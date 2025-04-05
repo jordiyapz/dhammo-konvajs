@@ -1,0 +1,849 @@
+[
+  {
+    "id": "lobha1",
+    "order": 1,
+    "vedana": "somanassa",
+    "jati": "akusala",
+    "hetuvariant": "lobha"
+  },
+  {
+    "id": "lobha2",
+    "order": 2,
+    "vedana": "somanassa",
+    "jati": "akusala",
+    "hetuvariant": "lobha"
+  },
+  {
+    "id": "lobha3",
+    "order": 3,
+    "vedana": "somanassa",
+    "jati": "akusala",
+    "hetuvariant": "lobha"
+  },
+  {
+    "id": "lobha4",
+    "order": 4,
+    "vedana": "somanassa",
+    "jati": "akusala",
+    "hetuvariant": "lobha"
+  },
+  {
+    "id": "lobha5",
+    "order": 5,
+    "vedana": "upekkha",
+    "jati": "akusala",
+    "hetuvariant": "lobha"
+  },
+  {
+    "id": "lobha6",
+    "order": 6,
+    "vedana": "upekkha",
+    "jati": "akusala",
+    "hetuvariant": "lobha"
+  },
+  {
+    "id": "lobha7",
+    "order": 7,
+    "vedana": "upekkha",
+    "jati": "akusala",
+    "hetuvariant": "lobha"
+  },
+  {
+    "id": "lobha8",
+    "order": 8,
+    "vedana": "upekkha",
+    "jati": "akusala",
+    "hetuvariant": "lobha"
+  },
+  {
+    "id": "dosa1",
+    "order": 9,
+    "vedana": "domanassa",
+    "jati": "akusala",
+    "hetuvariant": "dosa"
+  },
+  {
+    "id": "dosa2",
+    "order": 10,
+    "vedana": "domanassa",
+    "jati": "akusala",
+    "hetuvariant": "dosa"
+  },
+  {
+    "id": "moha1",
+    "order": 11,
+    "vedana": "upekkha",
+    "jati": "akusala",
+    "hetuvariant": "moha"
+  },
+  {
+    "id": "moha2",
+    "order": 12,
+    "vedana": "upekkha",
+    "jati": "akusala",
+    "hetuvariant": "moha"
+  },
+  {
+    "id": "cakkhu1",
+    "order": 13,
+    "vedana": "upekkha",
+    "jati": "vipaka",
+    "hetuvariant": "ahetuka"
+  },
+  {
+    "id": "sota1",
+    "order": 14,
+    "vedana": "upekkha",
+    "jati": "vipaka",
+    "hetuvariant": "ahetuka"
+  },
+  {
+    "id": "ghana1",
+    "order": 15,
+    "vedana": "upekkha",
+    "jati": "vipaka",
+    "hetuvariant": "ahetuka"
+  },
+  {
+    "id": "jivha1",
+    "order": 16,
+    "vedana": "upekkha",
+    "jati": "vipaka",
+    "hetuvariant": "ahetuka"
+  },
+  {
+    "id": "kaya1",
+    "order": 17,
+    "vedana": "dukkha",
+    "jati": "vipaka",
+    "hetuvariant": "ahetuka"
+  },
+  {
+    "id": "sam1",
+    "order": 18,
+    "vedana": "upekkha",
+    "jati": "vipaka",
+    "hetuvariant": "ahetuka"
+  },
+  {
+    "id": "san1",
+    "order": 19,
+    "vedana": "upekkha",
+    "jati": "vipaka",
+    "hetuvariant": "ahetuka"
+  },
+  {
+    "id": "cakkhu2",
+    "order": 20,
+    "vedana": "upekkha",
+    "jati": "vipaka",
+    "hetuvariant": "ahetuka"
+  },
+  {
+    "id": "sota2",
+    "order": 21,
+    "vedana": "upekkha",
+    "jati": "vipaka",
+    "hetuvariant": "ahetuka"
+  },
+  {
+    "id": "ghana2",
+    "order": 22,
+    "vedana": "upekkha",
+    "jati": "vipaka",
+    "hetuvariant": "ahetuka"
+  },
+  {
+    "id": "jivha2",
+    "order": 23,
+    "vedana": "upekkha",
+    "jati": "vipaka",
+    "hetuvariant": "ahetuka"
+  },
+  {
+    "id": "kaya2",
+    "order": 24,
+    "vedana": "sukha",
+    "jati": "vipaka",
+    "hetuvariant": "ahetuka"
+  },
+  {
+    "id": "sam2",
+    "order": 25,
+    "vedana": "upekkha",
+    "jati": "vipaka",
+    "hetuvariant": "ahetuka"
+  },
+  {
+    "id": "san2",
+    "order": 26,
+    "vedana": "somanassa",
+    "jati": "vipaka",
+    "hetuvariant": "ahetuka"
+  },
+  {
+    "id": "san3",
+    "order": 27,
+    "vedana": "upekkha",
+    "jati": "vipaka",
+    "hetuvariant": "ahetuka"
+  },
+  {
+    "id": "pancadv",
+    "order": 28,
+    "vedana": "upekkha",
+    "jati": "kiriya",
+    "hetuvariant": "ahetuka"
+  },
+  {
+    "id": "manodv",
+    "order": 29,
+    "vedana": "upekkha",
+    "jati": "kiriya",
+    "hetuvariant": "ahetuka"
+  },
+  {
+    "id": "has",
+    "order": 30,
+    "vedana": "somanassa",
+    "jati": "kiriya",
+    "hetuvariant": "ahetuka"
+  },
+  {
+    "id": "mkus1",
+    "order": 31,
+    "vedana": "somanassa",
+    "jati": "kusala",
+    "hetuvariant": "tihetuka"
+  },
+  {
+    "id": "mkus2",
+    "order": 32,
+    "vedana": "somanassa",
+    "jati": "kusala",
+    "hetuvariant": "tihetuka"
+  },
+  {
+    "id": "mkus3",
+    "order": 33,
+    "vedana": "somanassa",
+    "jati": "kusala",
+    "hetuvariant": "dvihetuka"
+  },
+  {
+    "id": "mkus4",
+    "order": 34,
+    "vedana": "somanassa",
+    "jati": "kusala",
+    "hetuvariant": "dvihetuka"
+  },
+  {
+    "id": "mkus5",
+    "order": 35,
+    "vedana": "upekkha",
+    "jati": "kusala",
+    "hetuvariant": "tihetuka"
+  },
+  {
+    "id": "mkus6",
+    "order": 36,
+    "vedana": "upekkha",
+    "jati": "kusala",
+    "hetuvariant": "tihetuka"
+  },
+  {
+    "id": "mkus7",
+    "order": 37,
+    "vedana": "upekkha",
+    "jati": "kusala",
+    "hetuvariant": "dvihetuka"
+  },
+  {
+    "id": "mkus8",
+    "order": 38,
+    "vedana": "upekkha",
+    "jati": "kusala",
+    "hetuvariant": "dvihetuka"
+  },
+  {
+    "id": "mvip1",
+    "order": 39,
+    "vedana": "somanassa",
+    "jati": "vipaka",
+    "hetuvariant": "tihetuka"
+  },
+  {
+    "id": "mvip2",
+    "order": 40,
+    "vedana": "somanassa",
+    "jati": "vipaka",
+    "hetuvariant": "tihetuka"
+  },
+  {
+    "id": "mvip3",
+    "order": 41,
+    "vedana": "somanassa",
+    "jati": "vipaka",
+    "hetuvariant": "dvihetuka"
+  },
+  {
+    "id": "mvip4",
+    "order": 42,
+    "vedana": "somanassa",
+    "jati": "vipaka",
+    "hetuvariant": "dvihetuka"
+  },
+  {
+    "id": "mvip5",
+    "order": 43,
+    "vedana": "upekkha",
+    "jati": "vipaka",
+    "hetuvariant": "tihetuka"
+  },
+  {
+    "id": "mvip6",
+    "order": 44,
+    "vedana": "upekkha",
+    "jati": "vipaka",
+    "hetuvariant": "tihetuka"
+  },
+  {
+    "id": "mvip7",
+    "order": 45,
+    "vedana": "upekkha",
+    "jati": "vipaka",
+    "hetuvariant": "dvihetuka"
+  },
+  {
+    "id": "mvip8",
+    "order": 46,
+    "vedana": "upekkha",
+    "jati": "vipaka",
+    "hetuvariant": "dvihetuka"
+  },
+  {
+    "id": "mkir1",
+    "order": 47,
+    "vedana": "somanassa",
+    "jati": "kiriya",
+    "hetuvariant": "tihetuka"
+  },
+  {
+    "id": "mkir2",
+    "order": 48,
+    "vedana": "somanassa",
+    "jati": "kiriya",
+    "hetuvariant": "tihetuka"
+  },
+  {
+    "id": "mkir3",
+    "order": 49,
+    "vedana": "somanassa",
+    "jati": "kiriya",
+    "hetuvariant": "dvihetuka"
+  },
+  {
+    "id": "mkir4",
+    "order": 50,
+    "vedana": "somanassa",
+    "jati": "kiriya",
+    "hetuvariant": "dvihetuka"
+  },
+  {
+    "id": "mkir5",
+    "order": 51,
+    "vedana": "upekkha",
+    "jati": "kiriya",
+    "hetuvariant": "tihetuka"
+  },
+  {
+    "id": "mkir6",
+    "order": 52,
+    "vedana": "upekkha",
+    "jati": "kiriya",
+    "hetuvariant": "tihetuka"
+  },
+  {
+    "id": "mkir7",
+    "order": 53,
+    "vedana": "upekkha",
+    "jati": "kiriya",
+    "hetuvariant": "dvihetuka"
+  },
+  {
+    "id": "mkir8",
+    "order": 54,
+    "vedana": "upekkha",
+    "jati": "kiriya",
+    "hetuvariant": "dvihetuka"
+  },
+  {
+    "id": "rkus1",
+    "order": 55,
+    "vedana": "somanassa",
+    "jati": "kusala",
+    "hetuvariant": "tihetuka"
+  },
+  {
+    "id": "rkus2",
+    "order": 56,
+    "vedana": "somanassa",
+    "jati": "kusala",
+    "hetuvariant": "tihetuka"
+  },
+  {
+    "id": "rkus3",
+    "order": 57,
+    "vedana": "somanassa",
+    "jati": "kusala",
+    "hetuvariant": "tihetuka"
+  },
+  {
+    "id": "rkus4",
+    "order": 58,
+    "vedana": "somanassa",
+    "jati": "kusala",
+    "hetuvariant": "tihetuka"
+  },
+  {
+    "id": "rkus5",
+    "order": 59,
+    "vedana": "upekkha",
+    "jati": "kusala",
+    "hetuvariant": "tihetuka"
+  },
+  {
+    "id": "rvip1",
+    "order": 60,
+    "vedana": "somanassa",
+    "jati": "vipaka",
+    "hetuvariant": "tihetuka"
+  },
+  {
+    "id": "rvip2",
+    "order": 61,
+    "vedana": "somanassa",
+    "jati": "vipaka",
+    "hetuvariant": "tihetuka"
+  },
+  {
+    "id": "rvip3",
+    "order": 62,
+    "vedana": "somanassa",
+    "jati": "vipaka",
+    "hetuvariant": "tihetuka"
+  },
+  {
+    "id": "rvip4",
+    "order": 63,
+    "vedana": "somanassa",
+    "jati": "vipaka",
+    "hetuvariant": "tihetuka"
+  },
+  {
+    "id": "rvip5",
+    "order": 64,
+    "vedana": "upekkha",
+    "jati": "vipaka",
+    "hetuvariant": "tihetuka"
+  },
+  {
+    "id": "rkir1",
+    "order": 65,
+    "vedana": "somanassa",
+    "jati": "kiriya",
+    "hetuvariant": "tihetuka"
+  },
+  {
+    "id": "rkir2",
+    "order": 66,
+    "vedana": "somanassa",
+    "jati": "kiriya",
+    "hetuvariant": "tihetuka"
+  },
+  {
+    "id": "rkir3",
+    "order": 67,
+    "vedana": "somanassa",
+    "jati": "kiriya",
+    "hetuvariant": "tihetuka"
+  },
+  {
+    "id": "rkir4",
+    "order": 68,
+    "vedana": "somanassa",
+    "jati": "kiriya",
+    "hetuvariant": "tihetuka"
+  },
+  {
+    "id": "rkir5",
+    "order": 69,
+    "vedana": "upekkha",
+    "jati": "kiriya",
+    "hetuvariant": "tihetuka"
+  },
+  {
+    "id": "arkus1",
+    "order": 70,
+    "vedana": "upekkha",
+    "jati": "kusala",
+    "hetuvariant": "tihetuka"
+  },
+  {
+    "id": "arkus2",
+    "order": 71,
+    "vedana": "upekkha",
+    "jati": "kusala",
+    "hetuvariant": "tihetuka"
+  },
+  {
+    "id": "arkus3",
+    "order": 72,
+    "vedana": "upekkha",
+    "jati": "kusala",
+    "hetuvariant": "tihetuka"
+  },
+  {
+    "id": "arkus4",
+    "order": 73,
+    "vedana": "upekkha",
+    "jati": "kusala",
+    "hetuvariant": "tihetuka"
+  },
+  {
+    "id": "arvip1",
+    "order": 74,
+    "vedana": "upekkha",
+    "jati": "vipaka",
+    "hetuvariant": "tihetuka"
+  },
+  {
+    "id": "arvip2",
+    "order": 75,
+    "vedana": "upekkha",
+    "jati": "vipaka",
+    "hetuvariant": "tihetuka"
+  },
+  {
+    "id": "arvip3",
+    "order": 76,
+    "vedana": "upekkha",
+    "jati": "vipaka",
+    "hetuvariant": "tihetuka"
+  },
+  {
+    "id": "arvip4",
+    "order": 77,
+    "vedana": "upekkha",
+    "jati": "vipaka",
+    "hetuvariant": "tihetuka"
+  },
+  {
+    "id": "arkir1",
+    "order": 78,
+    "vedana": "upekkha",
+    "jati": "kiriya",
+    "hetuvariant": "tihetuka"
+  },
+  {
+    "id": "arkir2",
+    "order": 79,
+    "vedana": "upekkha",
+    "jati": "kiriya",
+    "hetuvariant": "tihetuka"
+  },
+  {
+    "id": "arkir3",
+    "order": 80,
+    "vedana": "upekkha",
+    "jati": "kiriya",
+    "hetuvariant": "tihetuka"
+  },
+  {
+    "id": "arkir4",
+    "order": 81,
+    "vedana": "upekkha",
+    "jati": "kiriya",
+    "hetuvariant": "tihetuka"
+  },
+  {
+    "id": "sotmg1",
+    "order": 82,
+    "vedana": "somanassa",
+    "jati": "kusala",
+    "hetuvariant": "tihetuka"
+  },
+  {
+    "id": "sotmg2",
+    "order": 83,
+    "vedana": "somanassa",
+    "jati": "kusala",
+    "hetuvariant": "tihetuka"
+  },
+  {
+    "id": "sotmg3",
+    "order": 84,
+    "vedana": "somanassa",
+    "jati": "kusala",
+    "hetuvariant": "tihetuka"
+  },
+  {
+    "id": "sotmg4",
+    "order": 85,
+    "vedana": "somanassa",
+    "jati": "kusala",
+    "hetuvariant": "tihetuka"
+  },
+  {
+    "id": "sotmg5",
+    "order": 86,
+    "vedana": "upekkha",
+    "jati": "kusala",
+    "hetuvariant": "tihetuka"
+  },
+  {
+    "id": "sakmg1",
+    "order": 87,
+    "vedana": "somanassa",
+    "jati": "kusala",
+    "hetuvariant": "tihetuka"
+  },
+  {
+    "id": "sakmg2",
+    "order": 88,
+    "vedana": "somanassa",
+    "jati": "kusala",
+    "hetuvariant": "tihetuka"
+  },
+  {
+    "id": "sakmg3",
+    "order": 89,
+    "vedana": "somanassa",
+    "jati": "kusala",
+    "hetuvariant": "tihetuka"
+  },
+  {
+    "id": "sakmg4",
+    "order": 90,
+    "vedana": "somanassa",
+    "jati": "kusala",
+    "hetuvariant": "tihetuka"
+  },
+  {
+    "id": "sakmg5",
+    "order": 91,
+    "vedana": "upekkha",
+    "jati": "kusala",
+    "hetuvariant": "tihetuka"
+  },
+  {
+    "id": "anamg1",
+    "order": 92,
+    "vedana": "somanassa",
+    "jati": "kusala",
+    "hetuvariant": "tihetuka"
+  },
+  {
+    "id": "anamg2",
+    "order": 93,
+    "vedana": "somanassa",
+    "jati": "kusala",
+    "hetuvariant": "tihetuka"
+  },
+  {
+    "id": "anamg3",
+    "order": 94,
+    "vedana": "somanassa",
+    "jati": "kusala",
+    "hetuvariant": "tihetuka"
+  },
+  {
+    "id": "anamg4",
+    "order": 95,
+    "vedana": "somanassa",
+    "jati": "kusala",
+    "hetuvariant": "tihetuka"
+  },
+  {
+    "id": "anamg5",
+    "order": 96,
+    "vedana": "upekkha",
+    "jati": "kusala",
+    "hetuvariant": "tihetuka"
+  },
+  {
+    "id": "aramg1",
+    "order": 97,
+    "vedana": "somanassa",
+    "jati": "kusala",
+    "hetuvariant": "tihetuka"
+  },
+  {
+    "id": "aramg2",
+    "order": 98,
+    "vedana": "somanassa",
+    "jati": "kusala",
+    "hetuvariant": "tihetuka"
+  },
+  {
+    "id": "aramg3",
+    "order": 99,
+    "vedana": "somanassa",
+    "jati": "kusala",
+    "hetuvariant": "tihetuka"
+  },
+  {
+    "id": "aramg4",
+    "order": 100,
+    "vedana": "somanassa",
+    "jati": "kusala",
+    "hetuvariant": "tihetuka"
+  },
+  {
+    "id": "aramg5",
+    "order": 101,
+    "vedana": "upekkha",
+    "jati": "kusala",
+    "hetuvariant": "tihetuka"
+  },
+  {
+    "id": "sotph1",
+    "order": 102,
+    "vedana": "somanassa",
+    "jati": "vipaka",
+    "hetuvariant": "tihetuka"
+  },
+  {
+    "id": "sotph2",
+    "order": 103,
+    "vedana": "somanassa",
+    "jati": "vipaka",
+    "hetuvariant": "tihetuka"
+  },
+  {
+    "id": "sotph3",
+    "order": 104,
+    "vedana": "somanassa",
+    "jati": "vipaka",
+    "hetuvariant": "tihetuka"
+  },
+  {
+    "id": "sotph4",
+    "order": 105,
+    "vedana": "somanassa",
+    "jati": "vipaka",
+    "hetuvariant": "tihetuka"
+  },
+  {
+    "id": "sotph5",
+    "order": 106,
+    "vedana": "upekkha",
+    "jati": "vipaka",
+    "hetuvariant": "tihetuka"
+  },
+  {
+    "id": "sakph1",
+    "order": 107,
+    "vedana": "somanassa",
+    "jati": "vipaka",
+    "hetuvariant": "tihetuka"
+  },
+  {
+    "id": "sakph2",
+    "order": 108,
+    "vedana": "somanassa",
+    "jati": "vipaka",
+    "hetuvariant": "tihetuka"
+  },
+  {
+    "id": "sakph3",
+    "order": 109,
+    "vedana": "somanassa",
+    "jati": "vipaka",
+    "hetuvariant": "tihetuka"
+  },
+  {
+    "id": "sakph4",
+    "order": 110,
+    "vedana": "somanassa",
+    "jati": "vipaka",
+    "hetuvariant": "tihetuka"
+  },
+  {
+    "id": "sakph5",
+    "order": 111,
+    "vedana": "upekkha",
+    "jati": "vipaka",
+    "hetuvariant": "tihetuka"
+  },
+  {
+    "id": "anaph1",
+    "order": 112,
+    "vedana": "somanassa",
+    "jati": "vipaka",
+    "hetuvariant": "tihetuka"
+  },
+  {
+    "id": "anaph2",
+    "order": 113,
+    "vedana": "somanassa",
+    "jati": "vipaka",
+    "hetuvariant": "tihetuka"
+  },
+  {
+    "id": "anaph3",
+    "order": 114,
+    "vedana": "somanassa",
+    "jati": "vipaka",
+    "hetuvariant": "tihetuka"
+  },
+  {
+    "id": "anaph4",
+    "order": 115,
+    "vedana": "somanassa",
+    "jati": "vipaka",
+    "hetuvariant": "tihetuka"
+  },
+  {
+    "id": "anaph5",
+    "order": 116,
+    "vedana": "upekkha",
+    "jati": "vipaka",
+    "hetuvariant": "tihetuka"
+  },
+  {
+    "id": "araph1",
+    "order": 117,
+    "vedana": "somanassa",
+    "jati": "vipaka",
+    "hetuvariant": "tihetuka"
+  },
+  {
+    "id": "araph2",
+    "order": 118,
+    "vedana": "somanassa",
+    "jati": "vipaka",
+    "hetuvariant": "tihetuka"
+  },
+  {
+    "id": "araph3",
+    "order": 119,
+    "vedana": "somanassa",
+    "jati": "vipaka",
+    "hetuvariant": "tihetuka"
+  },
+  {
+    "id": "araph4",
+    "order": 120,
+    "vedana": "somanassa",
+    "jati": "vipaka",
+    "hetuvariant": "tihetuka"
+  },
+  {
+    "id": "araph5",
+    "order": 121,
+    "vedana": "upekkha",
+    "jati": "vipaka",
+    "hetuvariant": "tihetuka"
+  }
+]

@@ -1,0 +1,728 @@
+[
+  {
+    "id": "lobha1",
+    "group": 1,
+    "x": 0,
+    "y": 0
+  },
+  {
+    "id": "lobha2",
+    "group": 1,
+    "x": 1,
+    "y": 0
+  },
+  {
+    "id": "lobha3",
+    "group": 1,
+    "x": 2,
+    "y": 0
+  },
+  {
+    "id": "lobha4",
+    "group": 1,
+    "x": 3,
+    "y": 0
+  },
+  {
+    "id": "lobha5",
+    "group": 1,
+    "x": 4,
+    "y": 0
+  },
+  {
+    "id": "lobha6",
+    "group": 1,
+    "x": 5,
+    "y": 0
+  },
+  {
+    "id": "lobha7",
+    "group": 1,
+    "x": 6,
+    "y": 0
+  },
+  {
+    "id": "lobha8",
+    "group": 1,
+    "x": 7,
+    "y": 0
+  },
+  {
+    "id": "dosa1",
+    "group": 1,
+    "x": 0,
+    "y": 1
+  },
+  {
+    "id": "dosa2",
+    "group": 1,
+    "x": 1,
+    "y": 1
+  },
+  {
+    "id": "moha1",
+    "group": 1,
+    "x": 0,
+    "y": 2
+  },
+  {
+    "id": "moha2",
+    "group": 1,
+    "x": 1,
+    "y": 2
+  },
+  {
+    "id": "cakkhu1",
+    "group": 2,
+    "x": 0,
+    "y": 0
+  },
+  {
+    "id": "sota1",
+    "group": 2,
+    "x": 1,
+    "y": 0
+  },
+  {
+    "id": "ghana1",
+    "group": 2,
+    "x": 2,
+    "y": 0
+  },
+  {
+    "id": "jivha1",
+    "group": 2,
+    "x": 3,
+    "y": 0
+  },
+  {
+    "id": "kaya1",
+    "group": 2,
+    "x": 4,
+    "y": 0
+  },
+  {
+    "id": "sam1",
+    "group": 2,
+    "x": 5,
+    "y": 0
+  },
+  {
+    "id": "san1",
+    "group": 2,
+    "x": 6,
+    "y": 0
+  },
+  {
+    "id": "cakkhu2",
+    "group": 2,
+    "x": 0,
+    "y": 1
+  },
+  {
+    "id": "sota2",
+    "group": 2,
+    "x": 1,
+    "y": 1
+  },
+  {
+    "id": "ghana2",
+    "group": 2,
+    "x": 2,
+    "y": 1
+  },
+  {
+    "id": "jivha2",
+    "group": 2,
+    "x": 3,
+    "y": 1
+  },
+  {
+    "id": "kaya2",
+    "group": 2,
+    "x": 4,
+    "y": 1
+  },
+  {
+    "id": "sam2",
+    "group": 2,
+    "x": 5,
+    "y": 1
+  },
+  {
+    "id": "san2",
+    "group": 2,
+    "x": 6,
+    "y": 1
+  },
+  {
+    "id": "san3",
+    "group": 2,
+    "x": 7,
+    "y": 1
+  },
+  {
+    "id": "pancadv",
+    "group": 2,
+    "x": 0,
+    "y": 2
+  },
+  {
+    "id": "manodv",
+    "group": 2,
+    "x": 1,
+    "y": 2
+  },
+  {
+    "id": "has",
+    "group": 2,
+    "x": 2,
+    "y": 2
+  },
+  {
+    "id": "mkus1",
+    "group": 3,
+    "x": 0,
+    "y": 0
+  },
+  {
+    "id": "mkus2",
+    "group": 3,
+    "x": 1,
+    "y": 0
+  },
+  {
+    "id": "mkus3",
+    "group": 3,
+    "x": 2,
+    "y": 0
+  },
+  {
+    "id": "mkus4",
+    "group": 3,
+    "x": 3,
+    "y": 0
+  },
+  {
+    "id": "mkus5",
+    "group": 3,
+    "x": 4,
+    "y": 0
+  },
+  {
+    "id": "mkus6",
+    "group": 3,
+    "x": 5,
+    "y": 0
+  },
+  {
+    "id": "mkus7",
+    "group": 3,
+    "x": 6,
+    "y": 0
+  },
+  {
+    "id": "mkus8",
+    "group": 3,
+    "x": 7,
+    "y": 0
+  },
+  {
+    "id": "mvip1",
+    "group": 3,
+    "x": 0,
+    "y": 1
+  },
+  {
+    "id": "mvip2",
+    "group": 3,
+    "x": 1,
+    "y": 1
+  },
+  {
+    "id": "mvip3",
+    "group": 3,
+    "x": 2,
+    "y": 1
+  },
+  {
+    "id": "mvip4",
+    "group": 3,
+    "x": 3,
+    "y": 1
+  },
+  {
+    "id": "mvip5",
+    "group": 3,
+    "x": 4,
+    "y": 1
+  },
+  {
+    "id": "mvip6",
+    "group": 3,
+    "x": 5,
+    "y": 1
+  },
+  {
+    "id": "mvip7",
+    "group": 3,
+    "x": 6,
+    "y": 1
+  },
+  {
+    "id": "mvip8",
+    "group": 3,
+    "x": 7,
+    "y": 1
+  },
+  {
+    "id": "mkir1",
+    "group": 3,
+    "x": 0,
+    "y": 2
+  },
+  {
+    "id": "mkir2",
+    "group": 3,
+    "x": 1,
+    "y": 2
+  },
+  {
+    "id": "mkir3",
+    "group": 3,
+    "x": 2,
+    "y": 2
+  },
+  {
+    "id": "mkir4",
+    "group": 3,
+    "x": 3,
+    "y": 2
+  },
+  {
+    "id": "mkir5",
+    "group": 3,
+    "x": 4,
+    "y": 2
+  },
+  {
+    "id": "mkir6",
+    "group": 3,
+    "x": 5,
+    "y": 2
+  },
+  {
+    "id": "mkir7",
+    "group": 3,
+    "x": 6,
+    "y": 2
+  },
+  {
+    "id": "mkir8",
+    "group": 3,
+    "x": 7,
+    "y": 2
+  },
+  {
+    "id": "rkus1",
+    "group": 4,
+    "x": 0,
+    "y": 0
+  },
+  {
+    "id": "rkus2",
+    "group": 4,
+    "x": 1,
+    "y": 0
+  },
+  {
+    "id": "rkus3",
+    "group": 4,
+    "x": 2,
+    "y": 0
+  },
+  {
+    "id": "rkus4",
+    "group": 4,
+    "x": 3,
+    "y": 0
+  },
+  {
+    "id": "rkus5",
+    "group": 4,
+    "x": 4,
+    "y": 0
+  },
+  {
+    "id": "rvip1",
+    "group": 4,
+    "x": 0,
+    "y": 1
+  },
+  {
+    "id": "rvip2",
+    "group": 4,
+    "x": 1,
+    "y": 1
+  },
+  {
+    "id": "rvip3",
+    "group": 4,
+    "x": 2,
+    "y": 1
+  },
+  {
+    "id": "rvip4",
+    "group": 4,
+    "x": 3,
+    "y": 1
+  },
+  {
+    "id": "rvip5",
+    "group": 4,
+    "x": 4,
+    "y": 1
+  },
+  {
+    "id": "rkir1",
+    "group": 4,
+    "x": 0,
+    "y": 2
+  },
+  {
+    "id": "rkir2",
+    "group": 4,
+    "x": 1,
+    "y": 2
+  },
+  {
+    "id": "rkir3",
+    "group": 4,
+    "x": 2,
+    "y": 2
+  },
+  {
+    "id": "rkir4",
+    "group": 4,
+    "x": 3,
+    "y": 2
+  },
+  {
+    "id": "rkir5",
+    "group": 4,
+    "x": 4,
+    "y": 2
+  },
+  {
+    "id": "arkus1",
+    "group": 5,
+    "x": 4,
+    "y": 0
+  },
+  {
+    "id": "arkus2",
+    "group": 5,
+    "x": 5,
+    "y": 0
+  },
+  {
+    "id": "arkus3",
+    "group": 5,
+    "x": 6,
+    "y": 0
+  },
+  {
+    "id": "arkus4",
+    "group": 5,
+    "x": 7,
+    "y": 0
+  },
+  {
+    "id": "arvip1",
+    "group": 5,
+    "x": 4,
+    "y": 1
+  },
+  {
+    "id": "arvip2",
+    "group": 5,
+    "x": 5,
+    "y": 1
+  },
+  {
+    "id": "arvip3",
+    "group": 5,
+    "x": 6,
+    "y": 1
+  },
+  {
+    "id": "arvip4",
+    "group": 5,
+    "x": 7,
+    "y": 1
+  },
+  {
+    "id": "arkir1",
+    "group": 5,
+    "x": 4,
+    "y": 2
+  },
+  {
+    "id": "arkir2",
+    "group": 5,
+    "x": 5,
+    "y": 2
+  },
+  {
+    "id": "arkir3",
+    "group": 5,
+    "x": 6,
+    "y": 2
+  },
+  {
+    "id": "arkir4",
+    "group": 5,
+    "x": 7,
+    "y": 2
+  },
+  {
+    "id": "sotmg1",
+    "group": 6,
+    "x": 0,
+    "y": 0
+  },
+  {
+    "id": "sotmg2",
+    "group": 6,
+    "x": 1,
+    "y": 0
+  },
+  {
+    "id": "sotmg3",
+    "group": 6,
+    "x": 2,
+    "y": 0
+  },
+  {
+    "id": "sotmg4",
+    "group": 6,
+    "x": 3,
+    "y": 0
+  },
+  {
+    "id": "sotmg5",
+    "group": 6,
+    "x": 4,
+    "y": 0
+  },
+  {
+    "id": "sakmg1",
+    "group": 6,
+    "x": 0,
+    "y": 1
+  },
+  {
+    "id": "sakmg2",
+    "group": 6,
+    "x": 1,
+    "y": 1
+  },
+  {
+    "id": "sakmg3",
+    "group": 6,
+    "x": 2,
+    "y": 1
+  },
+  {
+    "id": "sakmg4",
+    "group": 6,
+    "x": 3,
+    "y": 1
+  },
+  {
+    "id": "sakmg5",
+    "group": 6,
+    "x": 4,
+    "y": 1
+  },
+  {
+    "id": "anamg1",
+    "group": 6,
+    "x": 0,
+    "y": 2
+  },
+  {
+    "id": "anamg2",
+    "group": 6,
+    "x": 1,
+    "y": 2
+  },
+  {
+    "id": "anamg3",
+    "group": 6,
+    "x": 2,
+    "y": 2
+  },
+  {
+    "id": "anamg4",
+    "group": 6,
+    "x": 3,
+    "y": 2
+  },
+  {
+    "id": "anamg5",
+    "group": 6,
+    "x": 4,
+    "y": 2
+  },
+  {
+    "id": "aramg1",
+    "group": 6,
+    "x": 0,
+    "y": 3
+  },
+  {
+    "id": "aramg2",
+    "group": 6,
+    "x": 1,
+    "y": 3
+  },
+  {
+    "id": "aramg3",
+    "group": 6,
+    "x": 2,
+    "y": 3
+  },
+  {
+    "id": "aramg4",
+    "group": 6,
+    "x": 3,
+    "y": 3
+  },
+  {
+    "id": "aramg5",
+    "group": 6,
+    "x": 4,
+    "y": 3
+  },
+  {
+    "id": "sotph1",
+    "group": 7,
+    "x": 0,
+    "y": 0
+  },
+  {
+    "id": "sotph2",
+    "group": 7,
+    "x": 1,
+    "y": 0
+  },
+  {
+    "id": "sotph3",
+    "group": 7,
+    "x": 2,
+    "y": 0
+  },
+  {
+    "id": "sotph4",
+    "group": 7,
+    "x": 3,
+    "y": 0
+  },
+  {
+    "id": "sotph5",
+    "group": 7,
+    "x": 4,
+    "y": 0
+  },
+  {
+    "id": "sakph1",
+    "group": 7,
+    "x": 0,
+    "y": 1
+  },
+  {
+    "id": "sakph2",
+    "group": 7,
+    "x": 1,
+    "y": 1
+  },
+  {
+    "id": "sakph3",
+    "group": 7,
+    "x": 2,
+    "y": 1
+  },
+  {
+    "id": "sakph4",
+    "group": 7,
+    "x": 3,
+    "y": 1
+  },
+  {
+    "id": "sakph5",
+    "group": 7,
+    "x": 4,
+    "y": 1
+  },
+  {
+    "id": "anaph1",
+    "group": 7,
+    "x": 0,
+    "y": 2
+  },
+  {
+    "id": "anaph2",
+    "group": 7,
+    "x": 1,
+    "y": 2
+  },
+  {
+    "id": "anaph3",
+    "group": 7,
+    "x": 2,
+    "y": 2
+  },
+  {
+    "id": "anaph4",
+    "group": 7,
+    "x": 3,
+    "y": 2
+  },
+  {
+    "id": "anaph5",
+    "group": 7,
+    "x": 4,
+    "y": 2
+  },
+  {
+    "id": "araph1",
+    "group": 7,
+    "x": 0,
+    "y": 3
+  },
+  {
+    "id": "araph2",
+    "group": 7,
+    "x": 1,
+    "y": 3
+  },
+  {
+    "id": "araph3",
+    "group": 7,
+    "x": 2,
+    "y": 3
+  },
+  {
+    "id": "araph4",
+    "group": 7,
+    "x": 3,
+    "y": 3
+  },
+  {
+    "id": "araph5",
+    "group": 7,
+    "x": 4,
+    "y": 3
+  }
+ ]
