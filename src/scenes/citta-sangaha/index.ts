@@ -1,4 +1,5 @@
 import { cittaFactory, cittaLayoutGroups } from "@/entities/citta";
+import { palette } from "@/entities/citta/model/palette";
 import Konva from "konva";
 
 class CittaSangahaScene {
@@ -11,7 +12,7 @@ class CittaSangahaScene {
       y: 0,
       width: stage.width(),
       height: stage.height(),
-      fill: "#303030",
+      fill: palette.backgroundGray,
     });
 
     const cittaGroup = new Konva.Group({
