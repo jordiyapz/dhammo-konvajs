@@ -1,3 +1,4 @@
+import Constants from "@/config/constant";
 import {
   cittaFactory,
   cittaLayoutGroups,
@@ -11,12 +12,12 @@ class CittaSangahaScene {
   background: any;
   cittaGroup: any;
 
-  constructor(stage: Konva.Stage) {
+  constructor() {
     const background = new Konva.Rect({
       x: 0,
       y: 0,
-      width: stage.width(),
-      height: stage.height(),
+      width: Constants.virtualSize.width,
+      height: Constants.virtualSize.height,
       fill: palette.backgroundGray,
     });
 
