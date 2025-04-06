@@ -27,8 +27,8 @@ class CittaSangahaScene {
       draggable: true,
     });
 
-    const gap = 16;
-    const cittaRadius = 20;
+    const gap = 12;
+    const cittaRadius = 10;
     const cittaSpacing = cittaRadius * 2 + gap;
 
     let offsetX = 0;

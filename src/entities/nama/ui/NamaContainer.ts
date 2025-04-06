@@ -13,15 +13,17 @@ const Defaults = {
 type NamaProps = {
   jati?: UJati;
   radius?: number;
+  padding?: number;
 };
 
 class NamaContainer extends Konva.Group {
   _base: Konva.Circle;
   _nama?: CittaNode;
   _jati?: UJati;
+  _padding: number = Defaults.padding;
 
   constructor(config?: NamaProps & Konva.GroupConfig) {
-    const { jati, radius = 20, ...rest } = config ?? {};
+    const { jati, radius = Defaults.radius, padding, ...rest } = config ?? {};
     super({ name: "nama-container", ...rest });
     this._jati = jati;
 
@@ -62,7 +64,7 @@ class NamaContainer extends Konva.Group {
       this.setPosition(this._nama.getPosition());
       this._nama.setPosition({ x: 0, y: 0 });
 
-      const namaRadius = this._nama.getRadius();
+      const namaRadius = this._nama.radius;
       this._base.radius(namaRadius + Defaults.padding);
     }
   }

@@ -6,7 +6,7 @@ import {
   vedanaColors,
 } from "../model/palette";
 
-const Config = {
+const Defaults = {
   borderWidth: 3,
   baseRadius: 20,
   hetuRadiusFactor: 0.25,
@@ -14,13 +14,13 @@ const Config = {
 };
 
 interface CittaParameters {
-  radius: number;
+  radius?: number;
   vedana?: UVedana;
   hetuVariant?: UHetuVariant;
 }
 
 class CittaNode extends Konva.Group {
-  _radius: number;
+  _radius: number = Defaults.baseRadius;
   _vedana: UVedana;
   _hetuVariant: UHetuVariant;
 
@@ -37,7 +37,8 @@ class CittaNode extends Konva.Group {
 
     super({ name: "citta", ...config });
 
-    this._radius = radius;
+    if (radius !== undefined) this.radius = radius;
+
     this._hetuVariant = hetuVariant;
     this._vedana = vedana;
 
@@ -45,10 +46,10 @@ class CittaNode extends Konva.Group {
     this._base = new Konva.Circle({
       x: 0,
       y: 0,
-      radius: Config.baseRadius,
+      radius: Defaults.baseRadius,
       fill: hetuVariantBgColors[hetuVariant],
       stroke: vedanaColors[vedana ?? "upekkha"],
-      strokeWidth: Config.borderWidth,
+      strokeWidth: Defaults.borderWidth,
       lineCap: "round",
       dash: ["sukha", "dukkha"].includes(vedana) ? [6, 8] : undefined,
       name: "base",
@@ -59,15 +60,18 @@ class CittaNode extends Konva.Group {
 
     this.add(this._base);
     this.add(...this._hetuNodes);
-
-    this.scale({
-      x: radius / Config.baseRadius,
-      y: radius / Config.baseRadius,
-    });
   }
 
-  getRadius() {
+  get radius() {
     return this._radius;
+  }
+
+  set radius(radius: number) {
+    this._radius = radius;
+    this.scale({
+      x: radius / Defaults.baseRadius,
+      y: radius / Defaults.baseRadius,
+    });
   }
 
   _getHetuList(hetuVariant: UHetuVariant): UHetu[] {
@@ -102,7 +106,7 @@ class CittaNode extends Konva.Group {
     const k = center.y ?? 0;
 
     const radius =
-      numOfHetu === 1 ? 0 : Config.baseRadius * Config.hetuSpacingFactor;
+      numOfHetu === 1 ? 0 : Defaults.baseRadius * Defaults.hetuSpacingFactor;
 
     const points: { x: number; y: number }[] = [];
 
@@ -120,7 +124,7 @@ class CittaNode extends Konva.Group {
     const hetuList = this._getHetuList(this._hetuVariant);
 
     const numOfHetu = hetuList.length;
-    const hetuRadius = Config.baseRadius * Config.hetuRadiusFactor;
+    const hetuRadius = Defaults.baseRadius * Defaults.hetuRadiusFactor;
 
     if (!numOfHetu) return [];
 
