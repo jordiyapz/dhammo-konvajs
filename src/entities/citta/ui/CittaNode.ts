@@ -35,7 +35,7 @@ class CittaNode extends Konva.Group {
       ...config
     } = options;
 
-    super(config);
+    super({ name: "citta", ...config });
 
     this._radius = radius;
     this._hetuVariant = hetuVariant;
@@ -64,6 +64,10 @@ class CittaNode extends Konva.Group {
       x: radius / Config.baseRadius,
       y: radius / Config.baseRadius,
     });
+  }
+
+  getRadius() {
+    return this._radius;
   }
 
   _getHetuList(hetuVariant: UHetuVariant): UHetu[] {
@@ -128,6 +132,7 @@ class CittaNode extends Konva.Group {
         y: p.y,
         radius: hetuRadius,
         fill: hetuColors[hetuList[i]],
+        name: "hetu",
       });
       return hetuObj;
     });

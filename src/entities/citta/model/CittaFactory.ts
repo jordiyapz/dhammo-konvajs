@@ -14,7 +14,7 @@ class CittaFactory {
   ) {
     if (!cittaMap.has(id)) throw new Error(`Citta ${id} not found`);
 
-    const { vedana, hetuvariant } = cittaMap.get(id)!;
+    const { vedana, hetuVariant } = cittaMap.get(id)!;
     const radius = options.radius ?? this.initialRadius;
     const x = options.x ?? 0;
     const y = options.y ?? 0;
@@ -22,8 +22,10 @@ class CittaFactory {
       x,
       y,
       radius,
-      vedana: vedana as UVedana,
-      hetuVariant: hetuvariant as UHetuVariant,
+      vedana,
+      hetuVariant,
+      name: `citta ${id}`,
+      id: id,
     });
   }
 }

@@ -1,13 +1,15 @@
+import { UJati } from "@/entities/nama/model/interface";
 import { UHetu, UHetuVariant, UVedana } from "./interface";
 
 export const palette = {
   backgroundGray: "#232323",
+  purple: "#AF48FF",
 };
 
 export const hetuColors = {
   lobha: "#4743ff",
   dosa: "#da0000",
-  moha: "#af48ff",
+  moha: palette.purple,
   alobha: "#6fc381",
   adosa: "#e2711d",
   amoha: "#2fffe6",
@@ -29,3 +31,10 @@ export const vedanaColors = {
   somanassa: "#faff00",
   sukha: "#faff00",
 } satisfies Record<UVedana, string>;
+
+export const jatiColors = {
+  akusala: palette.purple,
+  kusala: "#ffa000",
+  vipaka: "gray",
+  kiriya: "#168eA3",
+} satisfies Record<UJati, string>;

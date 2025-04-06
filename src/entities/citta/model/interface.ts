@@ -1,3 +1,5 @@
+import { UJati } from "@/entities/nama";
+
 export type UHetu = "lobha" | "dosa" | "moha" | "alobha" | "adosa" | "amoha";
 
 export type UHetuVariant =
@@ -14,3 +16,10 @@ export type UVedana =
   | "domanassa"
   | "sukha"
   | "dukkha";
+
+export interface Citta {
+  id: string;
+  hetuVariant: UHetuVariant;
+  vedana: UVedana;
+  jati: UJati;
+}

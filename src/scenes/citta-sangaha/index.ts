@@ -1,5 +1,10 @@
-import { cittaFactory, cittaLayoutGroups } from "@/entities/citta";
-import { palette } from "@/entities/citta/model/palette";
+import {
+  cittaFactory,
+  cittaLayoutGroups,
+  getCittaById,
+  palette,
+} from "@/entities/citta";
+import { NamaContainer } from "@/entities/nama";
 import Konva from "konva";
 
 class CittaSangahaScene {
@@ -21,26 +26,34 @@ class CittaSangahaScene {
       draggable: true,
     });
 
+    const gap = 16;
+    const cittaRadius = 20;
+    const cittaSpacing = cittaRadius * 2 + gap;
+
     let offsetX = 0;
     let offsetY = 0;
-    const radius = 20;
-    const gap = 10;
 
     for (const group of cittaLayoutGroups) {
       let rowCount = 0;
       for (const item of group) {
         const cittaNode = cittaFactory.createById(item.id, {
-          x: item.x * (radius * 2 + gap) + offsetX,
-          y: item.y * (radius * 2 + gap) + offsetY,
-          radius,
+          x: item.x * cittaSpacing + offsetX,
+          y: item.y * cittaSpacing + offsetY,
+          radius: cittaRadius,
         });
-        cittaGroup.add(cittaNode);
+
+        const container = new NamaContainer({
+          jati: getCittaById(item.id)?.jati,
+        });
+
+        container.attachItem(cittaNode, { fitContainerToItem: true });
+        cittaGroup.add(container);
+
         rowCount = Math.max(rowCount, item.y + 1);
       }
-      offsetY += rowCount * 50 + 20;
+      offsetY += rowCount * cittaSpacing + gap;
     }
 
-    // add the shape to the layer
     this.background = background;
     this.cittaGroup = cittaGroup;
   }

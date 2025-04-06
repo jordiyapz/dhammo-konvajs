@@ -1,7 +1,13 @@
 import cittaJson from "@/assets/citta.json";
 import cittaLayout from "@/assets/citta-layout.json";
+import { Citta } from "./interface";
 
-export const cittaMap = new Map(cittaJson.map((citta) => [citta.id, citta]));
+export const cittaMap = new Map<string, Citta>(
+  cittaJson.map((citta) => [
+    citta.id,
+    { ...citta, hetuVariant: citta.hetuvariant } as Citta,
+  ])
+);
 
 export const getCittaById = (id: string) => cittaMap.get(id);
 
