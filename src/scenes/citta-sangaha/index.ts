@@ -5,6 +5,9 @@ import { palette } from "@/entities/citta";
 
 import CittaTable from "./ui/CittaTable";
 import CittaSolarSystem from "./ui/CittaSolarSystem";
+import { associationTable } from "@/entities/cetasika";
+import { getCetasikaAssociation } from "@/entities/cetasika/lib/util";
+import { CetasikaAssociation } from "@/entities/cetasika/model/interface";
 
 class CittaSangahaScene {
   background: any;
@@ -33,6 +36,28 @@ class CittaSangahaScene {
     this.solarSystem = new CittaSolarSystem({
       x: (Constants.virtualSize.width / 4) * 3,
       y: Constants.virtualSize.height / 2,
+    });
+
+    associationTable.forEach((row) => {
+      const association = getCetasikaAssociation(row.id);
+      (["mustHave", "sometime"] as Array<"mustHave" | "sometime">).forEach(
+        (key) => {
+          row[key].sort();
+          association[key].sort();
+          if (row[key].length === 0 && association[key].length === 0) return;
+          if (
+            row[key].length !== association[key].length ||
+            row[key].every((x, i) => x !== association[key][i])
+          ) {
+            console.debug({
+              key,
+              id: row.id,
+              row: row[key],
+              association: association[key],
+            });
+          }
+        }
+      );
     });
   }
 
