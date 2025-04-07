@@ -20,7 +20,7 @@ class Orbit extends Konva.Group {
   constructor(config: Konva.GroupConfig = {}) {
     super({ name: "cetasika-orbit", ...config });
 
-    this.planets = Array.from({ length: 10 }).map(
+    this.planets = Array.from({ length: 33 }).map(
       () =>
         new Konva.Circle({
           radius: 0,
