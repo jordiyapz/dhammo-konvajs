@@ -6,7 +6,7 @@ import CittaNode from "@/entities/citta/ui/CittaNode";
 const Defaults = {
   strokeWidth: 1,
   radius: 20,
-  dash: [2, 2],
+  dash: [1, 2],
   padding: 4,
 };
 
@@ -35,6 +35,7 @@ class NamaContainer extends Konva.Group {
       radius: radius ?? Defaults.radius,
       stroke,
       strokeWidth: Defaults.strokeWidth,
+      lineCap: "round",
       dash: Defaults.dash,
       name: "base",
     });
