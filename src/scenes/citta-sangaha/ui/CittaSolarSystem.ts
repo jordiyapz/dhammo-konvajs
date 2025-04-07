@@ -16,8 +16,11 @@ class CittaSolarSystem extends Konva.Group {
 
     core.on("click", () => {
       this.isExpanded = !this.isExpanded;
-      if (this.isExpanded) core.shrink();
-      else orbit.shrink();
+      if (this.isExpanded) {
+        core.shrink();
+      } else {
+        orbit.shrink();
+      }
     });
 
     this.add(orbit, core);

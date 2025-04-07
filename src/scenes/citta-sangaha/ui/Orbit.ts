@@ -14,7 +14,7 @@ class Orbit extends Konva.Group {
   planets: Konva.Circle[] = [];
   planetRadius = Defaults.planetRadius;
   expandedPositions: { x: number; y: number }[] = [];
-
+  isExpanded = false;
   _onShrinkFn = () => {};
 
   constructor(config: Konva.GroupConfig = {}) {
@@ -39,10 +39,18 @@ class Orbit extends Konva.Group {
     });
   }
 
-  expand() {
+  expand(options?: Partial<{ skipAnimation: boolean }>) {
+    this.isExpanded = true;
     this.revolveAnimation.start();
     this.planets.forEach((cetasika, index) => {
       const pos = this.expandedPositions[index];
+      if (options?.skipAnimation) {
+        cetasika.radius(this.planetRadius);
+        cetasika.x(pos.x);
+        cetasika.y(pos.y);
+        cetasika.opacity(1);
+        return;
+      }
       cetasika.to({
         x: pos.x,
         y: pos.y,
@@ -54,8 +62,17 @@ class Orbit extends Konva.Group {
     });
   }
 
-  shrink() {
+  shrink(options?: Partial<{ skipAnimation: boolean }>) {
+    this.isExpanded = false;
+   
     this.planets.forEach((cetasika, i) => {
+      if (options?.skipAnimation) {
+        cetasika.radius(0);
+        cetasika.x(0);
+        cetasika.y(0);
+        cetasika.opacity(0);
+        return;
+      }
       cetasika.to({
         x: 0,
         y: 0,
@@ -63,7 +80,10 @@ class Orbit extends Konva.Group {
         opacity: 0,
         radius: 0,
         easing: Defaults.shrunkEasing,
-        onFinish: () => (i === 0 ? this._onShrinkFn() : undefined),
+        onFinish: () => {
+          if (i === 0) this._onShrinkFn();
+          this.revolveAnimation.stop();
+        },
       });
     });
   }
