@@ -1,13 +1,12 @@
 import Konva from "konva";
 
 import Constants from "@/config/constant";
-import { palette } from "@/entities/citta";
 
 import CittaTable from "./ui/CittaTable";
 import CittaSolarSystem from "./ui/CittaSolarSystem";
 import { associationTable } from "@/entities/cetasika";
 import { getCetasikaAssociation } from "@/entities/cetasika/lib/util";
-import { CetasikaAssociation } from "@/entities/cetasika/model/interface";
+import { palette } from "@/shared/palette";
 
 class CittaSangahaScene {
   background: any;

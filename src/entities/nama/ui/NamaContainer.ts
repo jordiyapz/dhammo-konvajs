@@ -1,7 +1,8 @@
 import Konva from "konva";
+import { CittaNode } from "@/entities/citta/@x/nama";
+
 import { UJati } from "../model/interface";
-import { jatiColors } from "@/entities/citta/model/palette";
-import CittaNode from "@/entities/citta/ui/CittaNode";
+import { jatiColors } from "../model/palette";
 
 const Defaults = {
   strokeWidth: 1,

@@ -1,4 +1,4 @@
-import { CittaID, UVedana } from "@/entities/citta";
+import { CittaID, UVedana } from "@/entities/citta/@x/cetasika";
 
 export type CetasikaGroupType = "annasamana" | "akusala" | "sobhana";
 

@@ -4,7 +4,6 @@ import Konva from "konva";
 
 import { fitStageIntoParentContainer } from "./shared/utils";
 import Constants from "./config/constant";
-import CittaEditorScene from "./scenes/citta-editor";
 import CittaSangahaScene from "./scenes/citta-sangaha";
 
 // We need to create a stage

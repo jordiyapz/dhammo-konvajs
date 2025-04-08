@@ -1,4 +1,4 @@
-import { CittaID, getCittaById } from "@/entities/citta";
+import { CittaID, getCittaById } from "@/entities/citta/@x/cetasika";
 import {
   CetasikaGroupTerms,
   CetasikaName,

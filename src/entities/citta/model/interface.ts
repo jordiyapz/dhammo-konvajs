@@ -1,4 +1,4 @@
-import { UJati } from "@/entities/nama";
+import { UJati } from "@/entities/nama/@x/citta";
 
 export type UHetu = "lobha" | "dosa" | "moha" | "alobha" | "adosa" | "amoha";
 
