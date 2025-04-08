@@ -1,0 +1,314 @@
+[
+  {
+    "id": "phassa",
+    "group": 1,
+    "x": 0,
+    "y": 0
+  },
+  {
+    "id": "vedana",
+    "group": 1,
+    "x": 1,
+    "y": 0
+  },
+  {
+    "id": "sanna",
+    "group": 1,
+    "x": 2,
+    "y": 0
+  },
+  {
+    "id": "cetana",
+    "group": 1,
+    "x": 3,
+    "y": 0
+  },
+  {
+    "id": "ekaggata",
+    "group": 1,
+    "x": 4,
+    "y": 0
+  },
+  {
+    "id": "jivitindriya",
+    "group": 1,
+    "x": 5,
+    "y": 0
+  },
+  {
+    "id": "manasikara",
+    "group": 1,
+    "x": 6,
+    "y": 0
+  },
+  {
+    "id": "vitakka",
+    "group": 1,
+    "x": 0,
+    "y": 1
+  },
+  {
+    "id": "vicara",
+    "group": 1,
+    "x": 1,
+    "y": 1
+  },
+  {
+    "id": "adhimokha",
+    "group": 1,
+    "x": 2,
+    "y": 1
+  },
+  {
+    "id": "viriya",
+    "group": 1,
+    "x": 3,
+    "y": 1
+  },
+  {
+    "id": "piti",
+    "group": 1,
+    "x": 4,
+    "y": 1
+  },
+  {
+    "id": "chanda",
+    "group": 1,
+    "x": 5,
+    "y": 1
+  },
+  {
+    "id": "moha",
+    "group": 2,
+    "x": 0,
+    "y": 0
+  },
+  {
+    "id": "ahirika",
+    "group": 2,
+    "x": 1,
+    "y": 0
+  },
+  {
+    "id": "anottappa",
+    "group": 2,
+    "x": 2,
+    "y": 0
+  },
+  {
+    "id": "uddaccha",
+    "group": 2,
+    "x": 3,
+    "y": 0
+  },
+  {
+    "id": "lobha",
+    "group": 2,
+    "x": 0,
+    "y": 1
+  },
+  {
+    "id": "ditthi",
+    "group": 2,
+    "x": 1,
+    "y": 1
+  },
+  {
+    "id": "mana",
+    "group": 2,
+    "x": 2,
+    "y": 1
+  },
+  {
+    "id": "dosa",
+    "group": 2,
+    "x": 0,
+    "y": 2
+  },
+  {
+    "id": "issa",
+    "group": 2,
+    "x": 1,
+    "y": 2
+  },
+  {
+    "id": "macchariya",
+    "group": 2,
+    "x": 2,
+    "y": 2
+  },
+  {
+    "id": "kukuccha",
+    "group": 2,
+    "x": 3,
+    "y": 2
+  },
+  {
+    "id": "thina",
+    "group": 2,
+    "x": 0,
+    "y": 3
+  },
+  {
+    "id": "middha",
+    "group": 2,
+    "x": 1,
+    "y": 3
+  },
+  {
+    "id": "vicikiccha",
+    "group": 2,
+    "x": 0,
+    "y": 4
+  },
+  {
+    "id": "saddha",
+    "group": 3,
+    "x": 0,
+    "y": 0
+  },
+  {
+    "id": "sati",
+    "group": 3,
+    "x": 1,
+    "y": 0
+  },
+  {
+    "id": "hiri",
+    "group": 3,
+    "x": 2,
+    "y": 0
+  },
+  {
+    "id": "ottappa",
+    "group": 3,
+    "x": 3,
+    "y": 0
+  },
+  {
+    "id": "alobha",
+    "group": 3,
+    "x": 4,
+    "y": 0
+  },
+  {
+    "id": "adosa",
+    "group": 3,
+    "x": 5,
+    "y": 0
+  },
+  {
+    "id": "tatramajjhattata",
+    "group": 3,
+    "x": 6,
+    "y": 0
+  },
+  {
+    "id": "kayapasadhi",
+    "group": 3,
+    "x": 0,
+    "y": 1
+  },
+  {
+    "id": "kayalahutta",
+    "group": 3,
+    "x": 1,
+    "y": 1
+  },
+  {
+    "id": "kayamudutta",
+    "group": 3,
+    "x": 2,
+    "y": 1
+  },
+  {
+    "id": "kayakammannata",
+    "group": 3,
+    "x": 3,
+    "y": 1
+  },
+  {
+    "id": "kayapagunnata",
+    "group": 3,
+    "x": 4,
+    "y": 1
+  },
+  {
+    "id": "kayujukata",
+    "group": 3,
+    "x": 5,
+    "y": 1
+  },
+  {
+    "id": "cittapasadhi",
+    "group": 3,
+    "x": 0,
+    "y": 2
+  },
+  {
+    "id": "cittalahutta",
+    "group": 3,
+    "x": 1,
+    "y": 2
+  },
+  {
+    "id": "cittamudutta",
+    "group": 3,
+    "x": 2,
+    "y": 2
+  },
+  {
+    "id": "cittakammannata",
+    "group": 3,
+    "x": 3,
+    "y": 2
+  },
+  {
+    "id": "cittapagunnata",
+    "group": 3,
+    "x": 4,
+    "y": 2
+  },
+  {
+    "id": "cittujukata",
+    "group": 3,
+    "x": 5,
+    "y": 2
+  },
+  {
+    "id": "sammavaca",
+    "group": 3,
+    "x": 0,
+    "y": 3
+  },
+  {
+    "id": "sammakammanta",
+    "group": 3,
+    "x": 1,
+    "y": 3
+  },
+  {
+    "id": "sammajiva",
+    "group": 3,
+    "x": 2,
+    "y": 3
+  },
+  {
+    "id": "karuna",
+    "group": 3,
+    "x": 0,
+    "y": 4
+  },
+  {
+    "id": "mudita",
+    "group": 3,
+    "x": 1,
+    "y": 4
+  },
+  {
+    "id": "panna",
+    "group": 3,
+    "x": 0,
+    "y": 5
+  }
+]

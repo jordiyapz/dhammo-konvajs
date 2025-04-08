@@ -1,5 +1,4 @@
 import CittaNode from "../ui/CittaNode";
-import { UHetuVariant, UVedana } from "./interface";
 import { cittaMap } from "./repository";
 
 class CittaFactory {
@@ -18,6 +17,7 @@ class CittaFactory {
     const radius = options.radius ?? this.initialRadius;
     const x = options.x ?? 0;
     const y = options.y ?? 0;
+
     return new CittaNode({
       x,
       y,

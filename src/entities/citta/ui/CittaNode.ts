@@ -4,7 +4,7 @@ import {
   hetuColors,
   hetuVariantBgColors,
   vedanaColors,
-} from "../model/palette";
+} from "@/shared/palette";
 
 const Defaults = {
   borderWidth: 3,

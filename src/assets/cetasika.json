@@ -1,0 +1,366 @@
+[
+  {
+    "id": "phassa",
+    "order": 1,
+    "name": "phassa",
+    "base": "ahetuka",
+    "hetu": ""
+  },
+  {
+    "id": "vedana",
+    "order": 2,
+    "name": "vedanā",
+    "base": "ahetuka",
+    "hetu": ""
+  },
+  {
+    "id": "sanna",
+    "order": 3,
+    "name": "saññā",
+    "base": "ahetuka",
+    "hetu": ""
+  },
+  {
+    "id": "cetana",
+    "order": 4,
+    "name": "cetanā",
+    "base": "ahetuka",
+    "hetu": ""
+  },
+  {
+    "id": "ekaggata",
+    "order": 5,
+    "name": "ekaggatā",
+    "base": "ahetuka",
+    "hetu": ""
+  },
+  {
+    "id": "jivitindriya",
+    "order": 6,
+    "name": "jīvitindriya",
+    "base": "ahetuka",
+    "hetu": ""
+  },
+  {
+    "id": "manasikara",
+    "order": 7,
+    "name": "manasikāra",
+    "base": "ahetuka",
+    "hetu": ""
+  },
+  {
+    "id": "vitakka",
+    "order": 8,
+    "name": "vitakka",
+    "base": "ahetuka",
+    "hetu": ""
+  },
+  {
+    "id": "vicara",
+    "order": 9,
+    "name": "vicāra",
+    "base": "ahetuka",
+    "hetu": ""
+  },
+  {
+    "id": "adhimokha",
+    "order": 10,
+    "name": "adhimokkha",
+    "base": "ahetuka",
+    "hetu": ""
+  },
+  {
+    "id": "viriya",
+    "order": 11,
+    "name": "vīriya",
+    "base": "ahetuka",
+    "hetu": ""
+  },
+  {
+    "id": "piti",
+    "order": 12,
+    "name": "pīti",
+    "base": "ahetuka",
+    "hetu": ""
+  },
+  {
+    "id": "chanda",
+    "order": 13,
+    "name": "chanda",
+    "base": "ahetuka",
+    "hetu": ""
+  },
+  {
+    "id": "moha",
+    "order": 14,
+    "name": "moha",
+    "base": "moha",
+    "hetu": "moha"
+  },
+  {
+    "id": "ahirika",
+    "order": 15,
+    "name": "ahirika",
+    "base": "moha",
+    "hetu": ""
+  },
+  {
+    "id": "anottappa",
+    "order": 16,
+    "name": "anottappa",
+    "base": "moha",
+    "hetu": ""
+  },
+  {
+    "id": "uddaccha",
+    "order": 17,
+    "name": "uddhacca",
+    "base": "moha",
+    "hetu": ""
+  },
+  {
+    "id": "lobha",
+    "order": 18,
+    "name": "lobha",
+    "base": "lobha",
+    "hetu": "lobha"
+  },
+  {
+    "id": "ditthi",
+    "order": 19,
+    "name": "diṭṭhi",
+    "base": "lobha",
+    "hetu": ""
+  },
+  {
+    "id": "mana",
+    "order": 20,
+    "name": "māna",
+    "base": "lobha",
+    "hetu": ""
+  },
+  {
+    "id": "dosa",
+    "order": 21,
+    "name": "dosa",
+    "base": "dosa",
+    "hetu": "dosa"
+  },
+  {
+    "id": "issa",
+    "order": 22,
+    "name": "issā",
+    "base": "dosa",
+    "hetu": ""
+  },
+  {
+    "id": "macchariya",
+    "order": 23,
+    "name": "macchariya",
+    "base": "dosa",
+    "hetu": ""
+  },
+  {
+    "id": "kukuccha",
+    "order": 24,
+    "name": "kukkucca",
+    "base": "dosa",
+    "hetu": ""
+  },
+  {
+    "id": "thina",
+    "order": 25,
+    "name": "thina",
+    "base": "moha",
+    "hetu": ""
+  },
+  {
+    "id": "middha",
+    "order": 26,
+    "name": "middha",
+    "base": "moha",
+    "hetu": ""
+  },
+  {
+    "id": "vicikiccha",
+    "order": 27,
+    "name": "vicikicchā",
+    "base": "moha",
+    "hetu": ""
+  },
+  {
+    "id": "saddha",
+    "order": 28,
+    "name": "saddhā",
+    "base": "dvihetuka",
+    "hetu": ""
+  },
+  {
+    "id": "sati",
+    "order": 29,
+    "name": "sati",
+    "base": "dvihetuka",
+    "hetu": ""
+  },
+  {
+    "id": "hiri",
+    "order": 30,
+    "name": "hirī",
+    "base": "dvihetuka",
+    "hetu": ""
+  },
+  {
+    "id": "ottappa",
+    "order": 31,
+    "name": "ottappa",
+    "base": "dvihetuka",
+    "hetu": ""
+  },
+  {
+    "id": "alobha",
+    "order": 32,
+    "name": "alobha",
+    "base": "dvihetuka",
+    "hetu": "alobha"
+  },
+  {
+    "id": "adosa",
+    "order": 33,
+    "name": "adosa",
+    "base": "dvihetuka",
+    "hetu": "adosa"
+  },
+  {
+    "id": "tatramajjhattata",
+    "order": 34,
+    "name": "tatramajjhattatā",
+    "base": "dvihetuka",
+    "hetu": ""
+  },
+  {
+    "id": "kayapasadhi",
+    "order": 35,
+    "name": "kāyapassaddhi",
+    "base": "dvihetuka",
+    "hetu": ""
+  },
+  {
+    "id": "kayalahutta",
+    "order": 36,
+    "name": "cittapassaddhi",
+    "base": "dvihetuka",
+    "hetu": ""
+  },
+  {
+    "id": "kayamudutta",
+    "order": 37,
+    "name": "kāyalahutā",
+    "base": "dvihetuka",
+    "hetu": ""
+  },
+  {
+    "id": "kayakammannata",
+    "order": 38,
+    "name": "cittalahutā",
+    "base": "dvihetuka",
+    "hetu": ""
+  },
+  {
+    "id": "kayapagunnata",
+    "order": 39,
+    "name": "kāyamudutā",
+    "base": "dvihetuka",
+    "hetu": ""
+  },
+  {
+    "id": "kayujukata",
+    "order": 40,
+    "name": "cittamudutā",
+    "base": "dvihetuka",
+    "hetu": ""
+  },
+  {
+    "id": "cittapasadhi",
+    "order": 41,
+    "name": "kāyakammaññatā",
+    "base": "dvihetuka",
+    "hetu": ""
+  },
+  {
+    "id": "cittalahutta",
+    "order": 42,
+    "name": "cittakammaññatā",
+    "base": "dvihetuka",
+    "hetu": ""
+  },
+  {
+    "id": "cittamudutta",
+    "order": 43,
+    "name": "kāyapāguññatā",
+    "base": "dvihetuka",
+    "hetu": ""
+  },
+  {
+    "id": "cittakammannata",
+    "order": 44,
+    "name": "cittapāguññatā",
+    "base": "dvihetuka",
+    "hetu": ""
+  },
+  {
+    "id": "cittapagunnata",
+    "order": 45,
+    "name": "kāyujukatā",
+    "base": "dvihetuka",
+    "hetu": ""
+  },
+  {
+    "id": "cittujukata",
+    "order": 46,
+    "name": "cittujukatā",
+    "base": "dvihetuka",
+    "hetu": ""
+  },
+  {
+    "id": "sammavaca",
+    "order": 47,
+    "name": "sammāvācā",
+    "base": "dvihetuka",
+    "hetu": ""
+  },
+  {
+    "id": "sammakammanta",
+    "order": 48,
+    "name": "sammākammanta",
+    "base": "dvihetuka",
+    "hetu": ""
+  },
+  {
+    "id": "sammajiva",
+    "order": 49,
+    "name": "sammāājīva",
+    "base": "dvihetuka",
+    "hetu": ""
+  },
+  {
+    "id": "karuna",
+    "order": 50,
+    "name": "karuṇā",
+    "base": "dvihetuka",
+    "hetu": ""
+  },
+  {
+    "id": "mudita",
+    "order": 51,
+    "name": "muditā",
+    "base": "dvihetuka",
+    "hetu": ""
+  },
+  {
+    "id": "panna",
+    "order": 52,
+    "name": "paññā",
+    "base": "tihetuka",
+    "hetu": "amoha"
+  }
+]

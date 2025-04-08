@@ -1,17 +1,20 @@
 import Konva from "konva";
 
 import Constants from "@/config/constant";
+import { palette } from "@/shared/palette";
 
 import CittaTable from "./ui/CittaTable";
 import CittaSolarSystem from "./ui/CittaSolarSystem";
-import { associationTable } from "@/entities/cetasika";
-import { getCetasikaAssociation } from "@/entities/cetasika/lib/util";
-import { palette } from "@/shared/palette";
+import CetasikaTable from "./ui/CetasikaTable";
+import { CetasikaNode } from "@/entities/cetasika";
 
 class CittaSangahaScene {
   background: any;
   cittaTable: any;
+  cetasikaTable: any;
   solarSystem: any;
+
+  components: any[] = [];
 
   constructor() {
     this.background = new Konva.Rect({
@@ -37,33 +40,21 @@ class CittaSangahaScene {
       y: Constants.virtualSize.height / 2,
     });
 
-    associationTable.forEach((row) => {
-      const association = getCetasikaAssociation(row.id);
-      (["mustHave", "sometime"] as Array<"mustHave" | "sometime">).forEach(
-        (key) => {
-          row[key].sort();
-          association[key].sort();
-          if (row[key].length === 0 && association[key].length === 0) return;
-          if (
-            row[key].length !== association[key].length ||
-            row[key].every((x, i) => x !== association[key][i])
-          ) {
-            console.debug({
-              key,
-              id: row.id,
-              row: row[key],
-              association: association[key],
-            });
-          }
-        }
-      );
+    this.cetasikaTable = new CetasikaTable({
+      x: Constants.virtualSize.width / 2 + 40,
+      y: 40,
     });
+
+    this.components.push(
+      this.background,
+      this.cittaTable,
+      // this.solarSystem,
+      this.cetasikaTable
+    );
   }
 
   attachToLayer(layer: Konva.Layer) {
-    layer.add(this.background);
-    layer.add(this.cittaTable);
-    layer.add(this.solarSystem);
+    layer.add(...this.components);
   }
 }
 

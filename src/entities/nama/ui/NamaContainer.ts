@@ -3,6 +3,7 @@ import { CittaNode } from "@/entities/citta/@x/nama";
 
 import { UJati } from "../model/interface";
 import { jatiColors } from "../model/palette";
+import { CetasikaNode } from "@/entities/cetasika";
 
 const Defaults = {
   strokeWidth: 1,
@@ -19,7 +20,7 @@ type NamaProps = {
 
 class NamaContainer extends Konva.Group {
   _base: Konva.Circle;
-  _nama?: CittaNode;
+  _nama?: CittaNode | CetasikaNode;
   _jati?: UJati;
   _padding: number = Defaults.padding;
 
@@ -50,7 +51,7 @@ class NamaContainer extends Konva.Group {
   }
 
   attachItem(
-    nama: CittaNode,
+    nama: CittaNode | CetasikaNode,
     options?: Partial<{ fitContainerToItem: boolean }>
   ) {
     if (this._nama) this.remove();
