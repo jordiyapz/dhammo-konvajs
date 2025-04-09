@@ -27,7 +27,7 @@ export const hetuColors = {
 } satisfies Record<UHetu, string>;
 
 export const hetuVariantBgColors = {
-  ahetuka: "#666666",
+  ahetuka: "#505050",
   lobha: "#242c4a",
   dosa: "#432323",
   moha: "#460161",
@@ -36,7 +36,7 @@ export const hetuVariantBgColors = {
 } satisfies Record<UHetuVariant, string>;
 
 export const vedanaColors = {
-  upekkha: "#454545",
+  upekkha: "#858585",
   domanassa: "#da0000",
   dukkha: "#da0000",
   somanassa: "#faff00",
