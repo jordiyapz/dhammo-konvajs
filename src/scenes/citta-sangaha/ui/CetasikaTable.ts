@@ -1,15 +1,9 @@
 import Konva from "konva";
 import { NamaContainer } from "@/entities/nama";
 
-import { cetasikaFactory } from "@/entities/cetasika";
-import { cetasikaLayoutGroups } from "@/entities/cetasika/model/repository";
-// import { KonvaNodeEvent } from "konva/lib/types";
-// import { KonvaEventListener } from "konva/lib/Node";
+import { cetasikaFactory, cetasikaLayoutGroups } from "@/entities/cetasika";
 
 class CetasikaTable extends Konva.Group {
-  // cetasikaEventHandlers: KonvaEventListener<CetasikaTable, KonvaNodeEvent>[] =
-  //   [];
-
   constructor(config: Konva.GroupConfig = {}) {
     super({ name: "cetasika-table", ...config });
 
@@ -34,8 +28,15 @@ class CetasikaTable extends Konva.Group {
 
         const container = new NamaContainer({ jati: "vipaka" });
         container.attachItem(cetasikaNode, { fitContainerToItem: true });
+        const hitbox = new Konva.Circle({
+          x: container.x(),
+          y: container.y(),
+          radius: container.radius,
+          name: `hitbox ${item.id}`,
+        });
+
         // container.on("mouseover", function (e) {});
-        this.add(container);
+        this.add(container, hitbox);
 
         rowCount = Math.max(rowCount, item.y + 1);
       }

@@ -1,9 +1,9 @@
 import Konva from "konva";
 import { CittaNode } from "@/entities/citta/@x/nama";
+import { CetasikaNode } from "@/entities/cetasika/@x/nama";
 
 import { UJati } from "../model/interface";
 import { jatiColors } from "../model/palette";
-import { CetasikaNode } from "@/entities/cetasika";
 
 const Defaults = {
   strokeWidth: 1,
@@ -23,9 +23,10 @@ class NamaContainer extends Konva.Group {
   _nama?: CittaNode | CetasikaNode;
   _jati?: UJati;
   _padding: number = Defaults.padding;
+  _radius: number = Defaults.radius;
 
   constructor(config?: NamaProps & Konva.GroupConfig) {
-    const { jati, radius = Defaults.radius, padding, ...rest } = config ?? {};
+    const { jati, radius, padding, ...rest } = config ?? {};
     super({ name: "nama-container", ...rest });
     this._jati = jati;
 
@@ -34,13 +35,14 @@ class NamaContainer extends Konva.Group {
     this._base = new Konva.Circle({
       x: 0,
       y: 0,
-      radius: radius ?? Defaults.radius,
       stroke,
       strokeWidth: Defaults.strokeWidth,
       lineCap: "round",
       dash: Defaults.dash,
       name: "base",
     });
+
+    this.radius = radius ?? this._radius;
 
     this.add(this._base);
   }
@@ -62,14 +64,23 @@ class NamaContainer extends Konva.Group {
     if (options?.fitContainerToItem) this._fitContainerToItem();
   }
 
-  _fitContainerToItem() {
+  _fitContainerToItem(options?: Partial<{ padding: number }>) {
     if (this._nama) {
       this.setPosition(this._nama.getPosition());
       this._nama.setPosition({ x: 0, y: 0 });
 
       const namaRadius = this._nama.radius;
-      this._base.radius(namaRadius + Defaults.padding);
+      const padding = options?.padding ?? Defaults.padding;
+      this.radius = namaRadius + padding;
     }
+  }
+
+  get radius() {
+    return this._radius;
+  }
+  set radius(radius: number) {
+    this._radius = radius;
+    this._base.radius(radius);
   }
 }
 

@@ -2,17 +2,17 @@ import Konva from "konva";
 
 import Constants from "@/config/constant";
 import { palette } from "@/shared/palette";
+import { cetasikaMap } from "@/entities/cetasika";
 
 import CittaTable from "./ui/CittaTable";
 import CittaSolarSystem from "./ui/CittaSolarSystem";
 import CetasikaTable from "./ui/CetasikaTable";
-import { CetasikaNode } from "@/entities/cetasika";
 import Tooltip from "./ui/Tooltip";
 
 class CittaSangahaScene {
   _background: any;
   _cittaTable: any;
-  _cetasikaTable: any;
+  _cetasikaTable: CetasikaTable;
   _solarSystem: any;
   _cetasikaTooltip: any;
 
@@ -53,11 +53,25 @@ class CittaSangahaScene {
       draggable: true,
       fontSize: 10,
     });
+    this._cetasikaTooltip.hide();
 
-    this._cetasikaTooltip.text = "Phassā";
-    this._cetasikaTooltip.position({
-      x: Constants.virtualSize.width / 2 + 40,
-      y: 40 + 8,
+    this._cetasikaTable.on("mouseout", (e) => {
+      this._cetasikaTooltip.hide();
+    });
+    this._cetasikaTable.on("mouseover", (e) => {
+      const targetName = e.target.attrs.name;
+      const words = targetName.split(" ");
+      if (words.length == 2) {
+        const [_, id] = words;
+        const cetasika = cetasikaMap.get(id);
+        if (cetasika) this._cetasikaTooltip.show();
+        const { x, y } = e.target.attrs;
+        this._cetasikaTooltip.text = cetasika?.name ?? id;
+        this._cetasikaTooltip.position({
+          x: x + this._cetasikaTable.x(),
+          y: y + this._cetasikaTable.y() + 8,
+        });
+      }
     });
 
     this.components.push(
