@@ -14,7 +14,7 @@ class CittaSangahaScene {
   _background: any;
   _cittaTable: CittaTable;
   _cetasikaTable: CetasikaTable;
-  _solarSystem: any;
+  _solarSystem: CittaSolarSystem;
   _cetasikaTooltip: any;
 
   components: any[] = [];
@@ -29,7 +29,7 @@ class CittaSangahaScene {
     });
 
     const cittaRadius = 10;
-    const cetasikaRadius = 6;
+    const cetasikaRadius = 8;
     const cittaTableInitialPosition: Vector2d = { x: 40, y: 40 };
     const cetasikaTableInitialPosition: Vector2d = {
       x: Constants.virtualSize.width / 2 + 40,
@@ -46,7 +46,17 @@ class CittaSangahaScene {
       x: Constants.virtualSize.width / 4,
       y: Constants.virtualSize.height / 2,
     });
-    this._solarSystem.hide();
+    const cittaPanelBg = new Konva.Rect({
+      x: 0,
+      y: 0,
+      width: Constants.virtualSize.width / 2,
+      height: Constants.virtualSize.height,
+      fill: palette.grays[800],
+      opacity: 0.7,
+    });
+    const solarPanel = new Konva.Group({ opacity: 0 });
+    solarPanel.add(cittaPanelBg, this._solarSystem);
+    solarPanel.hide();
 
     this._cetasikaTable = new CetasikaTable({
       ...cetasikaTableInitialPosition,
@@ -77,6 +87,24 @@ class CittaSangahaScene {
       }
     });
 
+    let expandTimer: NodeJS.Timeout;
+    this._cittaTable.on("click", (e) => {
+      this.hideTooltip();
+      solarPanel.show();
+      solarPanel.to({ opacity: 1 });
+      expandTimer = setTimeout(() => this._solarSystem.expand(), 500);
+    });
+    cittaPanelBg.on("click", (e) => {
+      clearTimeout(expandTimer);
+      solarPanel.to({
+        opacity: 0,
+        onFinish: () => {
+          solarPanel.hide();
+          this._solarSystem.shrink({ skipAnimation: true });
+        },
+      });
+    });
+
     this._cetasikaTable.on("dragend", (e) => {
       e.target.x(cetasikaTableInitialPosition.x);
     });
@@ -100,7 +128,7 @@ class CittaSangahaScene {
     this.components.push(
       this._background,
       this._cittaTable,
-      this._solarSystem,
+      solarPanel,
       this._cetasikaTable,
       this._cetasikaTooltip
     );
