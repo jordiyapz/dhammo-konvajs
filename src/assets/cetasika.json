@@ -247,70 +247,70 @@
   {
     "id": "kayalahutta",
     "order": 36,
-    "name": "cittapassaddhi",
+    "name": "kāyalahutā",
     "base": "dvihetuka",
     "hetu": ""
   },
   {
     "id": "kayamudutta",
     "order": 37,
-    "name": "kāyalahutā",
+    "name": "kāyamudutā",
     "base": "dvihetuka",
     "hetu": ""
   },
   {
     "id": "kayakammannata",
     "order": 38,
-    "name": "cittalahutā",
+    "name": "kāyakammaññatā",
     "base": "dvihetuka",
     "hetu": ""
   },
   {
     "id": "kayapagunnata",
     "order": 39,
-    "name": "kāyamudutā",
+    "name": "kāyapāguññatā",
     "base": "dvihetuka",
     "hetu": ""
   },
   {
     "id": "kayujukata",
     "order": 40,
-    "name": "cittamudutā",
+    "name": "kāyujukatā",
     "base": "dvihetuka",
     "hetu": ""
   },
   {
     "id": "cittapasadhi",
     "order": 41,
-    "name": "kāyakammaññatā",
+    "name": "cittapassaddhi",
     "base": "dvihetuka",
     "hetu": ""
   },
   {
     "id": "cittalahutta",
     "order": 42,
-    "name": "cittakammaññatā",
+    "name": "cittalahutā",
     "base": "dvihetuka",
     "hetu": ""
   },
   {
     "id": "cittamudutta",
     "order": 43,
-    "name": "kāyapāguññatā",
+    "name": "cittamudutā",
     "base": "dvihetuka",
     "hetu": ""
   },
   {
     "id": "cittakammannata",
     "order": 44,
-    "name": "cittapāguññatā",
+    "name": "cittakammaññatā",
     "base": "dvihetuka",
     "hetu": ""
   },
   {
     "id": "cittapagunnata",
     "order": 45,
-    "name": "kāyujukatā",
+    "name": "cittapāguññatā",
     "base": "dvihetuka",
     "hetu": ""
   },
@@ -363,4 +363,4 @@
     "base": "tihetuka",
     "hetu": "amoha"
   }
-]
+ ]

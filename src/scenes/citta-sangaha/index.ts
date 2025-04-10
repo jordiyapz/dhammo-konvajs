@@ -11,7 +11,7 @@ import Tooltip from "./ui/Tooltip";
 
 class CittaSangahaScene {
   _background: any;
-  _cittaTable: any;
+  _cittaTable: CittaTable;
   _cetasikaTable: CetasikaTable;
   _solarSystem: any;
   _cetasikaTooltip: any;
@@ -33,8 +33,8 @@ class CittaSangahaScene {
       draggable: true,
     });
 
-    this._cittaTable.on("dragend", () => {
-      this._cittaTable.x(40);
+    this._cittaTable.on("dragend", (e) => {
+      e.target.x(40);
     });
 
     this._solarSystem = new CittaSolarSystem({
@@ -42,9 +42,13 @@ class CittaSangahaScene {
       y: Constants.virtualSize.height / 2,
     });
 
+    const cetasikaRadius = 8;
+
     this._cetasikaTable = new CetasikaTable({
       x: Constants.virtualSize.width / 2 + 40,
       y: 40,
+      cetasikaRadius,
+      draggable: true,
     });
 
     this._cetasikaTooltip = new Tooltip({
@@ -54,22 +58,23 @@ class CittaSangahaScene {
       fontSize: 10,
     });
     this._cetasikaTooltip.hide();
-
-    this._cetasikaTable.on("mouseout", (e) => {
+    this._cetasikaTable.on("dragend", (e) => {
+      e.target.x(Constants.virtualSize.width / 2 + 40);
+    });
+    this._cetasikaTable.on("mouseout dragstart", (e) => {
       this._cetasikaTooltip.hide();
     });
     this._cetasikaTable.on("mouseover", (e) => {
-      const targetName = e.target.attrs.name;
+      const { x, y, name: targetName } = e.target.attrs;
       const words = targetName.split(" ");
       if (words.length == 2) {
         const [_, id] = words;
         const cetasika = cetasikaMap.get(id);
         if (cetasika) this._cetasikaTooltip.show();
-        const { x, y } = e.target.attrs;
         this._cetasikaTooltip.text = cetasika?.name ?? id;
         this._cetasikaTooltip.position({
           x: x + this._cetasikaTable.x(),
-          y: y + this._cetasikaTable.y() + 8,
+          y: y + this._cetasikaTable.y() + cetasikaRadius,
         });
       }
     });
