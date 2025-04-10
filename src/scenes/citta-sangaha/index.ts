@@ -42,10 +42,6 @@ class CittaSangahaScene {
       draggable: true,
     });
 
-    this._cittaTable.on("dragend", (e) => {
-      e.target.x(cittaTableInitialPosition.x);
-    });
-
     this._solarSystem = new CittaSolarSystem({
       x: Constants.virtualSize.width / 4,
       y: Constants.virtualSize.height / 2,
@@ -61,10 +57,30 @@ class CittaSangahaScene {
     this._cetasikaTooltip = new Tooltip({ fontSize: 10 });
     this._cetasikaTooltip.hide();
 
+    this._cittaTable.on("dragend", (e) => {
+      e.target.x(cittaTableInitialPosition.x);
+    });
+    this._cittaTable.on("mouseout dragstart", () => {
+      this._cetasikaTooltip.hide();
+    });
+    this._cittaTable.on("mouseover", (e) => {
+      const { x, y, name: targetName } = e.target.attrs;
+      const words = targetName.split(" ");
+      if (words.length == 2) {
+        const [_, id] = words;
+        const cetasika = cetasikaMap.get(id);
+        this.showTooltip({
+          text: cetasika?.name ?? id,
+          x: x + this._cittaTable.x(),
+          y: y + this._cittaTable.y() + cetasikaRadius,
+        });
+      }
+    });
+
     this._cetasikaTable.on("dragend", (e) => {
       e.target.x(cetasikaTableInitialPosition.x);
     });
-    this._cetasikaTable.on("mouseout dragstart", (e) => {
+    this._cetasikaTable.on("mouseout dragstart", () => {
       this._cetasikaTooltip.hide();
     });
     this._cetasikaTable.on("mouseover", (e) => {

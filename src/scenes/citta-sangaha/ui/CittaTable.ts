@@ -36,8 +36,22 @@ class CittaTable extends Konva.Group {
         });
 
         container.attachItem(cittaNode, { fitContainerToItem: true });
-        this.add(container);
+        const hitbox = new Konva.Circle({
+          x: container.x(),
+          y: container.y(),
+          radius: container.radius,
+          name: `hitbox ${item.id}`,
+        });
+        hitbox.on("mouseover", (e) => {
+          const stage = e.target.getStage();
+          if (stage) stage.container().style.cursor = "pointer";
+        });
+        hitbox.on("mouseout", (e) => {
+          const stage = e.target.getStage();
+          if (stage) stage.container().style.cursor = "default";
+        });
 
+        this.add(container, hitbox);
         rowCount = Math.max(rowCount, item.y + 1);
       }
       offsetY += rowCount * cittaSpacing + gap;
