@@ -7,17 +7,19 @@ import CittaTable from "./ui/CittaTable";
 import CittaSolarSystem from "./ui/CittaSolarSystem";
 import CetasikaTable from "./ui/CetasikaTable";
 import { CetasikaNode } from "@/entities/cetasika";
+import Tooltip from "./ui/Tooltip";
 
 class CittaSangahaScene {
-  background: any;
-  cittaTable: any;
-  cetasikaTable: any;
-  solarSystem: any;
+  _background: any;
+  _cittaTable: any;
+  _cetasikaTable: any;
+  _solarSystem: any;
+  _cetasikaTooltip: any;
 
   components: any[] = [];
 
   constructor() {
-    this.background = new Konva.Rect({
+    this._background = new Konva.Rect({
       x: 0,
       y: 0,
       width: Constants.virtualSize.width,
@@ -25,31 +27,45 @@ class CittaSangahaScene {
       fill: palette.backgroundGray,
     });
 
-    this.cittaTable = new CittaTable({
+    this._cittaTable = new CittaTable({
       x: 40,
       y: 40,
       draggable: true,
     });
 
-    this.cittaTable.on("dragend", () => {
-      this.cittaTable.x(40);
+    this._cittaTable.on("dragend", () => {
+      this._cittaTable.x(40);
     });
 
-    this.solarSystem = new CittaSolarSystem({
-      x: (Constants.virtualSize.width / 4) * 3,
+    this._solarSystem = new CittaSolarSystem({
+      x: Constants.virtualSize.width / 4,
       y: Constants.virtualSize.height / 2,
     });
 
-    this.cetasikaTable = new CetasikaTable({
+    this._cetasikaTable = new CetasikaTable({
       x: Constants.virtualSize.width / 2 + 40,
       y: 40,
     });
 
+    this._cetasikaTooltip = new Tooltip({
+      x: Constants.virtualSize.width / 2,
+      y: 40,
+      draggable: true,
+      fontSize: 10,
+    });
+
+    this._cetasikaTooltip.text = "Phassā";
+    this._cetasikaTooltip.position({
+      x: Constants.virtualSize.width / 2 + 40,
+      y: 40 + 8,
+    });
+
     this.components.push(
-      this.background,
-      this.cittaTable,
-      // this.solarSystem,
-      this.cetasikaTable
+      this._background,
+      this._cittaTable,
+      this._solarSystem,
+      this._cetasikaTable,
+      this._cetasikaTooltip
     );
   }
 
