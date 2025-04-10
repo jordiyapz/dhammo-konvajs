@@ -6,12 +6,17 @@ import {
   getCittaById,
 } from "@/entities/citta";
 
+type CittaTableProps = {
+  cittaRadius?: number;
+};
+
 class CittaTable extends Konva.Group {
-  constructor(config: Konva.GroupConfig = {}) {
+  constructor(config: Konva.GroupConfig & CittaTableProps = {}) {
     super({ name: "citta-table", ...config });
 
+    const { cittaRadius = 18 } = config;
+
     const gap = 12;
-    const cittaRadius = 10;
     const cittaSpacing = cittaRadius * 2 + gap;
 
     let offsetX = 0;
