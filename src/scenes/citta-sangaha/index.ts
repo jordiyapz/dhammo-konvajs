@@ -45,7 +45,9 @@ class CittaSangahaScene {
     this._solarSystem = new CittaSolarSystem({
       x: Constants.virtualSize.width / 4,
       y: Constants.virtualSize.height / 2,
+      orbitOptions: { angularVelocity: 2 },
     });
+
     const cittaPanelBg = new Konva.Rect({
       x: 0,
       y: 0,

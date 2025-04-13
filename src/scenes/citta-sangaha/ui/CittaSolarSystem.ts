@@ -1,6 +1,11 @@
 import Konva from "konva";
 import Core from "./Core";
-import Orbit from "./Orbit";
+import Orbit, { OrbitProps } from "./Orbit";
+
+type CittaSolarSystemProps = {
+  cittaId?: string;
+  orbitOptions?: OrbitProps;
+};
 
 class CittaSolarSystem extends Konva.Group {
   isExpanded = false;
@@ -8,11 +13,13 @@ class CittaSolarSystem extends Konva.Group {
   core: Core;
   orbit: Orbit;
 
-  constructor(config: Konva.GroupConfig = {}) {
+  constructor(config: Konva.GroupConfig & CittaSolarSystemProps = {}) {
     super({ name: "citta-solar-system", ...config });
 
-    this.core = new Core({ cittaId: "mkus1" });
-    this.orbit = new Orbit();
+    const { cittaId = "lobha1" } = config;
+
+    this.core = new Core({ cittaId });
+    this.orbit = new Orbit(config.orbitOptions);
 
     this.core.onShrinkEnd(() => this.orbit.expand());
     this.orbit.onShrinkEnd(() => this.core.expand());
@@ -33,6 +40,7 @@ class CittaSolarSystem extends Konva.Group {
     this.core.shrink(options);
     if (options?.skipAnimation) this.orbit.expand(options);
   }
+
   shrink(options?: Partial<{ skipAnimation: boolean }>) {
     this.orbit.shrink(options);
     if (options?.skipAnimation) this.core.expand(options);

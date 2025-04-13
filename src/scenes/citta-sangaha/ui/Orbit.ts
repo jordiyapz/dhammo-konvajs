@@ -2,11 +2,16 @@ import { computeLargeRadius, generateCirclePoints } from "@/shared/utils";
 import Konva from "konva";
 
 const Defaults = {
-  orbitAngularVelocity: 2 * Math.PI * 10,
+  orbitAngularVelocity: 10, // rad/s
   planetRadius: 8,
   shrunkEasing: Konva.Easings.StrongEaseIn,
   expandEasing: Konva.Easings.EaseOut,
   duration: 0.5,
+};
+
+export type OrbitProps = {
+  /** Rad/s */
+  angularVelocity?: number;
 };
 
 class Orbit extends Konva.Group {
@@ -17,8 +22,13 @@ class Orbit extends Konva.Group {
   isExpanded = false;
   _onShrinkFn = () => {};
 
-  constructor(config: Konva.GroupConfig = {}) {
-    super({ name: "cetasika-orbit", ...config });
+  constructor(config: Konva.GroupConfig & OrbitProps = {}) {
+    super({
+      name: "cetasika-orbit",
+      ...config,
+    });
+
+    const { angularVelocity = Defaults.orbitAngularVelocity } = config;
 
     this.planets = Array.from({ length: 33 }).map(
       () =>
@@ -34,7 +44,7 @@ class Orbit extends Konva.Group {
 
     this.revolveAnimation = new Konva.Animation((frame) => {
       if (!frame) return;
-      const angle = (frame.time / 1000) * Defaults.orbitAngularVelocity;
+      const angle = (frame.time * angularVelocity * 2 * Math.PI) / 1000;
       this.rotation(angle);
     });
   }
@@ -64,7 +74,7 @@ class Orbit extends Konva.Group {
 
   shrink(options?: Partial<{ skipAnimation: boolean }>) {
     this.isExpanded = false;
-   
+
     this.planets.forEach((cetasika, i) => {
       if (options?.skipAnimation) {
         cetasika.radius(0);
