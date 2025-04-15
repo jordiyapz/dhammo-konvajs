@@ -40,11 +40,11 @@ class CetasikaTable extends Konva.Group {
           radius: container.radius,
           name: `hitbox ${item.id}`,
         });
-        hitbox.on("mouseover", (e) => {
+        hitbox.on("pointerover", (e) => {
           const stage = e.target.getStage();
           if (stage) stage.container().style.cursor = "pointer";
         });
-        hitbox.on("mouseout", (e) => {
+        hitbox.on("pointerout", (e) => {
           const stage = e.target.getStage();
           if (stage) stage.container().style.cursor = "default";
         });

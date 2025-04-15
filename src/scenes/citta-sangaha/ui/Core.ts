@@ -47,11 +47,11 @@ class Core extends Konva.Group {
 
     this.add(this.base, this.citta);
 
-    this.on("mouseover", function (e) {
+    this.on("pointerover", function (e) {
       const stage = e.target.getStage();
       if (stage) stage.container().style.cursor = "pointer";
     });
-    this.on("mouseout", function (e) {
+    this.on("pointerout", function (e) {
       const stage = e.target.getStage();
       if (stage) stage.container().style.cursor = "default";
     });

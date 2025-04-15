@@ -35,7 +35,7 @@ class SolarPanel extends Konva.Group {
 
     this.add(this._background, this._solarSystem);
 
-    this._background.on("click", (e) => {
+    this._background.on("pointerclick", (e) => {
       clearTimeout(this.expandTimer);
       this.hide();
       this._onClose(e);

@@ -2,15 +2,14 @@ import Konva from "konva";
 
 import Constants from "@/config/constant";
 import { palette } from "@/shared/palette";
-import { cetasikaMap } from "@/entities/cetasika";
+import { CittaID, cittaIds } from "@/entities/citta";
+import { cetasikaMap, cetasikaIdList } from "@/entities/cetasika";
 
 import CittaTable from "./ui/CittaTable";
 import CetasikaTable from "./ui/CetasikaTable";
 import Tooltip from "./ui/Tooltip";
 import { Vector2d } from "konva/lib/types";
 import SolarPanel from "./ui/SolarPanel";
-import { CittaID, cittaIds } from "@/entities/citta";
-import { cetasikaIdList } from "@/entities/cetasika";
 
 interface CittaSangahaState {
   selectedCitta: string | null;
@@ -46,8 +45,6 @@ class CittaSangahaScene {
       fill: palette.backgroundGray,
     });
 
-    this.state.cittaList = cittaIds.slice(10, 18);
-
     const cittaRadius = 10;
     const cetasikaRadius = 8;
     const cittaTableInitialPosition: Vector2d = { x: 40, y: 40 };
@@ -80,10 +77,10 @@ class CittaSangahaScene {
     this._cittaTable.on("dragend", (e) => {
       e.target.x(cittaTableInitialPosition.x);
     });
-    this._cittaTable.on("mouseout dragstart", () => {
+    this._cittaTable.on("pointerout dragstart", () => {
       this._cetasikaTooltip.hide();
     });
-    this._cittaTable.on("mouseover", (e) => {
+    this._cittaTable.on("pointerover", (e) => {
       const { x, y, name: targetName } = e.target.attrs;
       const words = targetName.split(" ");
       if (words.length == 2) {
@@ -109,10 +106,10 @@ class CittaSangahaScene {
     this._cetasikaTable.on("dragend", (e) => {
       e.target.x(cetasikaTableInitialPosition.x);
     });
-    this._cetasikaTable.on("mouseout dragstart", () => {
+    this._cetasikaTable.on("pointerout dragstart", () => {
       this._cetasikaTooltip.hide();
     });
-    this._cetasikaTable.on("mouseover", (e) => {
+    this._cetasikaTable.on("pointerover", (e) => {
       const { x, y, name: targetName } = e.target.attrs;
       const words = targetName.split(" ");
       if (words.length == 2) {
