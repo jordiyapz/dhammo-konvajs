@@ -3,6 +3,7 @@ export {
   cetasikaMap,
   cetasikaLayoutGroups,
   associationTable,
+  cetasikaIdList,
 } from "./model/repository";
 
 export { default as CetasikaNode } from "./ui/CetasikaNode";

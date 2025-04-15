@@ -1,24 +1,33 @@
 import cittaJson from "@/assets/citta.json";
 import cittaLayout from "@/assets/citta-layout.json";
-import { Citta } from "./interface";
+import { Citta, CittaID } from "./interface";
 
-export const cittaMap = new Map<string, Citta>(
+interface CittaLayoutRow {
+  group: number;
+  id: CittaID;
+  x: number;
+  y: number;
+}
+
+export const cittaMap = new Map<CittaID, Citta>(
   cittaJson.map((citta) => [
-    citta.id,
+    citta.id as CittaID,
     { ...citta, hetuVariant: citta.hetuvariant } as Citta,
   ])
 );
 
-export const getCittaById = (id: string) => cittaMap.get(id);
+export const getCittaById = (id: CittaID) => cittaMap.get(id);
 
 export const cittaIds = Array.from(cittaMap.keys());
 
 export const cittaLayoutMap = new Map(
-  cittaLayout.map((citta) => [citta.id, citta])
+  cittaLayout.map((citta) => [citta.id as CittaID, citta])
 );
 
 const maxGroup = Math.max(...cittaLayout.map((citta) => citta.group));
 
 export const cittaLayoutGroups = Array.from({ length: maxGroup }, (_, i) =>
-  cittaLayout.filter((citta) => citta.group === i + 1)
+  (cittaLayout as Array<CittaLayoutRow>).filter(
+    (citta) => citta.group === i + 1
+  )
 );
