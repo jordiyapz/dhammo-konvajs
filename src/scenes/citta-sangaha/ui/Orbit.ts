@@ -15,12 +15,12 @@ export type OrbitProps = {
 };
 
 class Orbit extends Konva.Group {
-  revolveAnimation: Konva.Animation;
   planets: Konva.Circle[] = [];
   planetRadius = Defaults.planetRadius;
-  expandedPositions: { x: number; y: number }[] = [];
-  isExpanded = false;
   _onShrinkFn = () => {};
+
+  revolveAnimation: Konva.Animation;
+  tweens: Konva.Tween[] = [];
 
   constructor(config: Konva.GroupConfig & OrbitProps = {}) {
     super({
@@ -40,7 +40,27 @@ class Orbit extends Konva.Group {
     );
     this.add(...this.planets);
 
-    this.expandedPositions = this._calculateExpandedPositions({ gap: 10 });
+    const expandedPositions = this._calculateExpandedPositions({ gap: 10 });
+    expandedPositions.forEach((pos, index) => {
+      const onReset =
+        index !== 0
+          ? undefined
+          : () => {
+              this._onShrinkFn();
+              this.revolveAnimation.stop();
+            };
+      this.tweens.push(
+        new Konva.Tween({
+          node: this.planets[index],
+          ...pos,
+          duration: Defaults.duration,
+          opacity: 1,
+          radius: this.planetRadius,
+          easing: Defaults.expandEasing,
+          onReset,
+        })
+      );
+    });
 
     this.revolveAnimation = new Konva.Animation((frame) => {
       if (!frame) return;
@@ -50,51 +70,17 @@ class Orbit extends Konva.Group {
   }
 
   expand(options?: Partial<{ skipAnimation: boolean }>) {
-    this.isExpanded = true;
     this.revolveAnimation.start();
-    this.planets.forEach((cetasika, index) => {
-      const pos = this.expandedPositions[index];
-      if (options?.skipAnimation) {
-        cetasika.radius(this.planetRadius);
-        cetasika.x(pos.x);
-        cetasika.y(pos.y);
-        cetasika.opacity(1);
-        return;
-      }
-      cetasika.to({
-        x: pos.x,
-        y: pos.y,
-        duration: Defaults.duration,
-        opacity: 1,
-        radius: this.planetRadius,
-        easing: Defaults.expandEasing,
-      });
+    this.tweens.forEach((tween) => {
+      if (options?.skipAnimation) tween.finish();
+      else tween.play();
     });
   }
 
   shrink(options?: Partial<{ skipAnimation: boolean }>) {
-    this.isExpanded = false;
-
-    this.planets.forEach((cetasika, i) => {
-      if (options?.skipAnimation) {
-        cetasika.radius(0);
-        cetasika.x(0);
-        cetasika.y(0);
-        cetasika.opacity(0);
-        return;
-      }
-      cetasika.to({
-        x: 0,
-        y: 0,
-        duration: Defaults.duration,
-        opacity: 0,
-        radius: 0,
-        easing: Defaults.shrunkEasing,
-        onFinish: () => {
-          if (i === 0) this._onShrinkFn();
-          this.revolveAnimation.stop();
-        },
-      });
+    this.tweens.forEach((tween) => {
+      if (options?.skipAnimation) tween.reset();
+      else tween.reverse();
     });
   }
 

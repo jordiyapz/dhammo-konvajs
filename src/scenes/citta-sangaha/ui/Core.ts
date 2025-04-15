@@ -16,11 +16,13 @@ type CoreProps = Partial<typeof Defaults> & {
 class Core extends Konva.Group {
   _initialRadius = Defaults.initialRadius;
   _shrunkRadius = Defaults.shrunkRadius;
-  isExpanded = true;
   _onShrinkFn = () => {};
 
   base: Konva.Circle;
   citta: CittaNode;
+
+  baseTween!: Konva.Tween;
+  cittaTween!: Konva.Tween;
 
   constructor(config: Konva.GroupConfig & CoreProps) {
     const {
@@ -41,7 +43,7 @@ class Core extends Konva.Group {
     });
 
     this.initialRadius = initialRadius;
-    this.shrunkRadius = shrunkRadius;
+    this.shrunkRadius = shrunkRadius;  // also initialize tweens
 
     this.add(this.base, this.citta);
 
@@ -56,52 +58,23 @@ class Core extends Konva.Group {
   }
 
   shrink(options?: Partial<{ skipAnimation: boolean; skipOnFinish: boolean }>) {
-    this.isExpanded = false;
     if (options?.skipAnimation) {
-      this.citta.radius = this._shrunkRadius;
-      this.base.radius(this._shrunkRadius);
-      this.citta.opacity(0);
-      this.base.opacity(1);
-      if (!options.skipOnFinish) this._onShrinkFn();
+      this.cittaTween.finish();
+      this.baseTween.finish();
       return;
     }
-    this.citta.to({
-      duration: Defaults.duration,
-      easing: Defaults.shrunkEasing,
-      radius: this._shrunkRadius,
-      opacity: 0,
-    });
-    this.base.to({
-      duration: Defaults.duration,
-      easing: Defaults.shrunkEasing,
-      radius: this._shrunkRadius,
-      opacity: 1,
-      onFinish: () => !options?.skipOnFinish && this._onShrinkFn(),
-    });
+    this.cittaTween.play();
+    this.baseTween.play();
   }
 
   expand(options?: Partial<{ skipAnimation: boolean }>) {
-    this.isExpanded = true;
     if (options?.skipAnimation) {
-      this.citta.radius = this._initialRadius;
-      this.base.radius(this._initialRadius);
-      this.citta.opacity(1);
-      this.base.opacity(0);
+      this.cittaTween.reset();
+      this.baseTween.reset();
       return;
     }
-
-    this.citta.to({
-      duration: Defaults.duration,
-      easing: Defaults.expandEasing,
-      radius: this._initialRadius,
-      opacity: 1,
-    });
-    this.base.to({
-      duration: Defaults.duration,
-      easing: Defaults.expandEasing,
-      radius: this._initialRadius,
-      opacity: 0,
-    });
+    this.cittaTween.reverse();
+    this.baseTween.reverse();
   }
 
   onShrinkEnd(f: () => void) {
@@ -110,18 +83,31 @@ class Core extends Konva.Group {
 
   set initialRadius(radius: number) {
     this._initialRadius = radius;
-    if (this.isExpanded) {
-      this.citta.radius = radius;
-      this.base.radius(radius);
-    }
+    this.citta.radius = radius;
+    this.base.radius(radius);
   }
 
   set shrunkRadius(radius: number) {
     this._shrunkRadius = radius;
-    if (!this.isExpanded) {
-      this.citta.radius = radius;
-      this.base.radius(radius);
-    }
+    this.reinitializeTweens();
+  }
+
+  reinitializeTweens() {
+    this.cittaTween = new Konva.Tween({
+      node: this.citta,
+      duration: Defaults.duration,
+      easing: Defaults.shrunkEasing,
+      radius: this._shrunkRadius,
+      opacity: 0,
+    });
+    this.baseTween = new Konva.Tween({
+      node: this.base,
+      duration: Defaults.duration,
+      easing: Defaults.shrunkEasing,
+      radius: this._shrunkRadius,
+      opacity: 1,
+      onFinish: () => this._onShrinkFn(),
+    });
   }
 }
 

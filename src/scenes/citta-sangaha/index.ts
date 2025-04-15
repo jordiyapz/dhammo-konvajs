@@ -5,16 +5,15 @@ import { palette } from "@/shared/palette";
 import { cetasikaMap } from "@/entities/cetasika";
 
 import CittaTable from "./ui/CittaTable";
-import CittaSolarSystem from "./ui/CittaSolarSystem";
 import CetasikaTable from "./ui/CetasikaTable";
 import Tooltip from "./ui/Tooltip";
 import { Vector2d } from "konva/lib/types";
+import SolarPanel from "./ui/SolarPanel";
 
 class CittaSangahaScene {
   _background: any;
   _cittaTable: CittaTable;
   _cetasikaTable: CetasikaTable;
-  _solarSystem: CittaSolarSystem;
   _cetasikaTooltip: any;
 
   components: any[] = [];
@@ -42,23 +41,10 @@ class CittaSangahaScene {
       draggable: true,
     });
 
-    this._solarSystem = new CittaSolarSystem({
-      x: Constants.virtualSize.width / 4,
-      y: Constants.virtualSize.height / 2,
-      orbitOptions: { angularVelocity: 2 },
-    });
-
-    const cittaPanelBg = new Konva.Rect({
-      x: 0,
-      y: 0,
+    const solarPanel = new SolarPanel({
       width: Constants.virtualSize.width / 2,
       height: Constants.virtualSize.height,
-      fill: palette.grays[800],
-      opacity: 0.7,
     });
-    const solarPanel = new Konva.Group({ opacity: 0 });
-    solarPanel.add(cittaPanelBg, this._solarSystem);
-    solarPanel.hide();
 
     this._cetasikaTable = new CetasikaTable({
       ...cetasikaTableInitialPosition,
@@ -89,22 +75,13 @@ class CittaSangahaScene {
       }
     });
 
-    let expandTimer: NodeJS.Timeout;
-    this._cittaTable.on("click", (e) => {
+    this._cittaTable.on("click", () => {
       this.hideTooltip();
       solarPanel.show();
-      solarPanel.to({ opacity: 1 });
-      expandTimer = setTimeout(() => this._solarSystem.expand(), 500);
     });
-    cittaPanelBg.on("click", (e) => {
-      clearTimeout(expandTimer);
-      solarPanel.to({
-        opacity: 0,
-        onFinish: () => {
-          solarPanel.hide();
-          this._solarSystem.shrink({ skipAnimation: true });
-        },
-      });
+
+    solarPanel.onClose(() => {
+      this.hideTooltip();
     });
 
     this._cetasikaTable.on("dragend", (e) => {
