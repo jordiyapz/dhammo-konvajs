@@ -1,9 +1,10 @@
 import Konva from "konva";
 import Core from "./Core";
 import Orbit, { OrbitProps } from "./Orbit";
+import { CittaID } from "@/entities/citta";
 
 type CittaSolarSystemProps = {
-  cittaId?: string;
+  cittaId?: CittaID;
   orbitOptions?: OrbitProps;
 };
 
@@ -31,6 +32,10 @@ class CittaSolarSystem extends Konva.Group {
     });
 
     this.add(this.orbit, this.core);
+  }
+
+  setCitta(citta: CittaID) {
+    this.core.setCitta(citta);
   }
 
   expand(options?: Partial<{ skipAnimation: boolean }>) {

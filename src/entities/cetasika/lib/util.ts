@@ -1,7 +1,7 @@
 import { CittaID, getCittaById } from "@/entities/citta/@x/cetasika";
 import {
   CetasikaGroupTerms,
-  CetasikaName,
+  CetasikaID,
   CetasikaAssociation,
 } from "../model/interface";
 
@@ -43,7 +43,7 @@ const cetasikaGroup = {
   ],
   virati: ["sammavaca", "sammakammanta", "sammajiva"],
   appamanna: ["karuna", "mudita"],
-} satisfies Record<CetasikaGroupTerms, CetasikaName[]>;
+} satisfies Record<CetasikaGroupTerms, CetasikaID[]>;
 
 const gCit = {
   lobhamula: [

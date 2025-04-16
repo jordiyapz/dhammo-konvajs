@@ -2,7 +2,7 @@ import { CittaID, UHetu, UHetuVariant, UVedana } from "@/entities/citta/@x/cetas
 
 export type CetasikaGroupType = "annasamana" | "akusala" | "sobhana";
 
-export type CetasikaName =
+export type CetasikaID =
   | "phassa"
   | "vedana"
   | "sanna"
@@ -68,7 +68,7 @@ export type CetasikaGroupTerms =
   | "appamanna";
 
 export interface Cetasika {
-  id: CetasikaName;
+  id: CetasikaID;
   name: string;
   hetu: UHetu;
   base: UHetuVariant;
@@ -76,15 +76,15 @@ export interface Cetasika {
 }
 
 export interface CetasikaAssociation {
-  mustHave: CetasikaName[];
-  sometime: CetasikaName[];
-  variations: CetasikaName[][];
+  mustHave: CetasikaID[];
+  sometime: CetasikaID[];
+  variations: CetasikaID[][];
   vedana?: UVedana;
 }
 
 export interface AssociationRow {
   id: CittaID;
-  mustHave: CetasikaName[];
-  sometime: CetasikaName[];
-  variations?: CetasikaName[][];
+  mustHave: CetasikaID[];
+  sometime: CetasikaID[];
+  variations?: CetasikaID[][];
 }

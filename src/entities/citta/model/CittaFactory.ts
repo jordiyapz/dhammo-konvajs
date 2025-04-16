@@ -1,4 +1,5 @@
 import CittaNode from "../ui/CittaNode";
+import { CittaID } from "./interface";
 import { cittaMap } from "./repository";
 
 class CittaFactory {
@@ -8,7 +9,7 @@ class CittaFactory {
   }
 
   createById(
-    id: string,
+    id: CittaID,
     options: { radius?: number; x?: number; y?: number } = {}
   ) {
     if (!cittaMap.has(id)) throw new Error(`Citta ${id} not found`);
@@ -27,6 +28,13 @@ class CittaFactory {
       name: `citta ${id}`,
       id: id,
     });
+  }
+
+  static updateCitta(node: CittaNode, id: CittaID) {
+    if (!cittaMap.has(id)) throw new Error(`Citta ${id} not found`);
+    const { vedana, hetuVariant } = cittaMap.get(id)!;
+    node.vedana = vedana;
+    node.hetuVariant = hetuVariant;
   }
 }
 

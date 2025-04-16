@@ -5,5 +5,6 @@ export {
   associationTable,
   cetasikaIdList,
 } from "./model/repository";
+export * from "./model/interface";
 
 export { default as CetasikaNode } from "./ui/CetasikaNode";

@@ -1,4 +1,5 @@
-import { cittaFactory, CittaNode } from "@/entities/citta";
+import { cittaFactory, CittaID, CittaNode } from "@/entities/citta";
+import CittaFactory from "@/entities/citta/model/CittaFactory";
 import Konva from "konva";
 
 const Defaults = {
@@ -10,7 +11,7 @@ const Defaults = {
 };
 
 type CoreProps = Partial<typeof Defaults> & {
-  cittaId: string;
+  cittaId: CittaID;
 };
 
 class Core extends Konva.Group {
@@ -19,7 +20,8 @@ class Core extends Konva.Group {
   _onShrinkFn = () => {};
 
   base: Konva.Circle;
-  citta: CittaNode;
+  _cittaId: CittaID;
+  _cittaNode: CittaNode;
 
   baseTween!: Konva.Tween;
   cittaTween!: Konva.Tween;
@@ -32,7 +34,8 @@ class Core extends Konva.Group {
     } = config as CoreProps;
     super({ name: "core", ...config });
 
-    this.citta = cittaFactory.createById(cittaId, {
+    this._cittaId = cittaId ?? "lobha1";
+    this._cittaNode = cittaFactory.createById(cittaId, {
       radius: initialRadius,
     });
 
@@ -43,9 +46,9 @@ class Core extends Konva.Group {
     });
 
     this.initialRadius = initialRadius;
-    this.shrunkRadius = shrunkRadius;  // also initialize tweens
+    this.shrunkRadius = shrunkRadius; // also initialize tweens
 
-    this.add(this.base, this.citta);
+    this.add(this.base, this._cittaNode);
 
     this.on("pointerover", function (e) {
       const stage = e.target.getStage();
@@ -55,6 +58,15 @@ class Core extends Konva.Group {
       const stage = e.target.getStage();
       if (stage) stage.container().style.cursor = "default";
     });
+  }
+
+  setCitta(cittaId: CittaID) {
+    this._cittaId = cittaId;
+    // TODO: instead of recreating the citta node, update the existing one
+    // this._cittaNode = cittaFactory.createById(cittaId, {
+    //   radius: this.initialRadius,
+    // });
+    CittaFactory.updateCitta(this._cittaNode, cittaId);
   }
 
   shrink(options?: Partial<{ skipAnimation: boolean; skipOnFinish: boolean }>) {
@@ -83,7 +95,7 @@ class Core extends Konva.Group {
 
   set initialRadius(radius: number) {
     this._initialRadius = radius;
-    this.citta.radius = radius;
+    this._cittaNode.radius = radius;
     this.base.radius(radius);
   }
 
@@ -94,7 +106,7 @@ class Core extends Konva.Group {
 
   reinitializeTweens() {
     this.cittaTween = new Konva.Tween({
-      node: this.citta,
+      node: this._cittaNode,
       duration: Defaults.duration,
       easing: Defaults.shrunkEasing,
       radius: this._shrunkRadius,

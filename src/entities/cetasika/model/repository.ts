@@ -1,11 +1,11 @@
 import cetasikaJson from "@/assets/cetasika.json";
 import associationJson from "@/assets/association.json";
 import cetasikaLayout from "@/assets/cetasika-layout.json";
-import { AssociationRow, Cetasika } from "./interface";
+import { AssociationRow, Cetasika, CetasikaID } from "./interface";
 
-export const cetasikaIdList = cetasikaLayout.map((row) => row.id);
+export const cetasikaIdList = cetasikaLayout.map((row) => row.id as CetasikaID);
 export const cetasikaMap = new Map(
-  cetasikaJson.map((cetasika) => [cetasika.id, cetasika as Cetasika])
+  cetasikaJson.map((cetasika) => [cetasika.id as CetasikaID, cetasika as Cetasika])
 );
 
 export const cetasikaLayoutGroups = Array.from(

@@ -2,6 +2,7 @@ import { palette } from "@/shared/palette";
 import Konva from "konva";
 import CittaSolarSystem from "./CittaSolarSystem";
 import Constants from "@/config/constant";
+import { CittaID } from "@/entities/citta";
 
 class SolarPanel extends Konva.Group {
   expandTimer?: NodeJS.Timeout;
@@ -42,6 +43,10 @@ class SolarPanel extends Konva.Group {
     });
   }
 
+  setCitta(citta: CittaID) {
+    this._solarSystem.setCitta(citta);
+  }
+  
   show() {
     super.show();
     this.to({ opacity: 1 });

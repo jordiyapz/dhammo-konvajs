@@ -74,6 +74,21 @@ class CittaNode extends Konva.Group {
     });
   }
 
+  set vedana(vedana: UVedana) {
+    this._vedana = vedana;
+    this._base.stroke(vedanaColors[vedana]);
+  }
+
+  set hetuVariant(hetuVariant: UHetuVariant) {
+    this._hetuVariant = hetuVariant;
+    this._base.fill(hetuVariantBgColors[hetuVariant]);
+    this._hetuNodes.forEach((node) => {
+      node.destroy();
+    });
+    this._hetuNodes = this._createHetuNodes();
+    this.add(...this._hetuNodes);
+  }
+
   _getHetuList(hetuVariant: UHetuVariant): UHetu[] {
     switch (hetuVariant) {
       case "moha":
