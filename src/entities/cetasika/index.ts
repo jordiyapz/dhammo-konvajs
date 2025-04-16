@@ -2,8 +2,9 @@ export { cetasikaFactory } from "./model/CetasikaFactory";
 export {
   cetasikaMap,
   cetasikaLayoutGroups,
-  associationTable,
+  combinationTable,
   cetasikaIdList,
+  getCetasikaCombination
 } from "./model/repository";
 export * from "./model/interface";
 

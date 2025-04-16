@@ -1,11 +1,15 @@
 import cetasikaJson from "@/assets/cetasika.json";
-import associationJson from "@/assets/association.json";
+import combinationJson from "@/assets/association.json";
 import cetasikaLayout from "@/assets/cetasika-layout.json";
-import { AssociationRow, Cetasika, CetasikaID } from "./interface";
+import { AssociationRow as CombinationRow, Cetasika, CetasikaID } from "./interface";
+import { CittaID } from "@/entities/citta/@x/cetasika";
 
 export const cetasikaIdList = cetasikaLayout.map((row) => row.id as CetasikaID);
 export const cetasikaMap = new Map(
-  cetasikaJson.map((cetasika) => [cetasika.id as CetasikaID, cetasika as Cetasika])
+  cetasikaJson.map((cetasika) => [
+    cetasika.id as CetasikaID,
+    cetasika as Cetasika,
+  ])
 );
 
 export const cetasikaLayoutGroups = Array.from(
@@ -13,7 +17,10 @@ export const cetasikaLayoutGroups = Array.from(
   (_, i) => cetasikaLayout.filter((cetasika) => cetasika.group === i + 1)
 );
 
-export const associationTable = associationJson as AssociationRow[];
+export const combinationTable = combinationJson as CombinationRow[];
+export const getCetasikaCombination = (id: CittaID) => {
+  return combinationTable.find((row) => row.id === id);
+};
 
 export function getCetasikaPosition(id: string) {
   return cetasikaLayout.findIndex((row) => row.id === id);

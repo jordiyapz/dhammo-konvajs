@@ -2,33 +2,16 @@ import Konva from "konva";
 
 import Constants from "@/config/constant";
 import { palette } from "@/shared/palette";
-import { CittaID, cittaIds } from "@/entities/citta";
-import { cetasikaMap, cetasikaIdList, CetasikaID } from "@/entities/cetasika";
+import { cetasikaMap } from "@/entities/cetasika";
 
 import CittaTable from "./ui/CittaTable";
 import CetasikaTable from "./ui/CetasikaTable";
 import Tooltip from "./ui/Tooltip";
 import { Vector2d } from "konva/lib/types";
 import SolarPanel from "./ui/SolarPanel";
-
-interface CittaSangahaState {
-  selectedCitta: CittaID | null;
-  selectedCetasika: CetasikaID | null;
-  cittaList: CittaID[];
-  cetasikaList: CetasikaID[];
-  activeVariant: CetasikaID[];
-}
-
-const initialState: CittaSangahaState = {
-  selectedCitta: null,
-  selectedCetasika: null,
-  cittaList: cittaIds,
-  cetasikaList: cetasikaIdList,
-  activeVariant: [],
-};
+import store from "./lib/store";
 
 class CittaSangahaScene {
-  _state: CittaSangahaState = initialState;
   components: any[] = [];
 
   _background: any;
@@ -59,7 +42,7 @@ class CittaSangahaScene {
       cittaRadius,
       draggable: true,
     });
-    this._cittaTable.setAvailableCittas(this.state.cittaList);
+    this._cittaTable.setAvailableCittas(store.getState().cittaList);
 
     this._solarPanel = new SolarPanel({
       width: Constants.virtualSize.width / 2,
@@ -74,6 +57,14 @@ class CittaSangahaScene {
 
     this._cetasikaTooltip = new Tooltip({ fontSize: 10 });
     this._cetasikaTooltip.hide();
+
+    // EVENT LISTENERS
+    const { selectCitta } = store.getState();
+    store.subscribe(
+      (state) => [state.selectedCitta, state.cetasikaList],
+      ([selectedCitta, cetasikaList]) =>
+        console.debug({ cetasikaList, selectedCitta })
+    );
 
     this._cittaTable.on("dragend", (e) => {
       e.target.x(cittaTableInitialPosition.x);
@@ -97,12 +88,12 @@ class CittaSangahaScene {
 
     this._cittaTable.onClickCitta((id) => {
       this.hideTooltip();
-      this._solarPanel.show();
-      this.setState({ ...this.state, selectedCitta: id });
+      selectCitta(id);
     });
 
     this._solarPanel.onClose(() => {
       this.hideTooltip();
+      selectCitta(null);
     });
 
     this._cetasikaTable.on("dragend", (e) => {
@@ -132,21 +123,6 @@ class CittaSangahaScene {
       this._cetasikaTable,
       this._cetasikaTooltip
     );
-  }
-
-  get state() {
-    return this._state;
-  }
-
-  setState(newState: CittaSangahaState) {
-    this._state = newState;
-    this._cittaTable.setAvailableCittas(this.state.cittaList);
-    if (this.state.selectedCitta) {
-      this._solarPanel.setCitta(this.state.selectedCitta);
-    }
-    // this._cittaTable.setActiveCitta(this.state.selectedCitta);
-    // this._cetasikaTable.setAvailableCetasikas(this.state.cetasikaList);
-    // this._cetasikaTable.setActiveCetasika(this.state.activeVariant);
   }
 
   attachToLayer(layer: Konva.Layer) {
