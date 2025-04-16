@@ -1,4 +1,10 @@
 export * from "./model/interface";
-export { cittaFactory } from "./model/CittaFactory";
-export { cittaLayoutGroups, getCittaById, cittaIds } from "./model/repository";
+export {
+  cittaIdList,
+  cittaLayoutGroups,
+  getCittaById,
+  getCittaCombination,
+} from "./model/repository";
+
+export { cittaFactory, default as CittaFactory } from "./model/CittaFactory";
 export { default as CittaNode } from "./ui/CittaNode";

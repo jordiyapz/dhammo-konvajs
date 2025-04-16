@@ -1,11 +1,9 @@
-export { cetasikaFactory } from "./model/CetasikaFactory";
+export * from "./model/interface";
 export {
   cetasikaMap,
   cetasikaLayoutGroups,
-  combinationTable,
   cetasikaIdList,
-  getCetasikaCombination
 } from "./model/repository";
-export * from "./model/interface";
 
+export { cetasikaFactory } from "./model/CetasikaFactory";
 export { default as CetasikaNode } from "./ui/CetasikaNode";

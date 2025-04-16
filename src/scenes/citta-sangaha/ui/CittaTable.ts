@@ -3,7 +3,7 @@ import { NamaContainer } from "@/entities/nama";
 import {
   cittaFactory,
   CittaID,
-  cittaIds,
+  cittaIdList,
   cittaLayoutGroups,
   getCittaById,
 } from "@/entities/citta";
@@ -13,7 +13,7 @@ type CittaTableProps = {
 };
 
 class CittaTable extends Konva.Group {
-  _cittaList: CittaID[] = cittaIds;
+  _cittaList: CittaID[] = cittaIdList;
   _cittaNodes: Array<{ id: CittaID; citta: any; hitbox: Konva.Circle }> = [];
 
   _onClickCitta: (id: CittaID) => void = () => {};

@@ -1,6 +1,10 @@
-import { cittaFactory, CittaID, CittaNode } from "@/entities/citta";
-import CittaFactory from "@/entities/citta/model/CittaFactory";
 import Konva from "konva";
+import {
+  CittaFactory,
+  cittaFactory,
+  CittaID,
+  CittaNode,
+} from "@/entities/citta";
 
 const Defaults = {
   initialRadius: 20,
@@ -62,10 +66,6 @@ class Core extends Konva.Group {
 
   setCitta(cittaId: CittaID) {
     this._cittaId = cittaId;
-    // TODO: instead of recreating the citta node, update the existing one
-    // this._cittaNode = cittaFactory.createById(cittaId, {
-    //   radius: this.initialRadius,
-    // });
     CittaFactory.updateCitta(this._cittaNode, cittaId);
   }
 

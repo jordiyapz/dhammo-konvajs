@@ -1,4 +1,4 @@
-import { CittaID, UHetu, UHetuVariant, UVedana } from "@/entities/citta/@x/cetasika";
+import { UHetu, UHetuVariant } from "@/entities/citta/@x/cetasika";
 
 export type CetasikaGroupType = "annasamana" | "akusala" | "sobhana";
 
@@ -73,18 +73,4 @@ export interface Cetasika {
   hetu: UHetu;
   base: UHetuVariant;
   order: number;
-}
-
-export interface CetasikaAssociation {
-  mustHave: CetasikaID[];
-  sometime: CetasikaID[];
-  variations: CetasikaID[][];
-  vedana?: UVedana;
-}
-
-export interface AssociationRow {
-  id: CittaID;
-  mustHave: CetasikaID[];
-  sometime: CetasikaID[];
-  variations?: CetasikaID[][];
 }
