@@ -1,12 +1,12 @@
 import { palette } from "@/shared/palette";
 import Konva from "konva";
 import { Vector2d } from "konva/lib/types";
+import { tooltipStore } from "../tooltip";
 
 class Tooltip extends Konva.Group {
   padding: Vector2d = { x: 8, y: 4 };
 
   _arrowSize = 4;
-  _text: string = "";
   _components: {
     text: Konva.Text;
     rect: Konva.Rect;
@@ -29,9 +29,11 @@ class Tooltip extends Konva.Group {
 
     this._arrowSize = 5;
 
+    const state = tooltipStore.getState();
+
     this._components = {
       text: new Konva.Text({
-        text: this._text,
+        text: state.text,
         fontSize,
         fontFamily,
         align,
@@ -66,14 +68,20 @@ class Tooltip extends Konva.Group {
     rect.y(arrowHeight + boxYOffset);
 
     this.add(arrow, rect, text);
+
+    tooltipStore.subscribe((state) => {
+      this.position(state.position);
+      this._setText(state.text);
+      if (state.visible) this.show();
+      else this.hide();
+    });
   }
 
   get text() {
-    return this._text;
+    return tooltipStore.getState().text;
   }
 
-  set text(newText: string) {
-    this._text = newText;
+  _setText(newText: string) {
     const { text, rect } = this._components;
 
     text.text(newText);
