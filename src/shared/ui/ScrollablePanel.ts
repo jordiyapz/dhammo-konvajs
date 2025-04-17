@@ -15,11 +15,13 @@ const Defaults = {
 
 class ScrollablePanel extends Konva.Group {
   _nodes: { content: Konva.Group };
+  _onScroll?: () => void;
 
   constructor(config: Konva.GroupConfig & ScrollablePanelProps) {
     super({ name: "scrollable-panel", ...config });
 
     const { viewWidth, viewHeight, contentHeight } = config;
+    this._onScroll = config.onScroll;
 
     // For scroll wheel hit region
     const panelBg = new Konva.Rect({
@@ -88,7 +90,7 @@ class ScrollablePanel extends Konva.Group {
 
       verticalBar.y(vy);
 
-      config.onScroll?.();
+      this._onScroll?.();
     });
 
     // For mobile scroll
@@ -108,7 +110,7 @@ class ScrollablePanel extends Konva.Group {
         Defaults.scrollbarPadding;
       verticalBar.y(vy);
 
-      config.onScroll?.();
+      this._onScroll?.();
     });
 
     // Simulate scrollbar
@@ -131,6 +133,8 @@ class ScrollablePanel extends Konva.Group {
         (verticalBar.y() - Defaults.scrollbarPadding) / availableHeight; // delta in %
 
       panelContent.y(-(panelContent.height() - viewHeight) * delta);
+
+      this._onScroll?.();
     });
 
     verticalBar.on("mouseover", () => {
@@ -147,6 +151,10 @@ class ScrollablePanel extends Konva.Group {
 
   get contentNode() {
     return this._nodes.content;
+  }
+
+  onScroll(callback: () => void) {
+    this._onScroll = callback;
   }
 }
 

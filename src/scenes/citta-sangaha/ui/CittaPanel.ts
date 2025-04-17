@@ -54,11 +54,13 @@ class CittaPanel extends Konva.Group {
         });
       }
     });
-
     cittaTable.onClickCitta((id) => {
       hideTooltip();
       selectCitta(id);
     });
+    scrollablePanel.onScroll(() => {
+      hideTooltip();
+    })
   }
 }
 
