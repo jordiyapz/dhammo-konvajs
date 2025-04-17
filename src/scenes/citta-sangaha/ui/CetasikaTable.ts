@@ -1,13 +1,11 @@
 import Konva from "konva";
+import { TVisitor } from "@/shared/types";
 import { NamaContainer } from "@/entities/nama";
-
 import {
-  cetasikaFactory,
   CetasikaID,
-  cetasikaIdList,
+  cetasikaFactory,
   cetasikaLayoutGroups,
 } from "@/entities/cetasika";
-import { TVisitor } from "@/shared/types";
 
 type CetasikaTableProps = {
   cetasikaRadius?: number;

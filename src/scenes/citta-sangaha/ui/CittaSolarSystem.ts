@@ -19,7 +19,7 @@ class CittaSolarSystem extends Konva.Group {
 
     const { cittaId = "lobha1" } = config;
 
-    this.core = new Core({ cittaId });
+    this.core = new Core({ cittaId, initialRadius: 40 , shrunkRadius: 20});
     this.orbit = new Orbit(config.orbitOptions);
 
     this.core.onShrinkEnd(() => this.orbit.expand());
