@@ -1,12 +1,12 @@
 import Konva from "konva";
 
 import Constants from "@/config/constant";
+import Tooltip from "@/shared/ui/Tooltip";
 import { palette } from "@/shared/palette";
+import { hideTooltip } from "@/shared/tooltip";
 
-import Tooltip from "../../shared/ui/Tooltip";
 import SolarPanel from "./ui/SolarPanel";
 import store from "./lib/store";
-import { hideTooltip } from "@/shared/tooltip";
 import CetasikaPanel from "./ui/CetasikaPanel";
 import CittaPanel from "./ui/CittaPanel";
 
