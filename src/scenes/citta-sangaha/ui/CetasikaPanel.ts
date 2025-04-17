@@ -2,6 +2,8 @@ import Konva from "konva";
 import CetasikaTable from "./CetasikaTable";
 import { hideTooltip, showTooltip } from "@/shared/tooltip";
 import { cetasikaMap } from "@/entities/cetasika";
+import store from "../lib/store";
+import CetasikaVisibilityVisitor from "../lib/CetasikaVisibilityVisitor";
 
 const cetasikaRadius = 16;
 const offsetX = 40;
@@ -16,9 +18,20 @@ class CetasikaPanel extends Konva.Group {
       cetasikaRadius,
       draggable: true,
     });
+    cetasikaTable.accept(new CetasikaVisibilityVisitor());
 
     this.add(cetasikaTable);
 
+    cetasikaTable.onClickCetasika((id, e) => {
+      const { x, y } = e?.target.attrs ?? {};
+      showTooltip({
+        text: cetasikaMap.get(id)?.name ?? id,
+        position: {
+          x: x + cetasikaTable.x() + this.x(),
+          y: y + cetasikaTable.y() + this.y() + cetasikaRadius,
+        },
+      });
+    });
     cetasikaTable.on("dragend", (e) => {
       e.target.x(offsetX);
     });
@@ -40,6 +53,17 @@ class CetasikaPanel extends Konva.Group {
         });
       }
     });
+
+    store.subscribe(
+      ({ selectedCetasika, cetasikaList, sometimeCetasikaList }) => ({
+        selectedCetasika,
+        cetasikaList,
+        sometimeCetasikaList,
+      }),
+      ({ cetasikaList, sometimeCetasikaList }) => {
+        console.log(cetasikaList, sometimeCetasikaList);
+      }
+    );
   }
 }
 

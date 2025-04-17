@@ -74,3 +74,10 @@ export interface Cetasika {
   base: UHetuVariant;
   order: number;
 }
+
+export interface CetasikaLayoutRow {
+  id: CetasikaID;
+  group: number;
+  x: number;
+  y: number;
+}

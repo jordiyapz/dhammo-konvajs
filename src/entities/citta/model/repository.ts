@@ -14,10 +14,6 @@ export const getCittaById = (id: CittaID) => cittaMap.get(id);
 
 export const cittaIdList = Array.from(cittaMap.keys());
 
-export const cittaLayoutMap = new Map(
-  cittaLayout.map((citta) => [citta.id as CittaID, citta])
-);
-
 const maxGroup = Math.max(...cittaLayout.map((citta) => citta.group));
 
 export const cittaLayoutGroups = Array.from({ length: maxGroup }, (_, i) =>

@@ -1,6 +1,6 @@
 import cetasikaJson from "@/assets/cetasika.json";
 import cetasikaLayout from "@/assets/cetasika-layout.json";
-import { Cetasika, CetasikaID } from "./interface";
+import { Cetasika, CetasikaID, CetasikaLayoutRow } from "./interface";
 
 export const cetasikaIdList = cetasikaLayout.map((row) => row.id as CetasikaID);
 export const cetasikaMap = new Map(
@@ -12,7 +12,10 @@ export const cetasikaMap = new Map(
 
 export const cetasikaLayoutGroups = Array.from(
   { length: new Set(cetasikaLayout.map((row) => row.group)).size },
-  (_, i) => cetasikaLayout.filter((cetasika) => cetasika.group === i + 1)
+  (_, i) =>
+    (cetasikaLayout as Array<CetasikaLayoutRow>).filter(
+      (cetasika) => cetasika.group === i + 1
+    )
 );
 
 export function getCetasikaPosition(id: string) {
