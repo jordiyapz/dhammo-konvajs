@@ -30,17 +30,11 @@ class CetasikaPanel extends Konva.Group {
 
     cetasikaTable.onClickCetasika((id, e) => {
       const { x, y } = e?.target.attrs ?? {};
+      const stage = e?.target.getStage();
+      const absolute = cetasikaTable.getAbsolutePosition(stage ?? undefined);
       showTooltip({
         text: cetasikaMap.get(id)?.name ?? id,
-        position: {
-          x: x + scrollablePanel.contentNode.x() + cetasikaTable.x() + this.x(),
-          y:
-            y +
-            scrollablePanel.contentNode.y() +
-            cetasikaTable.y() +
-            this.y() +
-            cetasikaRadius,
-        },
+        position: { x: x + absolute.x, y: y + absolute.y + cetasikaRadius },
       });
     });
     cetasikaTable.on("pointerout dragstart", () => {
@@ -51,22 +45,11 @@ class CetasikaPanel extends Konva.Group {
       const words = targetName.split(" ");
       if (words.length == 2) {
         const [_, id] = words;
-        const cetasika = cetasikaMap.get(id);
+        const stage = e.target.getStage();
+        const absolute = cetasikaTable.getAbsolutePosition(stage ?? undefined);
         showTooltip({
-          text: cetasika?.name ?? id,
-          position: {
-            x:
-              x +
-              scrollablePanel.contentNode.x() +
-              cetasikaTable.x() +
-              this.x(),
-            y:
-              y +
-              scrollablePanel.contentNode.y() +
-              cetasikaTable.y() +
-              this.y() +
-              cetasikaRadius,
-          },
+          text: cetasikaMap.get(id)?.name ?? id,
+          position: { x: x + absolute.x, y: y + absolute.y + cetasikaRadius },
         });
       }
     });

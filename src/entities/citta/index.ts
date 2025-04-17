@@ -1,6 +1,7 @@
 export * from "./model/interface";
 export {
   cittaIdList,
+  cittaMap,
   cittaLayoutGroups,
   getCittaById,
   getCittaCombination,

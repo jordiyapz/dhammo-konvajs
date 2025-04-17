@@ -1,10 +1,9 @@
 import Konva from "konva";
 import { hideTooltip, showTooltip } from "@/shared/tooltip";
-import { cetasikaMap } from "@/entities/cetasika";
+import ScrollablePanel from "@/shared/ui/ScrollablePanel";
 
 import store from "../lib/store";
 import CittaTable from "./CittaTable";
-import ScrollablePanel from "../../../shared/ui/ScrollablePanel";
 
 const cittaRadius = 18;
 const cittaTableInitialPosition = { x: 50, y: 40 };
@@ -40,17 +39,11 @@ class CittaPanel extends Konva.Group {
       const words = targetName.split(" ");
       if (words.length == 2) {
         const [_, id] = words;
-        const cetasika = cetasikaMap.get(id);
+        const stage = e.target.getStage();
+        const abs = cittaTable.getAbsolutePosition(stage ?? undefined);
         showTooltip({
-          text: cetasika?.name ?? id,
-          position: {
-            x: x + scrollablePanel.contentNode.x() + cittaTable.x(),
-            y:
-              y +
-              scrollablePanel.contentNode.y() +
-              cittaTable.y() +
-              cittaRadius,
-          },
+          text: id,
+          position: { x: x + abs.x, y: y + abs.y + cittaRadius },
         });
       }
     });
@@ -60,7 +53,7 @@ class CittaPanel extends Konva.Group {
     });
     scrollablePanel.onScroll(() => {
       hideTooltip();
-    })
+    });
   }
 }
 
