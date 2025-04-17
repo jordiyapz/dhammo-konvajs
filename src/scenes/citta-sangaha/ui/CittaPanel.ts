@@ -4,7 +4,7 @@ import { cetasikaMap } from "@/entities/cetasika";
 
 import store from "../lib/store";
 import CittaTable from "./CittaTable";
-import ScrollablePanel from "./ScrollablePanel";
+import ScrollablePanel from "../../../shared/ui/ScrollablePanel";
 
 const cittaRadius = 18;
 const cittaTableInitialPosition = { x: 50, y: 40 };

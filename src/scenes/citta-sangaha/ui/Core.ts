@@ -5,6 +5,7 @@ import {
   CittaID,
   CittaNode,
 } from "@/entities/citta";
+import { setCursorStyle } from "@/shared/utils";
 
 const Defaults = {
   initialRadius: 20,
@@ -56,11 +57,11 @@ class Core extends Konva.Group {
 
     this.on("pointerover", function (e) {
       const stage = e.target.getStage();
-      if (stage) stage.container().style.cursor = "pointer";
+      if (stage) setCursorStyle(stage, "pointer");
     });
     this.on("pointerout", function (e) {
       const stage = e.target.getStage();
-      if (stage) stage.container().style.cursor = "default";
+      if (stage) setCursorStyle(stage, "default");
     });
   }
 

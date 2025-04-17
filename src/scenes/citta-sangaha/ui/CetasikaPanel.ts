@@ -54,16 +54,16 @@ class CetasikaPanel extends Konva.Group {
       }
     });
 
-    store.subscribe(
-      ({ selectedCetasika, cetasikaList, sometimeCetasikaList }) => ({
-        selectedCetasika,
-        cetasikaList,
-        sometimeCetasikaList,
-      }),
-      ({ cetasikaList, sometimeCetasikaList }) => {
-        console.log(cetasikaList, sometimeCetasikaList);
-      }
-    );
+    // store.subscribe(
+    //   ({ selectedCetasika, cetasikaList, sometimeCetasikaList }) => ({
+    //     selectedCetasika,
+    //     cetasikaList,
+    //     sometimeCetasikaList,
+    //   }),
+    //   ({ cetasikaList, sometimeCetasikaList }) => {
+    //     console.log(cetasikaList, sometimeCetasikaList);
+    //   }
+    // );
   }
 }
 

@@ -68,3 +68,45 @@ export function generateCirclePoints(
   }
   return points;
 }
+
+export function setCursorStyle(
+  stage: Konva.Stage,
+  cursorStyle: // general
+  | "default"
+    | "auto"
+    | "none"
+    // links & status
+    | "context-menu"
+    | "pointer"
+    | "progress"
+    | "wait"
+    // selection
+    | "cell"
+    | "crosshair"
+    | "text"
+    | "vertical-text"
+    // drag & drop
+    | "alias"
+    | "copy"
+    | "move"
+    | "no-drop"
+    | "not-allowed"
+    | "grab"
+    | "grabbing"
+    // resizing & scrolling
+    | "col-resize"
+    | "row-resize"
+    | "n-resize"
+    | "e-resize"
+    | "s-resize"
+    | "w-resize"
+    | "ne-resize"
+    | "nw-resize"
+    | "se-resize"
+    | "sw-resize"
+    // zoom
+    | "zoom-in"
+    | "zoom-out"
+) {
+  stage.container().style.cursor = cursorStyle;
+}

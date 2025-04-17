@@ -7,6 +7,7 @@ import {
   cittaLayoutGroups,
   getCittaById,
 } from "@/entities/citta";
+import { setCursorStyle } from "@/shared/utils";
 
 type CittaTableProps = {
   cittaRadius?: number;
@@ -51,11 +52,11 @@ class CittaTable extends Konva.Group {
         });
         hitbox.on("pointerover", (e) => {
           const stage = e.target.getStage();
-          if (stage) stage.container().style.cursor = "pointer";
+          if (stage) setCursorStyle(stage, "pointer");
         });
         hitbox.on("pointerout", (e) => {
           const stage = e.target.getStage();
-          if (stage) stage.container().style.cursor = "default";
+          if (stage) setCursorStyle(stage, "default");
         });
         hitbox.on("pointerclick", () => {
           this._onClickCitta(item.id);
