@@ -24,7 +24,16 @@ class CittaSangahaScene {
       fill: palette.backgroundGray,
     });
 
-    const cittaPanel = new CittaPanel({});
+    const cittaPanel = new CittaPanel({
+      width: panelWidth,
+      height: Constants.virtualSize.height,
+    });
+
+    const verticalLine = new Konva.Line({
+      points: [panelWidth, 0, panelWidth, Constants.virtualSize.height],
+      stroke: palette.grays[600],
+      strokeWidth: 1,
+    });
 
     const cetasikaPanel = new CetasikaPanel({
       x: panelWidth,
@@ -48,6 +57,7 @@ class CittaSangahaScene {
     this.components.push(
       background,
       cittaPanel,
+      verticalLine,
       cetasikaPanel,
       solarPanel,
       tooltip

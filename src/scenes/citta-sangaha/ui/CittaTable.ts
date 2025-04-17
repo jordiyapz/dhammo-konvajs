@@ -59,7 +59,7 @@ class CittaTable extends Konva.Group {
         });
         hitbox.on("pointerclick", () => {
           this._onClickCitta(item.id);
-        })
+        });
 
         this.add(container, hitbox);
         this._cittaNodes.push({
@@ -72,6 +72,7 @@ class CittaTable extends Konva.Group {
       }
       offsetY += rowCount * cittaSpacing + gap;
     }
+    this.height(offsetY);
   }
 
   setAvailableCittas(availableCittas: CittaID[]) {
