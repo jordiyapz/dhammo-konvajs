@@ -37,6 +37,8 @@ class CittaSangahaScene {
 
     const cetasikaPanel = new CetasikaPanel({
       x: panelWidth,
+      width: Constants.virtualSize.width - panelWidth,
+      height: Constants.virtualSize.height,
     });
 
     const solarPanel = new SolarPanel({

@@ -77,6 +77,7 @@ class CetasikaTable extends Konva.Group {
       }
       offsetY += rowCount * cetasikaSpacing + groupGap;
     }
+    this.height(offsetY);
   }
 
   accept<V extends TVisitor<CetasikaTable>>(visitor: V) {

@@ -2,8 +2,8 @@ import Konva from "konva";
 import CetasikaTable from "./CetasikaTable";
 import { hideTooltip, showTooltip } from "@/shared/tooltip";
 import { cetasikaMap } from "@/entities/cetasika";
-import store from "../lib/store";
 import CetasikaVisibilityVisitor from "../lib/CetasikaVisibilityVisitor";
+import ScrollablePanel from "@/shared/ui/ScrollablePanel";
 
 const cetasikaRadius = 16;
 const offsetX = 40;
@@ -16,24 +16,32 @@ class CetasikaPanel extends Konva.Group {
       x: offsetX,
       y: 40,
       cetasikaRadius,
-      draggable: true,
     });
     cetasikaTable.accept(new CetasikaVisibilityVisitor());
 
-    this.add(cetasikaTable);
+    const scrollablePanel = new ScrollablePanel({
+      viewWidth: this.width(),
+      viewHeight: this.height(),
+      contentHeight: cetasikaTable.height() + 40,
+    });
+    scrollablePanel.addContent(cetasikaTable);
+
+    this.add(scrollablePanel);
 
     cetasikaTable.onClickCetasika((id, e) => {
       const { x, y } = e?.target.attrs ?? {};
       showTooltip({
         text: cetasikaMap.get(id)?.name ?? id,
         position: {
-          x: x + cetasikaTable.x() + this.x(),
-          y: y + cetasikaTable.y() + this.y() + cetasikaRadius,
+          x: x + scrollablePanel.contentNode.x() + cetasikaTable.x() + this.x(),
+          y:
+            y +
+            scrollablePanel.contentNode.y() +
+            cetasikaTable.y() +
+            this.y() +
+            cetasikaRadius,
         },
       });
-    });
-    cetasikaTable.on("dragend", (e) => {
-      e.target.x(offsetX);
     });
     cetasikaTable.on("pointerout dragstart", () => {
       hideTooltip();
@@ -47,8 +55,17 @@ class CetasikaPanel extends Konva.Group {
         showTooltip({
           text: cetasika?.name ?? id,
           position: {
-            x: x + cetasikaTable.x() + this.x(),
-            y: y + cetasikaTable.y() + this.y() + cetasikaRadius,
+            x:
+              x +
+              scrollablePanel.contentNode.x() +
+              cetasikaTable.x() +
+              this.x(),
+            y:
+              y +
+              scrollablePanel.contentNode.y() +
+              cetasikaTable.y() +
+              this.y() +
+              cetasikaRadius,
           },
         });
       }
