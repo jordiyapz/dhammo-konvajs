@@ -1,5 +1,8 @@
-import { computeLargeRadius, generateCirclePoints } from "@/shared/utils";
 import Konva from "konva";
+import {
+  generateCirclePoints,
+  computeLargeRadius,
+} from "@/shared/lib/geometry";
 
 const Defaults = {
   orbitAngularVelocity: 10, // rad/s
