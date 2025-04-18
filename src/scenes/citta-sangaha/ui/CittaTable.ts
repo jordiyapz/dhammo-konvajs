@@ -8,6 +8,7 @@ import {
   getCittaById,
 } from "@/entities/citta";
 import { setCursorStyle } from "@/shared/utils";
+import { TVisitor } from "@/shared/types";
 
 type CittaTableProps = {
   cittaRadius?: number;
@@ -88,6 +89,10 @@ class CittaTable extends Konva.Group {
 
   onClickCitta(callback: (id: CittaID) => void) {
     this._onClickCitta = callback;
+  }
+
+  accept(visitor: TVisitor<CittaTable>) {
+    visitor.visit(this);
   }
 }
 

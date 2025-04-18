@@ -1,9 +1,10 @@
 import Konva from "konva";
-import CetasikaTable from "./CetasikaTable";
 import { hideTooltip, showTooltip } from "@/shared/tooltip";
-import { cetasikaMap } from "@/entities/cetasika";
-import CetasikaVisibilityVisitor from "../lib/CetasikaVisibilityVisitor";
 import ScrollablePanel from "@/shared/ui/ScrollablePanel";
+import { cetasikaMap } from "@/entities/cetasika";
+import CetasikaTable from "./CetasikaTable";
+import CetasikaVisibilityVisitor from "../lib/CetasikaVisibilityVisitor";
+import store from "../lib/store";
 
 const cetasikaRadius = 16;
 const offsetX = 40;
@@ -30,6 +31,10 @@ class CetasikaPanel extends Konva.Group {
 
     cetasikaTable.onClickCetasika((id, e) => {
       const { x, y } = e?.target.attrs ?? {};
+
+      const state = store.getState();
+      if (state.selectedCitta === null) state.selectCetasika(id);
+
       const stage = e?.target.getStage();
       const absolute = cetasikaTable.getAbsolutePosition(stage ?? undefined);
       showTooltip({

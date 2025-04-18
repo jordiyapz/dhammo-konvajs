@@ -5,7 +5,8 @@ import store from "./store";
 class CetasikaVisibilityVisitor implements TVisitor<CetasikaTable> {
   visit(table: CetasikaTable) {
     store.subscribe(
-      ({ cetasikaList, sometimeCetasikaList }) => ({
+      ({ selectedCetasika, cetasikaList, sometimeCetasikaList }) => ({
+        selectedCetasika,
         cetasikaList,
         sometimeCetasikaList,
       }),
@@ -16,7 +17,7 @@ class CetasikaVisibilityVisitor implements TVisitor<CetasikaTable> {
           const isSometime = sometimeCetasikaList.includes(id);
           const isVisible = isMust || isSometime;
           cetasikaNode.cetasika.visible(isVisible);
-          cetasikaNode.hitbox.visible(isVisible);
+          // cetasikaNode.hitbox.visible(isVisible);
         });
       }
     );

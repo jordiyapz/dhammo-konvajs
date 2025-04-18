@@ -11,7 +11,8 @@ export interface CittaSangahaValues {
 }
 
 export type CittaSangahaAction = {
-  selectCitta(CittaId: CittaID|null): void;
+  selectCitta(cittaId: CittaID | null): void;
+  selectCetasika(cetasikaId: CetasikaID | null): void;
 };
 
 export type CittaSangahaState = CittaSangahaValues & CittaSangahaAction;

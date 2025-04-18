@@ -4,6 +4,7 @@ import ScrollablePanel from "@/shared/ui/ScrollablePanel";
 
 import store from "../lib/store";
 import CittaTable from "./CittaTable";
+import CittaVisibilityVisitor from "../lib/CittaVisibilityVisitor";
 
 const cittaRadius = 18;
 const cittaTableInitialPosition = { x: 50, y: 40 };
@@ -17,6 +18,7 @@ class CittaPanel extends Konva.Group {
       cittaRadius,
     });
     cittaTable.setAvailableCittas(store.getState().cittaList);
+    cittaTable.accept(new CittaVisibilityVisitor());
 
     const scrollablePanel = new ScrollablePanel({
       viewWidth: this.width(),

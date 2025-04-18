@@ -3,6 +3,7 @@ export {
   cetasikaMap,
   cetasikaLayoutGroups,
   cetasikaIdList,
+  cetasikaAssociationMap,
 } from "./model/repository";
 
 export { cetasikaFactory } from "./model/CetasikaFactory";
