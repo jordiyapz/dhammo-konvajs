@@ -7,8 +7,8 @@ import { hideTooltip } from "@/shared/tooltip";
 
 import SolarPanel from "./ui/SolarPanel";
 import store from "./lib/store";
-import CetasikaPanel from "./ui/CetasikaPanel";
-import CittaPanel from "./ui/CittaPanel";
+import CetasikaSection from "./ui/CetasikaSection";
+import CittaSection from "./ui/CittaSection";
 
 const panelWidth = Constants.virtualSize.width / 2 + 50;
 
@@ -24,7 +24,7 @@ class CittaSangahaScene {
       fill: palette.backgroundGray,
     });
 
-    const cittaPanel = new CittaPanel({
+    const cittaPanel = new CittaSection({
       width: panelWidth,
       height: Constants.virtualSize.height,
     });
@@ -35,7 +35,7 @@ class CittaSangahaScene {
       strokeWidth: 1,
     });
 
-    const cetasikaPanel = new CetasikaPanel({
+    const cetasikaPanel = new CetasikaSection({
       x: panelWidth,
       width: Constants.virtualSize.width - panelWidth,
       height: Constants.virtualSize.height,

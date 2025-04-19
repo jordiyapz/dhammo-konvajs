@@ -9,7 +9,7 @@ import CittaVisibilityVisitor from "../lib/CittaVisibilityVisitor";
 const cittaRadius = 18;
 const cittaTableInitialPosition = { x: 50, y: 40 };
 
-class CittaPanel extends Konva.Group {
+class CittaSection extends Konva.Group {
   constructor(config: Konva.GroupConfig) {
     super(config);
 
@@ -59,4 +59,4 @@ class CittaPanel extends Konva.Group {
   }
 }
 
-export default CittaPanel;
+export default CittaSection;

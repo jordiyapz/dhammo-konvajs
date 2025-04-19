@@ -3,7 +3,6 @@ import { hideTooltip, showTooltip } from "@/shared/tooltip";
 import ScrollablePanel from "@/shared/ui/ScrollablePanel";
 import {
   CetasikaFactory,
-  cetasikaFactory,
   cetasikaMap,
   CetasikaNode,
 } from "@/entities/cetasika";
@@ -14,7 +13,7 @@ import { palette } from "@/shared/palette";
 
 const cetasikaRadius = 16;
 
-class CetasikaPanel extends Konva.Group {
+class CetasikaSection extends Konva.Group {
   constructor(config: Konva.GroupConfig) {
     super(config);
 
@@ -103,4 +102,4 @@ class CetasikaPanel extends Konva.Group {
   }
 }
 
-export default CetasikaPanel;
+export default CetasikaSection;
