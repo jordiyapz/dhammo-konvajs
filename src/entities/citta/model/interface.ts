@@ -23,6 +23,7 @@ export interface Citta {
   hetuVariant: UHetuVariant;
   vedana: UVedana;
   jati: UJati;
+  name?: string;
 }
 
 export type CittaID =

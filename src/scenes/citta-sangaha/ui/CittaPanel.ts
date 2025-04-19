@@ -1,30 +1,38 @@
 import Konva from "konva";
-import CittaTable from "./CittaTable";
-import store from "../lib/store";
 import { hideTooltip, showTooltip } from "@/shared/tooltip";
-import { cetasikaMap } from "@/entities/cetasika";
+import ScrollablePanel from "@/shared/ui/ScrollablePanel";
+
+import store from "../lib/store";
+import CittaTable from "./CittaTable";
+import CittaVisibilityVisitor from "../lib/CittaVisibilityVisitor";
+
+const cittaRadius = 18;
+const cittaTableInitialPosition = { x: 50, y: 40 };
 
 class CittaPanel extends Konva.Group {
   constructor(config: Konva.GroupConfig) {
     super(config);
 
-    const cittaRadius = 18;
-    const cittaTableInitialPosition = { x: 50, y: 40 };
-
     const cittaTable = new CittaTable({
       ...cittaTableInitialPosition,
       cittaRadius,
-      draggable: true,
     });
     cittaTable.setAvailableCittas(store.getState().cittaList);
+    cittaTable.accept(new CittaVisibilityVisitor());
 
-    this.add(cittaTable);
-    
+    const scrollablePanel = new ScrollablePanel({
+      viewWidth: this.width(),
+      viewHeight: this.height(),
+      contentHeight: cittaTable.height() + cittaTableInitialPosition.y,
+    });
+    scrollablePanel.addContent(cittaTable);
+
+    this.add(scrollablePanel);
+
+    // EVENT HANDLERS
+
     const { selectCitta } = store.getState();
 
-    cittaTable.on("dragend", (e) => {
-      e.target.x(cittaTableInitialPosition.x);
-    });
     cittaTable.on("pointerout dragstart", () => {
       hideTooltip();
     });
@@ -33,20 +41,20 @@ class CittaPanel extends Konva.Group {
       const words = targetName.split(" ");
       if (words.length == 2) {
         const [_, id] = words;
-        const cetasika = cetasikaMap.get(id);
+        const stage = e.target.getStage();
+        const abs = cittaTable.getAbsolutePosition(stage ?? undefined);
         showTooltip({
-          text: cetasika?.name ?? id,
-          position: {
-            x: x + cittaTable.x(),
-            y: y + cittaTable.y() +cittaRadius,
-          },
+          text: id,
+          position: { x: x + abs.x, y: y + abs.y + cittaRadius },
         });
       }
     });
-
     cittaTable.onClickCitta((id) => {
       hideTooltip();
       selectCitta(id);
+    });
+    scrollablePanel.onScroll(() => {
+      hideTooltip();
     });
   }
 }

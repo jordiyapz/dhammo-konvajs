@@ -1,39 +1,68 @@
 import Konva from "konva";
-import CetasikaTable from "./CetasikaTable";
 import { hideTooltip, showTooltip } from "@/shared/tooltip";
-import { cetasikaMap } from "@/entities/cetasika";
-import store from "../lib/store";
+import ScrollablePanel from "@/shared/ui/ScrollablePanel";
+import {
+  CetasikaFactory,
+  cetasikaFactory,
+  cetasikaMap,
+  CetasikaNode,
+} from "@/entities/cetasika";
+import CetasikaTable from "./CetasikaTable";
 import CetasikaVisibilityVisitor from "../lib/CetasikaVisibilityVisitor";
+import store from "../lib/store";
+import { palette } from "@/shared/palette";
 
 const cetasikaRadius = 16;
-const offsetX = 40;
 
 class CetasikaPanel extends Konva.Group {
   constructor(config: Konva.GroupConfig) {
     super(config);
 
     const cetasikaTable = new CetasikaTable({
-      x: offsetX,
+      x: 40,
       y: 40,
       cetasikaRadius,
-      draggable: true,
     });
     cetasikaTable.accept(new CetasikaVisibilityVisitor());
 
-    this.add(cetasikaTable);
+    const scrollablePanel = new ScrollablePanel({
+      viewWidth: this.width(),
+      viewHeight: this.height(),
+      contentHeight: cetasikaTable.height() + 40,
+    });
+    scrollablePanel.addContent(cetasikaTable);
+
+    const backdrop = new Konva.Rect({
+      width: scrollablePanel.contentNode.width(),
+      height: this.height(),
+      fill: palette.grays[800],
+      opacity: 0.7,
+    });
+    const selectedCetasikaNode = new CetasikaNode({
+      x: backdrop.width() / 2,
+      y: backdrop.height() / 2,
+      radius: 24,
+    });
+    const cetasikaDialog = new Konva.Group();
+    cetasikaDialog.add(backdrop, selectedCetasikaNode);
+    cetasikaDialog.hide();
+
+    this.add(scrollablePanel, cetasikaDialog);
 
     cetasikaTable.onClickCetasika((id, e) => {
       const { x, y } = e?.target.attrs ?? {};
+
+      const state = store.getState();
+      if (state.selectedCitta === null) {
+        state.selectCetasika(id);
+      }
+
+      const stage = e?.target.getStage();
+      const absolute = cetasikaTable.getAbsolutePosition(stage ?? undefined);
       showTooltip({
         text: cetasikaMap.get(id)?.name ?? id,
-        position: {
-          x: x + cetasikaTable.x() + this.x(),
-          y: y + cetasikaTable.y() + this.y() + cetasikaRadius,
-        },
+        position: { x: x + absolute.x, y: y + absolute.y + cetasikaRadius },
       });
-    });
-    cetasikaTable.on("dragend", (e) => {
-      e.target.x(offsetX);
     });
     cetasikaTable.on("pointerout dragstart", () => {
       hideTooltip();
@@ -43,25 +72,32 @@ class CetasikaPanel extends Konva.Group {
       const words = targetName.split(" ");
       if (words.length == 2) {
         const [_, id] = words;
-        const cetasika = cetasikaMap.get(id);
+        const stage = e.target.getStage();
+        const absolute = cetasikaTable.getAbsolutePosition(stage ?? undefined);
         showTooltip({
-          text: cetasika?.name ?? id,
-          position: {
-            x: x + cetasikaTable.x() + this.x(),
-            y: y + cetasikaTable.y() + this.y() + cetasikaRadius,
-          },
+          text: cetasikaMap.get(id)?.name ?? id,
+          position: { x: x + absolute.x, y: y + absolute.y + cetasikaRadius },
         });
       }
     });
 
+    cetasikaDialog.on("click", () => {
+      store.getState().selectCetasika(null);
+    });
+
     store.subscribe(
-      ({ selectedCetasika, cetasikaList, sometimeCetasikaList }) => ({
-        selectedCetasika,
-        cetasikaList,
-        sometimeCetasikaList,
-      }),
-      ({ cetasikaList, sometimeCetasikaList }) => {
-        console.log(cetasikaList, sometimeCetasikaList);
+      ({ selectedCetasika }) => ({ selectedCetasika }),
+      ({ selectedCetasika }) => {
+        if (selectedCetasika === null) {
+          cetasikaDialog.hide();
+        } else {
+          CetasikaFactory.modifyCetasika(
+            selectedCetasikaNode,
+            selectedCetasika,
+            selectedCetasika === "vedana" ? store.getState().vedana : undefined
+          );
+          cetasikaDialog.show();
+        }
       }
     );
   }

@@ -6,6 +6,7 @@ import {
   cetasikaFactory,
   cetasikaLayoutGroups,
 } from "@/entities/cetasika";
+import { setCursorStyle } from "@/shared/utils";
 
 type CetasikaTableProps = {
   cetasikaRadius?: number;
@@ -56,11 +57,11 @@ class CetasikaTable extends Konva.Group {
         });
         hitbox.on("pointerover", (e) => {
           const stage = e.target.getStage();
-          if (stage) stage.container().style.cursor = "pointer";
+          if (stage) setCursorStyle(stage, "pointer");
         });
         hitbox.on("pointerout", (e) => {
           const stage = e.target.getStage();
-          if (stage) stage.container().style.cursor = "default";
+          if (stage) setCursorStyle(stage, "default");
         });
         hitbox.on("pointerclick", (e) => {
           this._onClickCetasika?.(item.id, e);
@@ -76,6 +77,7 @@ class CetasikaTable extends Konva.Group {
       }
       offsetY += rowCount * cetasikaSpacing + groupGap;
     }
+    this.height(offsetY);
   }
 
   accept<V extends TVisitor<CetasikaTable>>(visitor: V) {

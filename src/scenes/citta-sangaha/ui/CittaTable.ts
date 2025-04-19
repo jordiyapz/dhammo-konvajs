@@ -7,6 +7,8 @@ import {
   cittaLayoutGroups,
   getCittaById,
 } from "@/entities/citta";
+import { setCursorStyle } from "@/shared/utils";
+import { TVisitor } from "@/shared/types";
 
 type CittaTableProps = {
   cittaRadius?: number;
@@ -51,15 +53,15 @@ class CittaTable extends Konva.Group {
         });
         hitbox.on("pointerover", (e) => {
           const stage = e.target.getStage();
-          if (stage) stage.container().style.cursor = "pointer";
+          if (stage) setCursorStyle(stage, "pointer");
         });
         hitbox.on("pointerout", (e) => {
           const stage = e.target.getStage();
-          if (stage) stage.container().style.cursor = "default";
+          if (stage) setCursorStyle(stage, "default");
         });
         hitbox.on("pointerclick", () => {
           this._onClickCitta(item.id);
-        })
+        });
 
         this.add(container, hitbox);
         this._cittaNodes.push({
@@ -72,6 +74,7 @@ class CittaTable extends Konva.Group {
       }
       offsetY += rowCount * cittaSpacing + gap;
     }
+    this.height(offsetY);
   }
 
   setAvailableCittas(availableCittas: CittaID[]) {
@@ -86,6 +89,10 @@ class CittaTable extends Konva.Group {
 
   onClickCitta(callback: (id: CittaID) => void) {
     this._onClickCitta = callback;
+  }
+
+  accept(visitor: TVisitor<CittaTable>) {
+    visitor.visit(this);
   }
 }
 
