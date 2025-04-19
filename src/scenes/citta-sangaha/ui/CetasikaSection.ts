@@ -39,6 +39,7 @@ class CetasikaSection extends Konva.Group {
       if (state.selectedCitta === null) {
         hideTooltip();
         state.selectCetasika(id);
+        return;
       }
 
       const { x, y } = e?.target.attrs ?? {};
@@ -66,7 +67,7 @@ class CetasikaSection extends Konva.Group {
       }
     });
 
-    cetasikaDialog.on("click", () => {
+    cetasikaDialog.onClose(() => {
       store.getState().selectCetasika(null);
     });
   }

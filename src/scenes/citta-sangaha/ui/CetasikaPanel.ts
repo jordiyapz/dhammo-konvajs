@@ -7,11 +7,14 @@ import { palette } from "@/shared/palette";
 import Konva from "konva";
 import store from "../lib/store";
 import Constants from "@/config/constant";
+import CloseButton from "@/shared/ui/CloseButton";
 
 type CetasikaPanelProps = {
   width: number;
   radius?: number;
 };
+
+type CloseHandler = (e: Konva.KonvaEventObject<MouseEvent>) => void;
 
 const Defaults = {
   radius: 20,
@@ -28,6 +31,7 @@ class CetasikaPanel extends Konva.Group {
     cetasika: Konva.Tween;
     text: Konva.Tween;
   };
+  _onClose?: CloseHandler;
 
   constructor(config: Konva.GroupConfig & CetasikaPanelProps) {
     const {
@@ -58,20 +62,29 @@ class CetasikaPanel extends Konva.Group {
       fill: palette.grays[400],
       opacity: 0,
     });
+    const closeBtn = new CloseButton({ y: 20 });
+    closeBtn.x(width - closeBtn.width() - 20);
 
     this._nodes = { backdrop, cetasikaNode, text };
-    
-    this.add(...Object.values(this._nodes));
+
+    this.add(...Object.values(this._nodes), closeBtn);
     this.hide();
     this.initializeTweens();
 
     // Event handlers
+
+    const handleClose = (e: Konva.KonvaEventObject<PointerEvent>) => {
+      this.hide();
+      this._onClose?.(e);
+    };
+
+    backdrop.on("pointerclick", handleClose);
+    closeBtn.on("pointerclick", handleClose);
+
     store.subscribe(
       ({ selectedCetasika }) => ({ selectedCetasika }),
       ({ selectedCetasika }) => {
-        if (selectedCetasika === null) {
-          this.hide();
-        } else {
+        if (selectedCetasika !== null) {
           this.setText(
             cetasikaMap.get(selectedCetasika)?.name ?? selectedCetasika
           );
@@ -137,6 +150,10 @@ class CetasikaPanel extends Konva.Group {
       this._tweens.background.onReset = () => super.hide();
     } else super.hide();
     return this;
+  }
+
+  onClose(cb: CloseHandler) {
+    this._onClose = cb;
   }
 }
 

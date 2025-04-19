@@ -4,6 +4,7 @@ import CittaSolarSystem from "./CittaSolarSystem";
 import Constants from "@/config/constant";
 import { CittaID } from "@/entities/citta";
 import store from "../lib/store";
+import CloseButton from "@/shared/ui/CloseButton";
 
 class SolarPanel extends Konva.Group {
   expandTimer?: NodeJS.Timeout;
@@ -35,13 +36,18 @@ class SolarPanel extends Konva.Group {
       orbitOptions: { angularVelocity: 2 },
     });
 
-    this.add(this._background, this._solarSystem);
+    const closeBtn = new CloseButton({ y: 20 });
+    closeBtn.x(width - closeBtn.width() - 20);
 
-    this._background.on("pointerclick", (e) => {
+    this.add(this._background, this._solarSystem, closeBtn);
+
+    const handleClose = (e?: Konva.KonvaEventObject<MouseEvent>) => {
       clearTimeout(this.expandTimer);
       this.hide();
       this._onClose(e);
-    });
+    };
+    closeBtn.on("pointerclick", handleClose);
+    this._background.on("pointerclick", handleClose);
 
     store.subscribe(
       (state) => ({ selectedCitta: state.selectedCitta }),
