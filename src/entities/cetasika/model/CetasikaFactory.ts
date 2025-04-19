@@ -24,6 +24,14 @@ class CetasikaFactory {
       vedana: id === "vedana" ? options?.vedana : undefined,
     });
   }
+
+  static modifyCetasika(node: CetasikaNode, id: CetasikaID, vedana?: UVedana) {
+    if (!cetasikaMap.has(id)) throw new Error(`Cetasika ${id} not found`);
+    const { base, hetu } = cetasikaMap.get(id)!;
+    node.base = base;
+    node.hetu = hetu;
+    node.vedana = vedana ?? undefined;
+  }
 }
 
 export default CetasikaFactory;

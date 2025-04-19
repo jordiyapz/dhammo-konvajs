@@ -30,7 +30,7 @@ class ScrollablePanel extends Konva.Group {
     });
 
     const panelContent = new Konva.Group({
-      width: viewHeight - Defaults.scrollbarPadding * 2 - 10,
+      width: viewWidth - Defaults.scrollbarPadding * 2 - 10,
       height: contentHeight,
       draggable: true,
     });
@@ -145,8 +145,8 @@ class ScrollablePanel extends Konva.Group {
     });
   }
 
-  addContent(node: Konva.Group | Konva.Shape) {
-    this._nodes.content.add(node);
+  addContent(...nodes: Array<Konva.Group | Konva.Shape>) {
+    this._nodes.content.add(...nodes);
   }
 
   get contentNode() {

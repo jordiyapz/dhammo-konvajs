@@ -30,6 +30,7 @@ class CittaFactory {
     });
   }
 
+  // TODO: rename to modifyCitta
   static updateCitta(node: CittaNode, id: CittaID) {
     if (!cittaMap.has(id)) throw new Error(`Citta ${id} not found`);
     const { vedana, hetuVariant } = cittaMap.get(id)!;

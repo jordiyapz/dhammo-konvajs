@@ -1,7 +1,7 @@
 import { createStore } from "zustand/vanilla";
 import { subscribeWithSelector } from "zustand/middleware";
 
-import { cittaIdList, getCittaCombination } from "@/entities/citta";
+import { cittaIdList, cittaMap, getCittaCombination } from "@/entities/citta";
 import { cetasikaAssociationMap, cetasikaIdList } from "@/entities/cetasika";
 import { CittaSangahaState, CittaSangahaValues } from "./interface";
 
@@ -12,6 +12,7 @@ const initialState: CittaSangahaValues = {
   cetasikaList: cetasikaIdList,
   sometimeCetasikaList: [],
   activeCombination: [],
+  vedana: "upekkha",
 };
 
 const store = createStore<CittaSangahaState>()(
@@ -19,28 +20,17 @@ const store = createStore<CittaSangahaState>()(
     ...initialState,
     selectCitta: (cittaId) =>
       set(() => {
-        if (cittaId === null)
-          return {
-            selectedCitta: null,
-            cittaList: initialState.cittaList,
-            cetasikaList: initialState.cetasikaList,
-            sometimeCetasikaList: initialState.sometimeCetasikaList,
-          };
+        if (cittaId === null) return { ...initialState, selectedCitta: null };
 
         const combination = getCittaCombination(cittaId);
-        if (!combination)
-          return {
-            selectedCitta: cittaId,
-            cittaList: initialState.cittaList,
-            cetasikaList: [],
-          };
+        if (!combination) return { ...initialState, selectedCitta: cittaId };
 
         const cetasikaList = combination.mustHave;
         const sometimeCetasikaList = combination.sometime;
         return {
+          ...initialState,
           selectedCitta: cittaId,
-          selectedCetasika: null,
-          cittaList: initialState.cittaList,
+          vedana: cittaMap.get(cittaId)!.vedana,
           cetasikaList,
           sometimeCetasikaList,
         };

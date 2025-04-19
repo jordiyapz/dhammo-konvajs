@@ -1,5 +1,5 @@
 import { CetasikaID } from "@/entities/cetasika";
-import { CittaID } from "@/entities/citta";
+import { CittaID, UVedana } from "@/entities/citta";
 
 export interface CittaSangahaValues {
   selectedCitta: CittaID | null;
@@ -8,6 +8,7 @@ export interface CittaSangahaValues {
   cetasikaList: CetasikaID[];
   sometimeCetasikaList: CetasikaID[];
   activeCombination: CetasikaID[];
+  vedana: UVedana;
 }
 
 export type CittaSangahaAction = {

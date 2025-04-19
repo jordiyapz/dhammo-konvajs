@@ -5,12 +5,12 @@ import store from "./store";
 class CetasikaVisibilityVisitor implements TVisitor<CetasikaTable> {
   visit(table: CetasikaTable) {
     store.subscribe(
-      ({ selectedCetasika, cetasikaList, sometimeCetasikaList }) => ({
-        selectedCetasika,
+      ({ vedana, cetasikaList, sometimeCetasikaList }) => ({
+        vedana,
         cetasikaList,
         sometimeCetasikaList,
       }),
-      ({ cetasikaList, sometimeCetasikaList }) => {
+      ({ cetasikaList, sometimeCetasikaList, vedana }) => {
         table._cetasikaNodes.forEach((cetasikaNode) => {
           const { id } = cetasikaNode;
           const isMust = cetasikaList.includes(id);
@@ -18,6 +18,10 @@ class CetasikaVisibilityVisitor implements TVisitor<CetasikaTable> {
           const isVisible = isMust || isSometime;
           cetasikaNode.cetasika.visible(isVisible);
           // cetasikaNode.hitbox.visible(isVisible);
+
+          if (id === "vedana") {
+            cetasikaNode.cetasika.vedana = vedana;
+          }
         });
       }
     );
