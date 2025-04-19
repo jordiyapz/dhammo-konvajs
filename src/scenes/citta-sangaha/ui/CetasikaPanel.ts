@@ -1,7 +1,12 @@
-import { CetasikaFactory, CetasikaNode } from "@/entities/cetasika";
+import {
+  CetasikaFactory,
+  cetasikaMap,
+  CetasikaNode,
+} from "@/entities/cetasika";
 import { palette } from "@/shared/palette";
 import Konva from "konva";
 import store from "../lib/store";
+import Constants from "@/config/constant";
 
 type CetasikaPanelProps = {
   width: number;
@@ -13,12 +18,25 @@ const Defaults = {
 };
 
 class CetasikaPanel extends Konva.Group {
-  _nodes: { backdrop: Konva.Rect; selectedCetasikaNode: CetasikaNode };
-  _tweens?: { background: Konva.Tween; cetasika: Konva.Tween };
+  _nodes: {
+    backdrop: Konva.Rect;
+    cetasikaNode: CetasikaNode;
+    text: Konva.Text;
+  };
+  _tweens?: {
+    background: Konva.Tween;
+    cetasika: Konva.Tween;
+    text: Konva.Tween;
+  };
 
   constructor(config: Konva.GroupConfig & CetasikaPanelProps) {
-    super({ ...config, width: config.width });
-    const { radius = Defaults.radius } = config;
+    const {
+      radius = Defaults.radius,
+      width,
+      height = Constants.virtualSize.height,
+    } = config;
+
+    super({ ...config, height, width });
 
     const backdrop = new Konva.Rect({
       width: this.width(),
@@ -26,33 +44,39 @@ class CetasikaPanel extends Konva.Group {
       fill: palette.grays[800],
       opacity: 0,
     });
-    const selectedCetasikaNode = new CetasikaNode({
+    const cetasikaNode = new CetasikaNode({
       x: backdrop.width() / 2,
       y: backdrop.height() / 2,
       radius: radius,
       opacity: 0,
     });
+    const text = new Konva.Text({
+      y: cetasikaNode.y() + radius + 10,
+      fontSize: 20,
+      fontFamily: "Arial",
+      align: "center",
+      fill: palette.grays[400],
+      opacity: 0,
+    });
 
-    this._nodes = { backdrop, selectedCetasikaNode };
-
-    this.add(backdrop, selectedCetasikaNode);
+    this._nodes = { backdrop, cetasikaNode, text };
+    
+    this.add(...Object.values(this._nodes));
     this.hide();
+    this.initializeTweens();
 
     // Event handlers
-    this.getStage()
-    this.initializeTweens();
-    this.on("layeradd", () => {
-      console.debug("layeradd listened");
-      this.initializeTweens();
-    });
     store.subscribe(
       ({ selectedCetasika }) => ({ selectedCetasika }),
       ({ selectedCetasika }) => {
         if (selectedCetasika === null) {
           this.hide();
         } else {
+          this.setText(
+            cetasikaMap.get(selectedCetasika)?.name ?? selectedCetasika
+          );
           CetasikaFactory.modifyCetasika(
-            selectedCetasikaNode,
+            cetasikaNode,
             selectedCetasika,
             selectedCetasika === "vedana" ? store.getState().vedana : undefined
           );
@@ -72,19 +96,35 @@ class CetasikaPanel extends Konva.Group {
         opacity: 0.7,
       }),
       cetasika: new Konva.Tween({
-        node: this._nodes.selectedCetasikaNode,
+        node: this._nodes.cetasikaNode,
         easing: Konva.Easings.EaseInOut,
         duration: 0.3,
         opacity: 1,
       }),
+      text: new Konva.Tween({
+        node: this._nodes.text,
+        easing: Konva.Easings.EaseInOut,
+        duration: 1,
+        opacity: 1,
+      }),
     };
+  }
+
+  setText(text: string) {
+    this._nodes.text.text(text);
+    this._nodes.text.x(this.width() / 2 - this._nodes.text.width() / 2);
   }
 
   show() {
     super.show();
     if (this._tweens) {
       this._tweens.background.play();
-      this._tweens.background.onFinish = () => this._tweens?.cetasika.play();
+      this._tweens.text.play();
+      this._tweens.cetasika.play();
+      this._tweens.background.onFinish = () => {
+        this._tweens?.cetasika.play();
+        this._tweens?.text.play();
+      };
     }
     return this;
   }
@@ -93,8 +133,9 @@ class CetasikaPanel extends Konva.Group {
     if (this._tweens) {
       this._tweens.background.reverse();
       this._tweens.cetasika.reverse();
+      this._tweens.text.reverse();
       this._tweens.background.onReset = () => super.hide();
-    }
+    } else super.hide();
     return this;
   }
 }
