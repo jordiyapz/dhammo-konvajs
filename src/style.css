@@ -2,5 +2,8 @@ body,
 html {
   padding: 0;
   margin: 0;
-  background-color: #212529;
+  background-color: #1B1D1F;
+}
+#app div {
+  margin: 0 auto;
 }

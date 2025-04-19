@@ -1,12 +1,14 @@
 import Konva from "konva";
 
-// Function to make the stage responsive
-export function fitStageIntoParentContainer(options: {
+type StageFitOptions = {
   elementId: string;
   stage: Konva.Stage;
   virtualWidth: number;
   virtualHeight: number;
-}) {
+};
+
+// Function to make the stage responsive
+export function fitStageIntoParentContainerWidth(options: StageFitOptions) {
   // Get the container element
   const container = document.getElementById(options.elementId);
   if (!container) return;
@@ -26,6 +28,42 @@ export function fitStageIntoParentContainer(options: {
   stage.width(virtualWidth * scale);
   stage.height(virtualHeight * scale);
   stage.scale({ x: scale, y: scale });
+}
+
+export function fitStageIntoParentContainerHeight(options: StageFitOptions) {
+  // Get the container element
+  const container = document.getElementById(options.elementId);
+  if (!container) return;
+
+  const { stage, virtualWidth, virtualHeight } = options;
+
+  // Make the container take up the full width
+  container.style.height = "100vh";
+
+  // Get current container width
+  const currentContainerHeight = container.offsetHeight;
+
+  // Calculate scale based on virtual width vs actual width
+  const scale = currentContainerHeight / virtualHeight;
+
+  // Set stage dimensions and scale
+  stage.width(virtualWidth * scale);
+  stage.height(virtualHeight * scale);
+  stage.scale({ x: scale, y: scale });
+}
+
+export function fitStageBestFit(options: StageFitOptions) {
+  const container = document.getElementById(options.elementId);
+  if (!container) return;
+
+  const currentContainerHeight = container.offsetHeight;
+  const currentContainerWidth = container.offsetWidth;
+
+  if (currentContainerHeight > currentContainerWidth) {
+    fitStageIntoParentContainerWidth(options);
+  } else {
+    fitStageIntoParentContainerHeight(options);
+  }
 }
 
 export function setCursorStyle(
