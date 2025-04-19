@@ -5,6 +5,7 @@ import ScrollablePanel from "@/shared/ui/ScrollablePanel";
 import store from "../lib/store";
 import CittaTable from "./CittaTable";
 import CittaVisibilityVisitor from "../lib/CittaVisibilityVisitor";
+import { cittaMap } from "@/entities/citta";
 
 const cittaRadius = 18;
 const cittaTableInitialPosition = { x: 50, y: 40 };
@@ -49,9 +50,19 @@ class CittaSection extends Konva.Group {
         });
       }
     });
-    cittaTable.onClickCitta((id) => {
-      hideTooltip();
-      selectCitta(id);
+    cittaTable.onClickCitta((id, e) => {
+      const { selectedCetasika } = store.getState();
+      if (selectedCetasika === null) {
+        hideTooltip();
+        selectCitta(id);
+      }
+      const { x, y } = e?.target.attrs ?? {};
+      const stage = e?.target.getStage();
+      const absolute = cittaTable.getAbsolutePosition(stage ?? undefined);
+      showTooltip({
+        text: cittaMap.get(id)?.name ?? id,
+        position: { x: x + absolute.x, y: y + absolute.y + cittaRadius },
+      });
     });
     scrollablePanel.onScroll(() => {
       hideTooltip();

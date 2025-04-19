@@ -18,7 +18,10 @@ class CittaTable extends Konva.Group {
   _cittaList: CittaID[] = cittaIdList;
   _cittaNodes: Array<{ id: CittaID; citta: any; hitbox: Konva.Circle }> = [];
 
-  _onClickCitta: (id: CittaID) => void = () => {};
+  _onClickCitta?: (
+    id: CittaID,
+    e: Konva.KonvaEventObject<PointerEvent>
+  ) => void;
 
   constructor(config: Konva.GroupConfig & CittaTableProps = {}) {
     super({ name: "citta-table", ...config });
@@ -59,8 +62,8 @@ class CittaTable extends Konva.Group {
           const stage = e.target.getStage();
           if (stage) setCursorStyle(stage, "default");
         });
-        hitbox.on("pointerclick", () => {
-          this._onClickCitta(item.id);
+        hitbox.on("pointerclick", (e) => {
+          this._onClickCitta?.(item.id, e)
         });
 
         this.add(container, hitbox);
@@ -87,7 +90,9 @@ class CittaTable extends Konva.Group {
     }
   }
 
-  onClickCitta(callback: (id: CittaID) => void) {
+  onClickCitta(
+    callback: (id: CittaID, e: Konva.KonvaEventObject<PointerEvent>) => void
+  ) {
     this._onClickCitta = callback;
   }
 

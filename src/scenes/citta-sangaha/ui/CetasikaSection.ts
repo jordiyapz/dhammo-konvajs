@@ -35,13 +35,13 @@ class CetasikaSection extends Konva.Group {
     this.add(scrollablePanel, cetasikaDialog);
 
     cetasikaTable.onClickCetasika((id, e) => {
-      const { x, y } = e?.target.attrs ?? {};
-
       const state = store.getState();
       if (state.selectedCitta === null) {
+        hideTooltip();
         state.selectCetasika(id);
       }
 
+      const { x, y } = e?.target.attrs ?? {};
       const stage = e?.target.getStage();
       const absolute = cetasikaTable.getAbsolutePosition(stage ?? undefined);
       showTooltip({
