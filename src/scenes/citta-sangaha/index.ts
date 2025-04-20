@@ -1,26 +1,22 @@
 import Konva from "konva";
 
 import Constants from "@/config/constant";
+import Tooltip from "@/shared/ui/Tooltip";
 import { palette } from "@/shared/palette";
-import { cetasikaMap } from "@/entities/cetasika";
+import { hideTooltip } from "@/shared/tooltip";
 
-import CittaTable from "./ui/CittaTable";
-import CittaSolarSystem from "./ui/CittaSolarSystem";
-import CetasikaTable from "./ui/CetasikaTable";
-import Tooltip from "./ui/Tooltip";
-import { Vector2d } from "konva/lib/types";
+import SolarPanel from "./ui/SolarPanel";
+import store from "./lib/store";
+import CetasikaSection from "./ui/CetasikaSection";
+import CittaSection from "./ui/CittaSection";
+
+const panelWidth = Constants.virtualSize.width / 2 + 50;
 
 class CittaSangahaScene {
-  _background: any;
-  _cittaTable: CittaTable;
-  _cetasikaTable: CetasikaTable;
-  _solarSystem: CittaSolarSystem;
-  _cetasikaTooltip: any;
-
   components: any[] = [];
 
   constructor() {
-    this._background = new Konva.Rect({
+    const background = new Konva.Rect({
       x: 0,
       y: 0,
       width: Constants.virtualSize.width,
@@ -28,129 +24,50 @@ class CittaSangahaScene {
       fill: palette.backgroundGray,
     });
 
-    const cittaRadius = 10;
-    const cetasikaRadius = 8;
-    const cittaTableInitialPosition: Vector2d = { x: 40, y: 40 };
-    const cetasikaTableInitialPosition: Vector2d = {
-      x: Constants.virtualSize.width / 2 + 40,
-      y: 40,
-    };
-
-    this._cittaTable = new CittaTable({
-      ...cittaTableInitialPosition,
-      cittaRadius,
-      draggable: true,
-    });
-
-    this._solarSystem = new CittaSolarSystem({
-      x: Constants.virtualSize.width / 4,
-      y: Constants.virtualSize.height / 2,
-      orbitOptions: { angularVelocity: 2 },
-    });
-
-    const cittaPanelBg = new Konva.Rect({
-      x: 0,
-      y: 0,
-      width: Constants.virtualSize.width / 2,
+    const cittaPanel = new CittaSection({
+      width: panelWidth,
       height: Constants.virtualSize.height,
-      fill: palette.grays[800],
-      opacity: 0.7,
-    });
-    const solarPanel = new Konva.Group({ opacity: 0 });
-    solarPanel.add(cittaPanelBg, this._solarSystem);
-    solarPanel.hide();
-
-    this._cetasikaTable = new CetasikaTable({
-      ...cetasikaTableInitialPosition,
-      cetasikaRadius,
-      draggable: true,
     });
 
-    this._cetasikaTooltip = new Tooltip({ fontSize: 10 });
-    this._cetasikaTooltip.hide();
-
-    this._cittaTable.on("dragend", (e) => {
-      e.target.x(cittaTableInitialPosition.x);
-    });
-    this._cittaTable.on("mouseout dragstart", () => {
-      this._cetasikaTooltip.hide();
-    });
-    this._cittaTable.on("mouseover", (e) => {
-      const { x, y, name: targetName } = e.target.attrs;
-      const words = targetName.split(" ");
-      if (words.length == 2) {
-        const [_, id] = words;
-        const cetasika = cetasikaMap.get(id);
-        this.showTooltip({
-          text: cetasika?.name ?? id,
-          x: x + this._cittaTable.x(),
-          y: y + this._cittaTable.y() + cetasikaRadius,
-        });
-      }
+    const verticalLine = new Konva.Line({
+      points: [panelWidth, 0, panelWidth, Constants.virtualSize.height],
+      stroke: palette.grays[600],
+      strokeWidth: 1,
     });
 
-    let expandTimer: NodeJS.Timeout;
-    this._cittaTable.on("click", (e) => {
-      this.hideTooltip();
-      solarPanel.show();
-      solarPanel.to({ opacity: 1 });
-      expandTimer = setTimeout(() => this._solarSystem.expand(), 500);
-    });
-    cittaPanelBg.on("click", (e) => {
-      clearTimeout(expandTimer);
-      solarPanel.to({
-        opacity: 0,
-        onFinish: () => {
-          solarPanel.hide();
-          this._solarSystem.shrink({ skipAnimation: true });
-        },
-      });
+    const cetasikaPanel = new CetasikaSection({
+      x: panelWidth,
+      width: Constants.virtualSize.width - panelWidth,
+      height: Constants.virtualSize.height,
     });
 
-    this._cetasikaTable.on("dragend", (e) => {
-      e.target.x(cetasikaTableInitialPosition.x);
+    const solarPanel = new SolarPanel({
+      width: panelWidth,
+      height: Constants.virtualSize.height,
     });
-    this._cetasikaTable.on("mouseout dragstart", () => {
-      this._cetasikaTooltip.hide();
-    });
-    this._cetasikaTable.on("mouseover", (e) => {
-      const { x, y, name: targetName } = e.target.attrs;
-      const words = targetName.split(" ");
-      if (words.length == 2) {
-        const [_, id] = words;
-        const cetasika = cetasikaMap.get(id);
-        this.showTooltip({
-          text: cetasika?.name ?? id,
-          x: x + this._cetasikaTable.x(),
-          y: y + this._cetasikaTable.y() + cetasikaRadius,
-        });
-      }
+
+    const tooltip = new Tooltip({ fontSize: 16 });
+
+    // EVENT LISTENERS
+    const { selectCitta } = store.getState();
+
+    solarPanel.onClose(() => {
+      hideTooltip();
+      selectCitta(null);
     });
 
     this.components.push(
-      this._background,
-      this._cittaTable,
+      background,
+      cittaPanel,
+      verticalLine,
+      cetasikaPanel,
       solarPanel,
-      this._cetasikaTable,
-      this._cetasikaTooltip
+      tooltip
     );
   }
 
   attachToLayer(layer: Konva.Layer) {
     layer.add(...this.components);
-  }
-
-  showTooltip(args: { text: string; x: number; y: number }) {
-    this._cetasikaTooltip.show();
-    this._cetasikaTooltip.text = args.text;
-    this._cetasikaTooltip.position({
-      x: args.x,
-      y: args.y,
-    });
-  }
-
-  hideTooltip() {
-    this._cetasikaTooltip.hide();
   }
 }
 

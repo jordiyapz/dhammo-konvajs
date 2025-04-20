@@ -1,5 +1,15 @@
-import { computeLargeRadius, generateCirclePoints } from "@/shared/utils";
 import Konva from "konva";
+import {
+  generateCirclePoints,
+  computeLargeRadius,
+} from "@/shared/lib/geometry";
+import {
+  CetasikaFactory,
+  CetasikaID,
+  cetasikaIdList,
+  CetasikaNode,
+} from "@/entities/cetasika";
+import { UVedana } from "@/entities/citta";
 
 const Defaults = {
   orbitAngularVelocity: 10, // rad/s
@@ -10,37 +20,48 @@ const Defaults = {
 };
 
 export type OrbitProps = {
-  /** Rad/s */
-  angularVelocity?: number;
+  planetRadius?: number;
+  minimalRadius?: number;
+  angularVelocity?: number /** Rad/s */;
+  satellites?: { must: CetasikaID[]; sometime: CetasikaID[] };
 };
 
+type Planet = CetasikaNode;
+
 class Orbit extends Konva.Group {
-  revolveAnimation: Konva.Animation;
-  planets: Konva.Circle[] = [];
-  planetRadius = Defaults.planetRadius;
-  expandedPositions: { x: number; y: number }[] = [];
-  isExpanded = false;
+  planetRadius;
+  minimalRadius;
+
+  planetPool: Array<Planet> = [];
+  planets: Array<{ id: CetasikaID; planet: Planet; tween: Konva.Tween }> = [];
   _onShrinkFn = () => {};
 
+  revolveAnimation: Konva.Animation;
+  tweens: Konva.Tween[] = [];
+
   constructor(config: Konva.GroupConfig & OrbitProps = {}) {
-    super({
-      name: "cetasika-orbit",
-      ...config,
+    super({ name: "cetasika-orbit", ...config });
+
+    const {
+      angularVelocity = Defaults.orbitAngularVelocity,
+      planetRadius = Defaults.planetRadius,
+      minimalRadius,
+    } = config;
+
+    this.minimalRadius = minimalRadius ?? 0;
+    this.planetRadius = planetRadius;
+    this.planetPool = Array.from({ length: 38 }).map(() => {
+      const node = new CetasikaNode({
+        radius: this.planetRadius,
+        isAniyata: true,
+      }).hide();
+
+      return node;
     });
 
-    const { angularVelocity = Defaults.orbitAngularVelocity } = config;
+    this.add(...this.planetPool.map((node) => node));
 
-    this.planets = Array.from({ length: 33 }).map(
-      () =>
-        new Konva.Circle({
-          radius: 0,
-          opacity: 0,
-          fill: "red",
-        })
-    );
-    this.add(...this.planets);
-
-    this.expandedPositions = this._calculateExpandedPositions({ gap: 10 });
+    if (config.satellites) this.setSatellites(config.satellites);
 
     this.revolveAnimation = new Konva.Animation((frame) => {
       if (!frame) return;
@@ -50,51 +71,17 @@ class Orbit extends Konva.Group {
   }
 
   expand(options?: Partial<{ skipAnimation: boolean }>) {
-    this.isExpanded = true;
     this.revolveAnimation.start();
-    this.planets.forEach((cetasika, index) => {
-      const pos = this.expandedPositions[index];
-      if (options?.skipAnimation) {
-        cetasika.radius(this.planetRadius);
-        cetasika.x(pos.x);
-        cetasika.y(pos.y);
-        cetasika.opacity(1);
-        return;
-      }
-      cetasika.to({
-        x: pos.x,
-        y: pos.y,
-        duration: Defaults.duration,
-        opacity: 1,
-        radius: this.planetRadius,
-        easing: Defaults.expandEasing,
-      });
+    this.planets.forEach((planet) => {
+      if (options?.skipAnimation) planet.tween.finish();
+      else planet.tween.play();
     });
   }
 
   shrink(options?: Partial<{ skipAnimation: boolean }>) {
-    this.isExpanded = false;
-
-    this.planets.forEach((cetasika, i) => {
-      if (options?.skipAnimation) {
-        cetasika.radius(0);
-        cetasika.x(0);
-        cetasika.y(0);
-        cetasika.opacity(0);
-        return;
-      }
-      cetasika.to({
-        x: 0,
-        y: 0,
-        duration: Defaults.duration,
-        opacity: 0,
-        radius: 0,
-        easing: Defaults.shrunkEasing,
-        onFinish: () => {
-          if (i === 0) this._onShrinkFn();
-          this.revolveAnimation.stop();
-        },
-      });
+    this.planets.forEach((planet) => {
+      if (options?.skipAnimation) planet.tween.reset();
+      else planet.tween.reverse();
     });
   }
 
@@ -102,13 +89,67 @@ class Orbit extends Konva.Group {
     this._onShrinkFn = f;
   }
 
-  _calculateExpandedPositions(options: Partial<{ gap: number }> = {}) {
-    const { gap = 0 } = options;
-    const numOfPlanets = this.planets.length;
-    const planetRadius = Defaults.planetRadius;
-    const orbitRadius = computeLargeRadius(planetRadius, numOfPlanets, gap);
+  _calculateExpandedPositions(options: { numOfPlanets: number; gap?: number }) {
+    const { gap = 0, numOfPlanets } = options;
+    const planetRadius = this.planetRadius;
+    const orbitRadius = Math.max(
+      computeLargeRadius(planetRadius, numOfPlanets, gap),
+      this.minimalRadius
+    );
     const points = generateCirclePoints(numOfPlanets, orbitRadius);
     return points.map(([x, y]) => ({ x, y }));
+  }
+
+  setSatellites(args: {
+    must: CetasikaID[];
+    sometime: CetasikaID[];
+    vedana?: UVedana;
+  }) {
+    const { must, sometime, vedana } = args;
+
+    this.planets.forEach((p) => {
+      p.planet.hide();
+      p.tween.destroy();
+    });
+
+    const expandedPositions = this._calculateExpandedPositions({
+      numOfPlanets: must.length + sometime.length,
+      gap: 10,
+    });
+
+    const cetasikaList = [
+      ...must.map((id) => ({ id, isAniyata: false })),
+      ...sometime.map((id) => ({ id, isAniyata: true })),
+    ];
+    cetasikaList.sort(
+      (a, b) =>
+        cetasikaIdList.findIndex((id) => id === a.id) -
+        cetasikaIdList.findIndex((id) => id === b.id)
+    );
+
+    const planets = cetasikaList.map((cetasika, i) => {
+      const { id, isAniyata } = cetasika;
+      const node = this.planetPool[i];
+      node.visible(true);
+      CetasikaFactory.modifyCetasika(node, id, vedana, isAniyata);
+      const tween = new Konva.Tween({
+        node,
+        x: expandedPositions[i].x,
+        y: expandedPositions[i].y,
+        duration: Defaults.duration,
+        opacity: 1,
+        radius: this.planetRadius,
+        easing: Defaults.expandEasing,
+      });
+      return { id, planet: node, tween };
+    });
+
+    planets[0].tween.onReset = () => {
+      this._onShrinkFn();
+      this.revolveAnimation.stop();
+    };
+
+    this.planets = planets;
   }
 }
 

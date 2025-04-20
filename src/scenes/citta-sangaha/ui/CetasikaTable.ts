@@ -1,7 +1,12 @@
 import Konva from "konva";
+import { TVisitor } from "@/shared/types";
 import { NamaContainer } from "@/entities/nama";
-
-import { cetasikaFactory, cetasikaLayoutGroups } from "@/entities/cetasika";
+import {
+  CetasikaID,
+  cetasikaFactory,
+  cetasikaLayoutGroups,
+} from "@/entities/cetasika";
+import { setCursorStyle } from "@/shared/utils";
 
 type CetasikaTableProps = {
   cetasikaRadius?: number;
@@ -9,6 +14,15 @@ type CetasikaTableProps = {
 
 class CetasikaTable extends Konva.Group {
   cetasikaRadius = 8;
+  _onClickCetasika?: (
+    id: CetasikaID,
+    e?: Konva.KonvaEventObject<PointerEvent>
+  ) => void;
+  _cetasikaNodes: Array<{
+    id: CetasikaID;
+    cetasika: any;
+    hitbox: Konva.Circle;
+  }> = [];
 
   constructor(config: Konva.GroupConfig & CetasikaTableProps = {}) {
     super({ name: "cetasika-table", ...config });
@@ -34,27 +48,46 @@ class CetasikaTable extends Konva.Group {
 
         const container = new NamaContainer({ jati: "vipaka" });
         container.attachItem(cetasikaNode, { fitContainerToItem: true });
+
         const hitbox = new Konva.Circle({
           x: container.x(),
           y: container.y(),
           radius: container.radius,
           name: `hitbox ${item.id}`,
         });
-        hitbox.on("mouseover", (e) => {
+        hitbox.on("pointerover", (e) => {
           const stage = e.target.getStage();
-          if (stage) stage.container().style.cursor = "pointer";
+          if (stage) setCursorStyle(stage, "pointer");
         });
-        hitbox.on("mouseout", (e) => {
+        hitbox.on("pointerout", (e) => {
           const stage = e.target.getStage();
-          if (stage) stage.container().style.cursor = "default";
+          if (stage) setCursorStyle(stage, "default");
         });
-
+        hitbox.on("pointerclick", (e) => {
+          this._onClickCetasika?.(item.id, e);
+        });
         this.add(container, hitbox);
+        this._cetasikaNodes.push({
+          id: item.id,
+          cetasika: cetasikaNode,
+          hitbox,
+        });
 
         rowCount = Math.max(rowCount, item.y + 1);
       }
       offsetY += rowCount * cetasikaSpacing + groupGap;
     }
+    this.height(offsetY);
+  }
+
+  accept<V extends TVisitor<CetasikaTable>>(visitor: V) {
+    visitor.visit(this);
+  }
+
+  onClickCetasika(
+    callback: (id: CetasikaID, e?: Konva.KonvaEventObject<PointerEvent>) => void
+  ) {
+    this._onClickCetasika = callback;
   }
 }
 

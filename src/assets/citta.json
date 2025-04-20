@@ -4,28 +4,32 @@
     "order": 1,
     "vedana": "somanassa",
     "jati": "akusala",
-    "hetuvariant": "lobha"
+    "hetuvariant": "lobha",
+    "name": "somanassasahagata diṭṭhigatasampayutta asaṅkhārika citta"
   },
   {
     "id": "lobha2",
     "order": 2,
     "vedana": "somanassa",
     "jati": "akusala",
-    "hetuvariant": "lobha"
+    "hetuvariant": "lobha",
+    "name": "somanassasahagata diṭṭhigatasampayutta sasaṅkhārika citta"
   },
   {
     "id": "lobha3",
     "order": 3,
     "vedana": "somanassa",
     "jati": "akusala",
-    "hetuvariant": "lobha"
+    "hetuvariant": "lobha",
+    "name": "somanassasahagata diṭṭhigatavippayutta asaṅkhārika citta"
   },
   {
     "id": "lobha4",
     "order": 4,
     "vedana": "somanassa",
     "jati": "akusala",
-    "hetuvariant": "lobha"
+    "hetuvariant": "lobha",
+    "name": "somanassasahagata diṭṭhigatavippayutta sasaṅkhārika citta"
   },
   {
     "id": "lobha5",

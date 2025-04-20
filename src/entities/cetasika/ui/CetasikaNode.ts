@@ -2,6 +2,7 @@ import { UHetu, UHetuVariant, UVedana } from "@/entities/citta";
 import {
   hetuColors,
   hetuVariantBgColors,
+  palette,
   vedanaColors,
 } from "@/shared/palette";
 import Konva from "konva";
@@ -11,6 +12,7 @@ type CetasikaNodeProps = {
   base?: UHetuVariant;
   vedana?: UVedana;
   hetu?: UHetu;
+  isAniyata?: boolean;
 };
 
 const Defaults = {
@@ -20,38 +22,54 @@ const Defaults = {
 
 class CetasikaNode extends Konva.Group {
   _radius = Defaults.baseRadius;
-  _vedana: UVedana = "upekkha";
+  _vedana?: UVedana;
   _hetuVariant: UHetuVariant = "ahetuka";
   _hetu?: UHetu;
 
-  _shapes: { base: any; hetu?: any } = { base: null };
+  _nodes: { base: any; vedana: any; aniyata: any };
 
   constructor(config: Konva.GroupConfig & CetasikaNodeProps) {
-    const { radius: radius, vedana, base, hetu, ...rest } = config;
+    const { radius: radius, vedana, base, hetu, isAniyata, ...rest } = config;
 
     super(rest);
 
     this._hetu = hetu ?? this._hetu;
-    this._vedana = vedana ?? this._vedana;
     this._hetuVariant = base ?? this._hetuVariant;
     this.radius = radius ?? this._radius;
-
-    this._shapes.base = new Konva.Circle({
+    const baseNode = new Konva.Circle({
       fill: hetu ? hetuColors[hetu] : hetuVariantBgColors[this._hetuVariant],
-      strokeWidth: 8,
-      stroke: vedana && vedanaColors[vedana],
-      radius: vedana ? Defaults.baseRadius - 4 : Defaults.baseRadius,
+      radius: Defaults.baseRadius,
       name: "base",
+      shadowColor: "black",
+      shadowBlur: 5,
+      shadowOpacity: 0.5,
+      shadowOffset: { x: 2, y: 2 },
     });
 
-    // this._shapes.hetu = new Konva.Circle({
-    //   fill: this._hetu && hetuColors[this._hetu],
-    //   radius: Defaults.hetuRadius,
-    //   name: "hetu",
-    // });
+    const vedanaRing = new Konva.Circle({
+      radius: Defaults.baseRadius - 4,
+      strokeWidth: 8,
+      name: "vedana-ring",
+      lineCap: "round",
+    });
 
-    this.add(this._shapes.base);
-    // if (this._hetu) this.add(this._shapes.hetu);
+    const aniyata = new Konva.Text({
+      text: "?",
+      fontSize: 24,
+      name: "aniyata",
+      fill: "white",
+      stroke: palette.grays[800],
+      strokeWidth: .5,
+    });
+    aniyata.x(-aniyata.width() / 2);
+    aniyata.y(-aniyata.height() / 2);
+    if (!isAniyata) aniyata.hide();
+
+    this._nodes = { base: baseNode, vedana: vedanaRing, aniyata };
+
+    this.add(baseNode, vedanaRing, aniyata);
+
+    this.vedana = vedana;
   }
 
   get radius() {
@@ -64,6 +82,28 @@ class CetasikaNode extends Konva.Group {
       x: radius / Defaults.baseRadius,
       y: radius / Defaults.baseRadius,
     });
+  }
+
+  set base(base: UHetuVariant) {
+    this._hetuVariant = base;
+    this._nodes.base.fill(hetuVariantBgColors[this._hetuVariant]);
+  }
+
+  set hetu(hetu: UHetu | undefined) {
+    this._hetu = hetu;
+    if (hetu) this._nodes.base.fill(hetuColors[hetu]);
+  }
+
+  set vedana(vedana: UVedana | undefined) {
+    this._vedana = vedana;
+    this._nodes.vedana.stroke(vedana && vedanaColors[vedana]);
+    if (vedana && ["sukha", "dukkha"].includes(vedana))
+      this._nodes.vedana.dash([4, 10]);
+    else this._nodes.vedana.dash(undefined);
+  }
+
+  set isAniyata(isAniyata: boolean) {
+    this._nodes.aniyata.visible(isAniyata);
   }
 }
 

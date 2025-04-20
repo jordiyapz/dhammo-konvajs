@@ -1,7 +1,7 @@
 const Constants = {
   virtualSize: {
     width: 800,
-    height: 360,
+    height: 600,
   },
 };
 

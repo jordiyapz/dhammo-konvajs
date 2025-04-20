@@ -2,15 +2,27 @@ import Konva from "konva";
 import { NamaContainer } from "@/entities/nama";
 import {
   cittaFactory,
+  CittaID,
+  cittaIdList,
   cittaLayoutGroups,
   getCittaById,
 } from "@/entities/citta";
+import { setCursorStyle } from "@/shared/utils";
+import { TVisitor } from "@/shared/types";
 
 type CittaTableProps = {
   cittaRadius?: number;
 };
 
 class CittaTable extends Konva.Group {
+  _cittaList: CittaID[] = cittaIdList;
+  _cittaNodes: Array<{ id: CittaID; citta: any; hitbox: Konva.Circle }> = [];
+
+  _onClickCitta?: (
+    id: CittaID,
+    e: Konva.KonvaEventObject<PointerEvent>
+  ) => void;
+
   constructor(config: Konva.GroupConfig & CittaTableProps = {}) {
     super({ name: "citta-table", ...config });
 
@@ -42,20 +54,50 @@ class CittaTable extends Konva.Group {
           radius: container.radius,
           name: `hitbox ${item.id}`,
         });
-        hitbox.on("mouseover", (e) => {
+        hitbox.on("pointerover", (e) => {
           const stage = e.target.getStage();
-          if (stage) stage.container().style.cursor = "pointer";
+          if (stage) setCursorStyle(stage, "pointer");
         });
-        hitbox.on("mouseout", (e) => {
+        hitbox.on("pointerout", (e) => {
           const stage = e.target.getStage();
-          if (stage) stage.container().style.cursor = "default";
+          if (stage) setCursorStyle(stage, "default");
+        });
+        hitbox.on("pointerclick", (e) => {
+          this._onClickCitta?.(item.id, e)
         });
 
         this.add(container, hitbox);
+        this._cittaNodes.push({
+          id: item.id,
+          citta: cittaNode,
+          hitbox: hitbox,
+        });
+
         rowCount = Math.max(rowCount, item.y + 1);
       }
       offsetY += rowCount * cittaSpacing + gap;
     }
+    this.height(offsetY);
+  }
+
+  setAvailableCittas(availableCittas: CittaID[]) {
+    this._cittaList = availableCittas;
+
+    for (const { id, citta, hitbox } of this._cittaNodes) {
+      const isActive = availableCittas.includes(id);
+      hitbox.listening(isActive);
+      citta.visible(isActive);
+    }
+  }
+
+  onClickCitta(
+    callback: (id: CittaID, e: Konva.KonvaEventObject<PointerEvent>) => void
+  ) {
+    this._onClickCitta = callback;
+  }
+
+  accept(visitor: TVisitor<CittaTable>) {
+    visitor.visit(this);
   }
 }
 

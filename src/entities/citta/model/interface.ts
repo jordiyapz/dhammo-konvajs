@@ -1,3 +1,4 @@
+import { CetasikaID } from "@/entities/cetasika/@x/citta";
 import { UJati } from "@/entities/nama/@x/citta";
 
 export type UHetu = "lobha" | "dosa" | "moha" | "alobha" | "adosa" | "amoha";
@@ -22,6 +23,7 @@ export interface Citta {
   hetuVariant: UHetuVariant;
   vedana: UVedana;
   jati: UJati;
+  name?: string;
 }
 
 export type CittaID =
@@ -146,3 +148,21 @@ export type CittaID =
   | "araph3"
   | "araph4"
   | "araph5";
+export interface CittaCombination {
+  mustHave: CetasikaID[];
+  sometime: CetasikaID[];
+  variations: CetasikaID[][];
+  vedana?: UVedana;
+}
+export interface CittaLayoutRow {
+  group: number;
+  id: CittaID;
+  x: number;
+  y: number;
+}
+export interface CombinationRow {
+  id: CittaID;
+  mustHave: CetasikaID[];
+  sometime: CetasikaID[];
+  variations?: CetasikaID[][];
+}

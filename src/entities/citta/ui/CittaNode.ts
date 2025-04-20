@@ -11,6 +11,7 @@ const Defaults = {
   baseRadius: 20,
   hetuRadiusFactor: 0.25,
   hetuSpacingFactor: 0.35,
+  dash: [6, 8],
 };
 
 interface CittaParameters {
@@ -51,7 +52,7 @@ class CittaNode extends Konva.Group {
       stroke: vedanaColors[vedana ?? "upekkha"],
       strokeWidth: Defaults.borderWidth,
       lineCap: "round",
-      dash: ["sukha", "dukkha"].includes(vedana) ? [6, 8] : undefined,
+      dash: ["sukha", "dukkha"].includes(vedana) ? Defaults.dash : undefined,
       name: "base",
     });
 
@@ -72,6 +73,24 @@ class CittaNode extends Konva.Group {
       x: radius / Defaults.baseRadius,
       y: radius / Defaults.baseRadius,
     });
+  }
+
+  set vedana(vedana: UVedana) {
+    this._vedana = vedana;
+    this._base.stroke(vedanaColors[vedana]);
+    if (["sukha", "dukkha"].includes(vedana)) {
+      this._base.dash(Defaults.dash);
+    }
+  }
+
+  set hetuVariant(hetuVariant: UHetuVariant) {
+    this._hetuVariant = hetuVariant;
+    this._base.fill(hetuVariantBgColors[hetuVariant]);
+    this._hetuNodes.forEach((node) => {
+      node.destroy();
+    });
+    this._hetuNodes = this._createHetuNodes();
+    this.add(...this._hetuNodes);
   }
 
   _getHetuList(hetuVariant: UHetuVariant): UHetu[] {
