@@ -25,12 +25,18 @@ class CetasikaFactory {
     });
   }
 
-  static modifyCetasika(node: CetasikaNode, id: CetasikaID, vedana?: UVedana) {
+  static modifyCetasika(
+    node: CetasikaNode,
+    id: CetasikaID,
+    vedana?: UVedana,
+    isAniyata?: boolean
+  ) {
     if (!cetasikaMap.has(id)) throw new Error(`Cetasika ${id} not found`);
     const { base, hetu } = cetasikaMap.get(id)!;
     node.base = base;
     node.hetu = hetu;
-    node.vedana = vedana ?? undefined;
+    node.vedana = id === "vedana" && vedana ? vedana : undefined;
+    node.isAniyata = isAniyata ?? false;
   }
 }
 

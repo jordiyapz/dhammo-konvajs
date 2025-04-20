@@ -1,11 +1,8 @@
 import Konva from "konva";
-import { palette, CittaNode } from "@/entities/citta";
+import { CittaNode } from "@/entities/citta";
 import { NamaContainer, UJati } from "@/entities/nama";
 import Constants from "@/config/constant";
-
-const Defaults = {
-  cittaRadius: 60,
-};
+import { palette } from "@/shared/palette";
 
 class CittaEditorScene {
   background: any;

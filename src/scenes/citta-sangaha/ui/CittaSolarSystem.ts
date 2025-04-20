@@ -1,7 +1,8 @@
 import Konva from "konva";
 import Core from "./Core";
 import Orbit, { OrbitProps } from "./Orbit";
-import { CittaID } from "@/entities/citta";
+import { CittaID, UVedana } from "@/entities/citta";
+import { CetasikaID } from "@/entities/cetasika";
 
 type CittaSolarSystemProps = {
   cittaId?: CittaID;
@@ -19,7 +20,7 @@ class CittaSolarSystem extends Konva.Group {
 
     const { cittaId = "lobha1" } = config;
 
-    this.core = new Core({ cittaId, initialRadius: 40 , shrunkRadius: 20});
+    this.core = new Core({ cittaId, initialRadius: 40, shrunkRadius: 30 });
     this.orbit = new Orbit(config.orbitOptions);
 
     this.core.onShrinkEnd(() => this.orbit.expand());
@@ -36,6 +37,14 @@ class CittaSolarSystem extends Konva.Group {
 
   setCitta(citta: CittaID) {
     this.core.setCitta(citta);
+  }
+
+  setSatellites(args: {
+    must: CetasikaID[];
+    sometime: CetasikaID[];
+    vedana?: UVedana;
+  }) {
+    this.orbit.setSatellites(args);
   }
 
   expand(options?: Partial<{ skipAnimation: boolean }>) {

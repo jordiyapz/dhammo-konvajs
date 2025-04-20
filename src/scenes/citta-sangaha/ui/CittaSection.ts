@@ -55,6 +55,7 @@ class CittaSection extends Konva.Group {
       if (selectedCetasika === null) {
         hideTooltip();
         selectCitta(id);
+        return;
       }
       const { x, y } = e?.target.attrs ?? {};
       const stage = e?.target.getStage();

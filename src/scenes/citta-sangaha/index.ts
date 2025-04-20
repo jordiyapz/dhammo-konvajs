@@ -9,7 +9,6 @@ import SolarPanel from "./ui/SolarPanel";
 import store from "./lib/store";
 import CetasikaSection from "./ui/CetasikaSection";
 import CittaSection from "./ui/CittaSection";
-import CloseButton from "@/shared/ui/CloseButton";
 
 const panelWidth = Constants.virtualSize.width / 2 + 50;
 

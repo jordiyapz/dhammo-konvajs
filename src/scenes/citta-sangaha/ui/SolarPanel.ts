@@ -2,7 +2,7 @@ import { palette } from "@/shared/palette";
 import Konva from "konva";
 import CittaSolarSystem from "./CittaSolarSystem";
 import Constants from "@/config/constant";
-import { CittaID } from "@/entities/citta";
+import { CittaID, getCittaCombination } from "@/entities/citta";
 import store from "../lib/store";
 import CloseButton from "@/shared/ui/CloseButton";
 
@@ -33,7 +33,7 @@ class SolarPanel extends Konva.Group {
     this._solarSystem = new CittaSolarSystem({
       x: width / 2,
       y: height / 2,
-      orbitOptions: { angularVelocity: 2 },
+      orbitOptions: { angularVelocity: 2, planetRadius: 10, minimalRadius: 50 },
     });
 
     const closeBtn = new CloseButton({ y: 20 });
@@ -50,14 +50,24 @@ class SolarPanel extends Konva.Group {
     this._background.on("pointerclick", handleClose);
 
     store.subscribe(
-      (state) => ({ selectedCitta: state.selectedCitta }),
+      (state) => ({ selectedCitta: state.selectedCitta, vedana: state.vedana }),
       (state) => {
         if (state.selectedCitta !== null) {
           this.setCitta(state.selectedCitta);
           this.show();
+          const combination = getCittaCombination(state.selectedCitta);
+          if (!combination) return;
+          this._solarSystem.setSatellites({
+            must: combination.mustHave,
+            sometime: combination.sometime,
+            vedana: state.vedana,
+          });
         }
       }
     );
+
+    // TESTS
+    // setTimeout(() => store.getState().selectCitta("dosa1"), 500);
   }
 
   setCitta(citta: CittaID) {

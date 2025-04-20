@@ -2,6 +2,7 @@ import { UHetu, UHetuVariant, UVedana } from "@/entities/citta";
 import {
   hetuColors,
   hetuVariantBgColors,
+  palette,
   vedanaColors,
 } from "@/shared/palette";
 import Konva from "konva";
@@ -11,6 +12,7 @@ type CetasikaNodeProps = {
   base?: UHetuVariant;
   vedana?: UVedana;
   hetu?: UHetu;
+  isAniyata?: boolean;
 };
 
 const Defaults = {
@@ -24,10 +26,10 @@ class CetasikaNode extends Konva.Group {
   _hetuVariant: UHetuVariant = "ahetuka";
   _hetu?: UHetu;
 
-  _nodes: { base: any; vedana: any };
+  _nodes: { base: any; vedana: any; aniyata: any };
 
   constructor(config: Konva.GroupConfig & CetasikaNodeProps) {
-    const { radius: radius, vedana, base, hetu, ...rest } = config;
+    const { radius: radius, vedana, base, hetu, isAniyata, ...rest } = config;
 
     super(rest);
 
@@ -38,6 +40,10 @@ class CetasikaNode extends Konva.Group {
       fill: hetu ? hetuColors[hetu] : hetuVariantBgColors[this._hetuVariant],
       radius: Defaults.baseRadius,
       name: "base",
+      shadowColor: "black",
+      shadowBlur: 5,
+      shadowOpacity: 0.5,
+      shadowOffset: { x: 2, y: 2 },
     });
 
     const vedanaRing = new Konva.Circle({
@@ -47,9 +53,21 @@ class CetasikaNode extends Konva.Group {
       lineCap: "round",
     });
 
-    this._nodes = { base: baseNode, vedana: vedanaRing };
+    const aniyata = new Konva.Text({
+      text: "?",
+      fontSize: 24,
+      name: "aniyata",
+      fill: "white",
+      stroke: palette.grays[800],
+      strokeWidth: .5,
+    });
+    aniyata.x(-aniyata.width() / 2);
+    aniyata.y(-aniyata.height() / 2);
+    if (!isAniyata) aniyata.hide();
 
-    this.add(baseNode, vedanaRing);
+    this._nodes = { base: baseNode, vedana: vedanaRing, aniyata };
+
+    this.add(baseNode, vedanaRing, aniyata);
 
     this.vedana = vedana;
   }
@@ -79,8 +97,13 @@ class CetasikaNode extends Konva.Group {
   set vedana(vedana: UVedana | undefined) {
     this._vedana = vedana;
     this._nodes.vedana.stroke(vedana && vedanaColors[vedana]);
-    if (vedana && ["sukha", "dukkha"].includes(vedana)) this._nodes.vedana.dash([4, 10]);
+    if (vedana && ["sukha", "dukkha"].includes(vedana))
+      this._nodes.vedana.dash([4, 10]);
     else this._nodes.vedana.dash(undefined);
+  }
+
+  set isAniyata(isAniyata: boolean) {
+    this._nodes.aniyata.visible(isAniyata);
   }
 }
 

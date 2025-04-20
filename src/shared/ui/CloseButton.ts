@@ -24,6 +24,7 @@ class CloseButton extends Konva.Group {
       shadowOffsetY: 4,
       shadowOpacity: 0.2,
       cornerRadius: 4,
+      opacity: 0.8,
     });
     const line1 = new Konva.Line({
       points: [6, 6, 24, 24],
@@ -44,10 +45,12 @@ class CloseButton extends Konva.Group {
     this.on("pointerover", function (e) {
       const stage = e.target.getStage();
       if (stage) setCursorStyle(stage, "pointer");
+      base.opacity(1);
     });
     this.on("pointerout", function (e) {
       const stage = e.target.getStage();
       if (stage) setCursorStyle(stage, "default");
+      base.opacity(.8);
     });
   }
 }
