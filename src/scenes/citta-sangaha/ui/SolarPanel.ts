@@ -5,6 +5,7 @@ import Constants from "@/config/constant";
 import { CittaID, getCittaCombination } from "@/entities/citta";
 import store from "../lib/store";
 import CloseButton from "@/shared/ui/CloseButton";
+import { hideTooltip, showTooltip } from "@/shared/tooltip";
 
 class SolarPanel extends Konva.Group {
   expandTimer?: NodeJS.Timeout;
@@ -57,10 +58,44 @@ class SolarPanel extends Konva.Group {
           this.show();
           const combination = getCittaCombination(state.selectedCitta);
           if (!combination) return;
-          this._solarSystem.setSatellites({
+          this._solarSystem.orbit.setSatellites({
             must: combination.mustHave,
             sometime: combination.sometime,
             vedana: state.vedana,
+            nodeEvents: [
+              [
+                "pointerover",
+                (id, e) => {
+                  this._solarSystem.orbit.revolveAnimation.stop();
+                  const stage = e.target.getStage();
+                  const orbit = this._solarSystem.orbit;
+                  if (stage) {
+                    const satellitePosition = e.currentTarget.getPosition();
+                    const orbitPos = orbit.getAbsolutePosition(stage);
+                    const orbitRotation =
+                      (orbit.getAbsoluteRotation() * Math.PI) / 180;
+                    const satelliteAngle =
+                      Math.atan(satellitePosition.y / satellitePosition.x) +
+                      (satellitePosition.x >= 0 ? 0 : Math.PI);
+
+                    const targetAngle = satelliteAngle + orbitRotation;
+                    const pointer = {
+                      x: orbitPos.x + orbit.orbitRadius * Math.cos(targetAngle),
+                      y: orbitPos.y + orbit.orbitRadius * Math.sin(targetAngle)+orbit.planetRadius
+                    };
+
+                    showTooltip({ position: pointer, text: id });
+                  }
+                },
+              ],
+              [
+                "pointerout",
+                () => {
+                  hideTooltip()
+                  this._solarSystem.orbit.revolveAnimation.start();
+                },
+              ],
+            ],
           });
         }
       }

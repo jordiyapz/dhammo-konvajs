@@ -39,14 +39,6 @@ class CittaSolarSystem extends Konva.Group {
     this.core.setCitta(citta);
   }
 
-  setSatellites(args: {
-    must: CetasikaID[];
-    sometime: CetasikaID[];
-    vedana?: UVedana;
-  }) {
-    this.orbit.setSatellites(args);
-  }
-
   expand(options?: Partial<{ skipAnimation: boolean }>) {
     this.core.shrink(options);
     // if (options?.skipAnimation) this.orbit.expand(options);
