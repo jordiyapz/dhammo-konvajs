@@ -1,8 +1,7 @@
 import Konva from "konva";
 import Core from "./Core";
 import Orbit, { OrbitProps } from "./Orbit";
-import { CittaID, UVedana } from "@/entities/citta";
-import { CetasikaID } from "@/entities/cetasika";
+import { CittaID } from "@/entities/citta";
 
 type CittaSolarSystemProps = {
   cittaId?: CittaID;
