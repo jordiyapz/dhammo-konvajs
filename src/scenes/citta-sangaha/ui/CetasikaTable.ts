@@ -3,6 +3,7 @@ import { TVisitor } from "@/shared/types";
 import { NamaContainer } from "@/entities/nama";
 import {
   CetasikaID,
+  CetasikaNode,
   cetasikaFactory,
   cetasikaLayoutGroups,
 } from "@/entities/cetasika";
@@ -20,7 +21,7 @@ class CetasikaTable extends Konva.Group {
   ) => void;
   _cetasikaNodes: Array<{
     id: CetasikaID;
-    cetasika: any;
+    cetasika: CetasikaNode;
     hitbox: Konva.Circle;
   }> = [];
 

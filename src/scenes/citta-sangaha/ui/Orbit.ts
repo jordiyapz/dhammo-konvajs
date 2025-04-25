@@ -52,13 +52,9 @@ class Orbit extends Konva.Group {
     this.minimalRadius = minimalRadius ?? 0;
     this.orbitRadius = this.minimalRadius;
     this.planetRadius = planetRadius;
-    this.planetPool = Array.from({ length: 38 }).map(() => {
-      const node = new CetasikaNode({
-        radius: this.planetRadius,
-      }).hide();
-
-      return node;
-    });
+    this.planetPool = Array.from({ length: 38 }).map(() =>
+      new CetasikaNode({ radius: this.planetRadius }).hide()
+    );
 
     this.add(...this.planetPool.map((node) => node));
 

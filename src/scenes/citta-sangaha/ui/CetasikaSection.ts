@@ -6,6 +6,7 @@ import CetasikaVisibilityVisitor from "../lib/CetasikaVisibilityVisitor";
 import store from "../lib/store";
 import CetasikaTable from "./CetasikaTable";
 import CetasikaPanel from "./CetasikaPanel";
+import CetasikaTableAniyataVisitor from "../lib/CetasikaTableAniyataVisitor";
 
 const cetasikaRadius = 16;
 
@@ -18,7 +19,6 @@ class CetasikaSection extends Konva.Group {
       y: 40,
       cetasikaRadius,
     });
-    cetasikaTable.accept(new CetasikaVisibilityVisitor());
 
     const scrollablePanel = new ScrollablePanel({
       viewWidth: this.width(),
@@ -70,6 +70,8 @@ class CetasikaSection extends Konva.Group {
     cetasikaDialog.onClose(() => {
       store.getState().selectCetasika(null);
     });
+    cetasikaTable.accept(new CetasikaVisibilityVisitor());
+    cetasikaTable.accept(new CetasikaTableAniyataVisitor());
   }
 }
 
