@@ -80,6 +80,8 @@ class CittaNode extends Konva.Group {
     this._base.stroke(vedanaColors[vedana]);
     if (["sukha", "dukkha"].includes(vedana)) {
       this._base.dash(Defaults.dash);
+    } else {
+      this._base.dash(null);
     }
   }
 

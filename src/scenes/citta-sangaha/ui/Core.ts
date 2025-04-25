@@ -67,7 +67,7 @@ class Core extends Konva.Group {
 
   setCitta(cittaId: CittaID) {
     this._cittaId = cittaId;
-    CittaFactory.updateCitta(this._cittaNode, cittaId);
+    CittaFactory.modifyCitta(this._cittaNode, cittaId);
   }
 
   shrink(options?: Partial<{ skipAnimation: boolean; skipOnFinish: boolean }>) {
