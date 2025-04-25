@@ -100,6 +100,9 @@ class Core extends Konva.Group {
     this.base.radius(radius);
   }
 
+  get shrunkRadius() {
+    return this._shrunkRadius;
+  }
   set shrunkRadius(radius: number) {
     this._shrunkRadius = radius;
     this.reinitializeTweens();

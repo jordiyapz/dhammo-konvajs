@@ -6,6 +6,7 @@ import { CittaID, getCittaCombination } from "@/entities/citta";
 import store from "../lib/store";
 import CloseButton from "@/shared/ui/CloseButton";
 import { hideTooltip, showTooltip } from "@/shared/tooltip";
+import { cetasikaMap } from "@/entities/cetasika";
 
 class SolarPanel extends Konva.Group {
   expandTimer?: NodeJS.Timeout;
@@ -81,17 +82,23 @@ class SolarPanel extends Konva.Group {
                     const targetAngle = satelliteAngle + orbitRotation;
                     const pointer = {
                       x: orbitPos.x + orbit.orbitRadius * Math.cos(targetAngle),
-                      y: orbitPos.y + orbit.orbitRadius * Math.sin(targetAngle)+orbit.planetRadius
+                      y:
+                        orbitPos.y +
+                        orbit.orbitRadius * Math.sin(targetAngle) +
+                        orbit.planetRadius,
                     };
 
-                    showTooltip({ position: pointer, text: id });
+                    showTooltip({
+                      position: pointer,
+                      text: cetasikaMap.get(id)?.name,
+                    });
                   }
                 },
               ],
               [
                 "pointerout",
                 () => {
-                  hideTooltip()
+                  hideTooltip();
                   this._solarSystem.orbit.revolveAnimation.start();
                 },
               ],
