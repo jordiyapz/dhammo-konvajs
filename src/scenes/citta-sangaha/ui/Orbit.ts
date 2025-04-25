@@ -31,9 +31,10 @@ type Planet = CetasikaNode;
 class Orbit extends Konva.Group {
   planetRadius;
   minimalRadius;
+  orbitRadius;
 
   planetPool: Array<Planet> = [];
-  planets: Array<{ id: CetasikaID; planet: Planet; tween: Konva.Tween }> = [];
+  planets: Array<{ id: CetasikaID; node: Planet; tween: Konva.Tween }> = [];
   _onShrinkFn = () => {};
 
   revolveAnimation: Konva.Animation;
@@ -49,15 +50,11 @@ class Orbit extends Konva.Group {
     } = config;
 
     this.minimalRadius = minimalRadius ?? 0;
+    this.orbitRadius = this.minimalRadius;
     this.planetRadius = planetRadius;
-    this.planetPool = Array.from({ length: 38 }).map(() => {
-      const node = new CetasikaNode({
-        radius: this.planetRadius,
-        isAniyata: true,
-      }).hide();
-
-      return node;
-    });
+    this.planetPool = Array.from({ length: 38 }).map(() =>
+      new CetasikaNode({ radius: this.planetRadius }).hide()
+    );
 
     this.add(...this.planetPool.map((node) => node));
 
@@ -96,6 +93,7 @@ class Orbit extends Konva.Group {
       computeLargeRadius(planetRadius, numOfPlanets, gap),
       this.minimalRadius
     );
+    this.orbitRadius = orbitRadius;
     const points = generateCirclePoints(numOfPlanets, orbitRadius);
     return points.map(([x, y]) => ({ x, y }));
   }
@@ -104,11 +102,14 @@ class Orbit extends Konva.Group {
     must: CetasikaID[];
     sometime: CetasikaID[];
     vedana?: UVedana;
+    nodeEvents?: Array<
+      [string, (id: CetasikaID, e: Konva.KonvaEventObject<Konva.Group>) => void]
+    >;
   }) {
     const { must, sometime, vedana } = args;
 
     this.planets.forEach((p) => {
-      p.planet.hide();
+      p.node.hide();
       p.tween.destroy();
     });
 
@@ -141,7 +142,10 @@ class Orbit extends Konva.Group {
         radius: this.planetRadius,
         easing: Defaults.expandEasing,
       });
-      return { id, planet: node, tween };
+      for (const [event, fn] of args.nodeEvents ?? []) {
+        node.on(event, (e) => fn(id, e));
+      }
+      return { id, node, tween };
     });
 
     planets[0].tween.onReset = () => {

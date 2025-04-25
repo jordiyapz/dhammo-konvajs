@@ -40,7 +40,7 @@ class Tooltip extends Konva.Group {
         fill: textColor,
       }),
       rect: new Konva.Rect({
-        fill: palette.grays[800],
+        fill: palette.grays["950"],
         shadowColor: "black",
         shadowBlur: 4,
         shadowOffsetX: 4,
@@ -51,7 +51,7 @@ class Tooltip extends Konva.Group {
       arrow: new Konva.RegularPolygon({
         sides: 3,
         radius: this._arrowSize,
-        fill: palette.grays[800],
+        fill: palette.grays["950"],
         shadowColor: "black",
         shadowBlur: 4,
         shadowOffsetX: 4,

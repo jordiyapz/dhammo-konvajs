@@ -67,7 +67,7 @@ class Core extends Konva.Group {
 
   setCitta(cittaId: CittaID) {
     this._cittaId = cittaId;
-    CittaFactory.updateCitta(this._cittaNode, cittaId);
+    CittaFactory.modifyCitta(this._cittaNode, cittaId);
   }
 
   shrink(options?: Partial<{ skipAnimation: boolean; skipOnFinish: boolean }>) {
@@ -94,12 +94,18 @@ class Core extends Konva.Group {
     this._onShrinkFn = f;
   }
 
+  get initialRadius() {
+    return this._initialRadius;
+  }
   set initialRadius(radius: number) {
     this._initialRadius = radius;
     this._cittaNode.radius = radius;
     this.base.radius(radius);
   }
 
+  get shrunkRadius() {
+    return this._shrunkRadius;
+  }
   set shrunkRadius(radius: number) {
     this._shrunkRadius = radius;
     this.reinitializeTweens();

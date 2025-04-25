@@ -1,8 +1,7 @@
 import Konva from "konva";
 import Core from "./Core";
 import Orbit, { OrbitProps } from "./Orbit";
-import { CittaID, UVedana } from "@/entities/citta";
-import { CetasikaID } from "@/entities/cetasika";
+import { CittaID } from "@/entities/citta";
 
 type CittaSolarSystemProps = {
   cittaId?: CittaID;
@@ -14,6 +13,8 @@ class CittaSolarSystem extends Konva.Group {
 
   core: Core;
   orbit: Orbit;
+
+  _onClickCore?: () => void;
 
   constructor(config: Konva.GroupConfig & CittaSolarSystemProps = {}) {
     super({ name: "citta-solar-system", ...config });
@@ -27,9 +28,9 @@ class CittaSolarSystem extends Konva.Group {
     this.orbit.onShrinkEnd(() => this.core.expand());
 
     this.core.on("pointerclick", () => {
-      this.isExpanded = !this.isExpanded;
       if (this.isExpanded) this.shrink();
       else this.expand();
+      this._onClickCore?.();
     });
 
     this.add(this.orbit, this.core);
@@ -39,22 +40,20 @@ class CittaSolarSystem extends Konva.Group {
     this.core.setCitta(citta);
   }
 
-  setSatellites(args: {
-    must: CetasikaID[];
-    sometime: CetasikaID[];
-    vedana?: UVedana;
-  }) {
-    this.orbit.setSatellites(args);
-  }
-
   expand(options?: Partial<{ skipAnimation: boolean }>) {
+    this.isExpanded = true;
     this.core.shrink(options);
     // if (options?.skipAnimation) this.orbit.expand(options);
   }
 
   shrink(options?: Partial<{ skipAnimation: boolean }>) {
+    this.isExpanded = false;
     this.orbit.shrink(options);
     if (options?.skipAnimation) this.core.expand(options);
+  }
+
+  onClickCore(cb: () => void) {
+    this._onClickCore = cb;
   }
 }
 

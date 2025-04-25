@@ -2,9 +2,11 @@ import { palette } from "@/shared/palette";
 import Konva from "konva";
 import CittaSolarSystem from "./CittaSolarSystem";
 import Constants from "@/config/constant";
-import { CittaID, getCittaCombination } from "@/entities/citta";
+import { CittaID, cittaMap, getCittaCombination } from "@/entities/citta";
 import store from "../lib/store";
 import CloseButton from "@/shared/ui/CloseButton";
+import { hideTooltip, showTooltip } from "@/shared/tooltip";
+import { cetasikaMap } from "@/entities/cetasika";
 
 class SolarPanel extends Konva.Group {
   expandTimer?: NodeJS.Timeout;
@@ -27,7 +29,7 @@ class SolarPanel extends Konva.Group {
       width,
       height,
       opacity: 0.7,
-      fill: palette.grays[800],
+      fill: palette.grays["950"],
     });
 
     this._solarSystem = new CittaSolarSystem({
@@ -49,6 +51,8 @@ class SolarPanel extends Konva.Group {
     closeBtn.on("pointerclick", handleClose);
     this._background.on("pointerclick", handleClose);
 
+    this._solarSystem.core.on("pointerout", () => hideTooltip());
+
     store.subscribe(
       (state) => ({ selectedCitta: state.selectedCitta, vedana: state.vedana }),
       (state) => {
@@ -57,10 +61,73 @@ class SolarPanel extends Konva.Group {
           this.show();
           const combination = getCittaCombination(state.selectedCitta);
           if (!combination) return;
-          this._solarSystem.setSatellites({
+
+          const renderCittaTooltip = () => {
+            const thisPos = this.getPosition();
+            const solarPos = this._solarSystem.getPosition();
+            const position = {
+              x: thisPos.x + solarPos.x,
+              y: thisPos.y + solarPos.y,
+            };
+            if (this._solarSystem.isExpanded) {
+              position.y += this._solarSystem.core.shrunkRadius;
+              showTooltip({ position, text: "Citta" });
+            } else {
+              position.y += this._solarSystem.core.initialRadius;
+              const text = cittaMap.get(state.selectedCitta!)?.name ?? state.selectedCitta!
+              showTooltip({ position, text });
+            }
+          };
+
+          this._solarSystem.core.on("pointerover", renderCittaTooltip);
+          this._solarSystem.onClickCore(() => {
+            renderCittaTooltip();
+          });
+
+          this._solarSystem.orbit.setSatellites({
             must: combination.mustHave,
             sometime: combination.sometime,
             vedana: state.vedana,
+            nodeEvents: [
+              [
+                "pointerover",
+                (id, e) => {
+                  this._solarSystem.orbit.revolveAnimation.stop();
+                  const stage = e.target.getStage();
+                  const orbit = this._solarSystem.orbit;
+                  if (stage) {
+                    const satellitePosition = e.currentTarget.getPosition();
+                    const orbitPos = orbit.getAbsolutePosition(stage);
+                    const orbitRotation =
+                      (orbit.getAbsoluteRotation() * Math.PI) / 180;
+                    const satelliteAngle =
+                      Math.atan(satellitePosition.y / satellitePosition.x) +
+                      (satellitePosition.x >= 0 ? 0 : Math.PI);
+
+                    const targetAngle = satelliteAngle + orbitRotation;
+                    const pointer = {
+                      x: orbitPos.x + orbit.orbitRadius * Math.cos(targetAngle),
+                      y:
+                        orbitPos.y +
+                        orbit.orbitRadius * Math.sin(targetAngle) +
+                        orbit.planetRadius,
+                    };
+
+                    showTooltip({
+                      position: pointer,
+                      text: cetasikaMap.get(id)?.name,
+                    });
+                  }
+                },
+              ],
+              [
+                "pointerout",
+                () => {
+                  hideTooltip();
+                  this._solarSystem.orbit.revolveAnimation.start();
+                },
+              ],
+            ],
           });
         }
       }

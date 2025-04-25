@@ -15,7 +15,7 @@ class CloseButton extends Konva.Group {
     const base = new Konva.Rect({
       width: Defaults.size, // use scale to change size (to be implemented)
       height: Defaults.size,
-      fill: palette.grays[800],
+      fill: palette.grays["950"],
       stroke: palette.grays[600],
       strokeWidth: 1,
       shadowColor: "black",
