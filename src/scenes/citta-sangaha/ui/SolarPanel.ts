@@ -2,7 +2,7 @@ import { palette } from "@/shared/palette";
 import Konva from "konva";
 import CittaSolarSystem from "./CittaSolarSystem";
 import Constants from "@/config/constant";
-import { CittaID, getCittaCombination } from "@/entities/citta";
+import { CittaID, cittaMap, getCittaCombination } from "@/entities/citta";
 import store from "../lib/store";
 import CloseButton from "@/shared/ui/CloseButton";
 import { hideTooltip, showTooltip } from "@/shared/tooltip";
@@ -51,6 +51,8 @@ class SolarPanel extends Konva.Group {
     closeBtn.on("pointerclick", handleClose);
     this._background.on("pointerclick", handleClose);
 
+    this._solarSystem.core.on("pointerout", () => hideTooltip());
+
     store.subscribe(
       (state) => ({ selectedCitta: state.selectedCitta, vedana: state.vedana }),
       (state) => {
@@ -59,6 +61,29 @@ class SolarPanel extends Konva.Group {
           this.show();
           const combination = getCittaCombination(state.selectedCitta);
           if (!combination) return;
+
+          const renderCittaTooltip = () => {
+            const thisPos = this.getPosition();
+            const solarPos = this._solarSystem.getPosition();
+            const position = {
+              x: thisPos.x + solarPos.x,
+              y: thisPos.y + solarPos.y,
+            };
+            if (this._solarSystem.isExpanded) {
+              position.y += this._solarSystem.core.shrunkRadius;
+              showTooltip({ position, text: "Citta" });
+            } else {
+              position.y += this._solarSystem.core.initialRadius;
+              const text = cittaMap.get(state.selectedCitta!)?.name ?? state.selectedCitta!
+              showTooltip({ position, text });
+            }
+          };
+
+          this._solarSystem.core.on("pointerover", renderCittaTooltip);
+          this._solarSystem.onClickCore(() => {
+            renderCittaTooltip();
+          });
+
           this._solarSystem.orbit.setSatellites({
             must: combination.mustHave,
             sometime: combination.sometime,

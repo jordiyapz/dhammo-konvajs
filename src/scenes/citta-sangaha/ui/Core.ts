@@ -94,6 +94,9 @@ class Core extends Konva.Group {
     this._onShrinkFn = f;
   }
 
+  get initialRadius() {
+    return this._initialRadius;
+  }
   set initialRadius(radius: number) {
     this._initialRadius = radius;
     this._cittaNode.radius = radius;
