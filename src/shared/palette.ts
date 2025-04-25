@@ -10,6 +10,7 @@ const paletteGray = {
   700: "#495057",
   800: "#343A40",
   900: "#212529",
+  950: "#14141A",
 };
 
 export const palette = {

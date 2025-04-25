@@ -45,7 +45,7 @@ class CetasikaPanel extends Konva.Group {
     const backdrop = new Konva.Rect({
       width: this.width(),
       height: this.height(),
-      fill: palette.grays[800],
+      fill: palette.grays["950"],
       opacity: 0.7,
     });
     const cetasikaNode = new CetasikaNode({

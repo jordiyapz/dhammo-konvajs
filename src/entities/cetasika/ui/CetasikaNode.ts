@@ -13,6 +13,7 @@ type CetasikaNodeProps = {
   vedana?: UVedana;
   hetu?: UHetu;
   isAniyata?: boolean;
+  baseProps?: Konva.CircleConfig;
 };
 
 const Defaults = {
@@ -29,7 +30,15 @@ class CetasikaNode extends Konva.Group {
   _nodes: { base: any; vedana: any; aniyata: any };
 
   constructor(config: Konva.GroupConfig & CetasikaNodeProps) {
-    const { radius: radius, vedana, base, hetu, isAniyata, ...rest } = config;
+    const {
+      radius: radius,
+      vedana,
+      base,
+      hetu,
+      isAniyata,
+      baseProps,
+      ...rest
+    } = config;
 
     super(rest);
 
@@ -44,6 +53,7 @@ class CetasikaNode extends Konva.Group {
       shadowBlur: 5,
       shadowOpacity: 0.5,
       shadowOffset: { x: 2, y: 2 },
+      ...baseProps,
     });
 
     const vedanaRing = new Konva.Circle({
@@ -58,8 +68,8 @@ class CetasikaNode extends Konva.Group {
       fontSize: 24,
       name: "aniyata",
       fill: "white",
-      stroke: palette.grays[800],
-      strokeWidth: .5,
+      stroke: palette.grays["950"],
+      strokeWidth: 0.5,
     });
     aniyata.x(-aniyata.width() / 2);
     aniyata.y(-aniyata.height() / 2);

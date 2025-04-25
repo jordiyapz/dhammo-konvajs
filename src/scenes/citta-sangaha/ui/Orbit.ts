@@ -55,7 +55,6 @@ class Orbit extends Konva.Group {
     this.planetPool = Array.from({ length: 38 }).map(() => {
       const node = new CetasikaNode({
         radius: this.planetRadius,
-        isAniyata: true,
       }).hide();
 
       return node;

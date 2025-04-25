@@ -29,7 +29,7 @@ class SolarPanel extends Konva.Group {
       width,
       height,
       opacity: 0.7,
-      fill: palette.grays[800],
+      fill: palette.grays["950"],
     });
 
     this._solarSystem = new CittaSolarSystem({
