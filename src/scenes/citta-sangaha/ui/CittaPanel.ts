@@ -2,7 +2,7 @@ import { palette } from "@/shared/palette";
 import Konva from "konva";
 import CittaSolarSystem from "./CittaSolarSystem";
 import Constants from "@/config/constant";
-import { CittaID, cittaMap, getCittaCombination } from "@/entities/citta";
+import { cittaMap, getCittaCombination } from "@/entities/citta";
 import store from "../lib/store";
 import CloseButton from "@/shared/ui/CloseButton";
 import { hideTooltip, showTooltip } from "@/shared/tooltip";
@@ -166,7 +166,7 @@ class CittaPanel extends Konva.Group {
     );
 
     // TESTS
-    setTimeout(() => store.getState().selectCitta("dosa1"), 500);
+    // setTimeout(() => store.getState().selectCitta("dosa1"), 500);
   }
 
   show() {
@@ -174,7 +174,7 @@ class CittaPanel extends Konva.Group {
     this.to({ opacity: 1 });
     this.expandTimer = setTimeout(() => {
       this._solarSystem.expand();
-    }, 500);
+    }, 800);
     return this;
   }
 
