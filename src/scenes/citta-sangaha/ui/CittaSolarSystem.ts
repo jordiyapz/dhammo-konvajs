@@ -15,6 +15,8 @@ class CittaSolarSystem extends Konva.Group {
   orbit: Orbit;
 
   _onClickCore?: () => void;
+  _onExpand?: () => void;
+  _onShrink?: () => void;
 
   constructor(config: Konva.GroupConfig & CittaSolarSystemProps = {}) {
     super({ name: "citta-solar-system", ...config });
@@ -43,6 +45,7 @@ class CittaSolarSystem extends Konva.Group {
   expand(options?: Partial<{ skipAnimation: boolean }>) {
     this.isExpanded = true;
     this.core.shrink(options);
+    this._onExpand?.();
     // if (options?.skipAnimation) this.orbit.expand(options);
   }
 
@@ -50,10 +53,19 @@ class CittaSolarSystem extends Konva.Group {
     this.isExpanded = false;
     this.orbit.shrink(options);
     if (options?.skipAnimation) this.core.expand(options);
+    this._onShrink?.();
   }
 
   onClickCore(cb: () => void) {
     this._onClickCore = cb;
+  }
+
+  onExpand(cb: () => void) {
+    this._onExpand = cb;
+  }
+
+  onShrink(cb: () => void) {
+    this._onShrink = cb;
   }
 }
 

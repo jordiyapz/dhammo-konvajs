@@ -19,7 +19,7 @@ export type UVedana =
   | "dukkha";
 
 export interface Citta {
-  id: string;
+  id: CittaID;
   hetuVariant: UHetuVariant;
   vedana: UVedana;
   jati: UJati;
