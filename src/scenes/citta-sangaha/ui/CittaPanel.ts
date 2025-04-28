@@ -8,7 +8,7 @@ import CloseButton from "@/shared/ui/CloseButton";
 import { hideTooltip, showTooltip } from "@/shared/tooltip";
 import { cetasikaMap } from "@/entities/cetasika";
 
-class SolarPanel extends Konva.Group {
+class CittaPanel extends Konva.Group {
   expandTimer?: NodeJS.Timeout;
   _background: Konva.Rect;
 
@@ -164,4 +164,4 @@ class SolarPanel extends Konva.Group {
   }
 }
 
-export default SolarPanel;
+export default CittaPanel;
