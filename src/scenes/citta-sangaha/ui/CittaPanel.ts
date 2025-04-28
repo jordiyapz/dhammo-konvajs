@@ -2,18 +2,21 @@ import { palette } from "@/shared/palette";
 import Konva from "konva";
 import CittaSolarSystem from "./CittaSolarSystem";
 import Constants from "@/config/constant";
-import { CittaID, cittaMap, getCittaCombination } from "@/entities/citta";
+import { cittaMap, getCittaCombination } from "@/entities/citta";
 import store from "../lib/store";
 import CloseButton from "@/shared/ui/CloseButton";
 import { hideTooltip, showTooltip } from "@/shared/tooltip";
 import { cetasikaMap } from "@/entities/cetasika";
 
-class SolarPanel extends Konva.Group {
+class CittaPanel extends Konva.Group {
   expandTimer?: NodeJS.Timeout;
+
   _background: Konva.Rect;
+  _solarSystem: CittaSolarSystem;
+  _title: Konva.Text;
+  _tweens: { title: Konva.Tween };
 
   _onClose: (e?: Konva.KonvaEventObject<MouseEvent>) => void = () => {};
-  _solarSystem: CittaSolarSystem;
 
   constructor(config: Konva.GroupConfig) {
     const {
@@ -38,10 +41,27 @@ class SolarPanel extends Konva.Group {
       orbitOptions: { angularVelocity: 2, planetRadius: 10, minimalRadius: 50 },
     });
 
+    const title = new Konva.Text({
+      text: "Hellow, World, this is quite long, mann, lorem ipsum dolor sit amet culametan met met culametan met met",
+      y: height / 2 + 60,
+      width: width - 80,
+      fontSize: 20,
+      fill: "white",
+      align: "center",
+      opacity: 0,
+    });
+    title.x((width - title.width()) / 2);
+    this._title = title;
+
     const closeBtn = new CloseButton({ y: 20 });
     closeBtn.x(width - closeBtn.width() - 20);
 
-    this.add(this._background, this._solarSystem, closeBtn);
+    this.add(this._background, this._solarSystem, title, closeBtn);
+
+    const titleTween = new Konva.Tween({ node: this._title, opacity: 1 });
+    this._tweens = { title: titleTween };
+
+    // EVENT HANDLERS
 
     const handleClose = (e?: Konva.KonvaEventObject<MouseEvent>) => {
       clearTimeout(this.expandTimer);
@@ -52,38 +72,27 @@ class SolarPanel extends Konva.Group {
     this._background.on("pointerclick", handleClose);
 
     this._solarSystem.core.on("pointerout", () => hideTooltip());
+    this._solarSystem.onExpand(() => {
+      this._tweens.title.reverse();
+    });
+    this._solarSystem.onShrink(() => {
+      this._tweens.title.play();
+    });
 
     store.subscribe(
       (state) => ({ selectedCitta: state.selectedCitta, vedana: state.vedana }),
       (state) => {
         if (state.selectedCitta !== null) {
-          this.setCitta(state.selectedCitta);
+          const citta = cittaMap.get(state.selectedCitta);
+          if (!citta)
+            throw new Error(`Citta ${state.selectedCitta} is not defined`);
+
+          this._title.setText(citta.name ?? citta.id);
+          this._solarSystem.setCitta(citta.id);
           this.show();
+
           const combination = getCittaCombination(state.selectedCitta);
           if (!combination) return;
-
-          const renderCittaTooltip = () => {
-            const thisPos = this.getPosition();
-            const solarPos = this._solarSystem.getPosition();
-            const position = {
-              x: thisPos.x + solarPos.x,
-              y: thisPos.y + solarPos.y,
-            };
-            if (this._solarSystem.isExpanded) {
-              position.y += this._solarSystem.core.shrunkRadius;
-              showTooltip({ position, text: "Citta" });
-            } else {
-              position.y += this._solarSystem.core.initialRadius;
-              const text = cittaMap.get(state.selectedCitta!)?.name ?? state.selectedCitta!
-              showTooltip({ position, text });
-            }
-          };
-
-          this._solarSystem.core.on("pointerover", renderCittaTooltip);
-          this._solarSystem.onClickCore(() => {
-            renderCittaTooltip();
-          });
-
           this._solarSystem.orbit.setSatellites({
             must: combination.mustHave,
             sometime: combination.sometime,
@@ -129,6 +138,29 @@ class SolarPanel extends Konva.Group {
               ],
             ],
           });
+
+          const renderCittaTooltip = () => {
+            const thisPos = this.getPosition();
+            const solarPos = this._solarSystem.getPosition();
+            const position = {
+              x: thisPos.x + solarPos.x,
+              y: thisPos.y + solarPos.y,
+            };
+            if (this._solarSystem.isExpanded) {
+              position.y += this._solarSystem.core.shrunkRadius;
+              showTooltip({ position, text: "Citta" });
+            } else {
+              hideTooltip();
+              // position.y += this._solarSystem.core.initialRadius;
+              // const text =
+              //   cittaMap.get(state.selectedCitta!)?.name ??
+              //   state.selectedCitta!;
+              // showTooltip({ position, text });
+            }
+          };
+
+          this._solarSystem.core.on("pointerover", renderCittaTooltip);
+          this._solarSystem.onClickCore(() => renderCittaTooltip());
         }
       }
     );
@@ -137,14 +169,12 @@ class SolarPanel extends Konva.Group {
     // setTimeout(() => store.getState().selectCitta("dosa1"), 500);
   }
 
-  setCitta(citta: CittaID) {
-    this._solarSystem.setCitta(citta);
-  }
-
   show() {
     super.show();
     this.to({ opacity: 1 });
-    this.expandTimer = setTimeout(() => this._solarSystem.expand(), 500);
+    this.expandTimer = setTimeout(() => {
+      this._solarSystem.expand();
+    }, 800);
     return this;
   }
 
@@ -164,4 +194,4 @@ class SolarPanel extends Konva.Group {
   }
 }
 
-export default SolarPanel;
+export default CittaPanel;

@@ -5,7 +5,7 @@ import Tooltip from "@/shared/ui/Tooltip";
 import { palette } from "@/shared/palette";
 import { hideTooltip } from "@/shared/tooltip";
 
-import SolarPanel from "./ui/SolarPanel";
+import CittaPanel from "./ui/CittaPanel";
 import store from "./lib/store";
 import CetasikaSection from "./ui/CetasikaSection";
 import CittaSection from "./ui/CittaSection";
@@ -24,7 +24,7 @@ class CittaSangahaScene {
       fill: palette.backgroundGray,
     });
 
-    const cittaPanel = new CittaSection({
+    const cittaSection = new CittaSection({
       width: panelWidth,
       height: Constants.virtualSize.height,
     });
@@ -41,7 +41,7 @@ class CittaSangahaScene {
       height: Constants.virtualSize.height,
     });
 
-    const solarPanel = new SolarPanel({
+    const cittaPanel = new CittaPanel({
       width: panelWidth,
       height: Constants.virtualSize.height,
     });
@@ -51,17 +51,17 @@ class CittaSangahaScene {
     // EVENT LISTENERS
     const { selectCitta } = store.getState();
 
-    solarPanel.onClose(() => {
+    cittaPanel.onClose(() => {
       hideTooltip();
       selectCitta(null);
     });
 
     this.components.push(
       background,
-      cittaPanel,
+      cittaSection,
       verticalLine,
       cetasikaPanel,
-      solarPanel,
+      cittaPanel,
       tooltip
     );
   }
