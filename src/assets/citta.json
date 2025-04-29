@@ -36,818 +36,935 @@
     "order": 5,
     "vedana": "upekkha",
     "jati": "akusala",
-    "hetuvariant": "lobha"
+    "hetuvariant": "lobha",
+    "name": "upekkhāsahagata diṭṭhigatasampayutta asaṅkhārika citta"
   },
   {
     "id": "lobha6",
     "order": 6,
     "vedana": "upekkha",
     "jati": "akusala",
-    "hetuvariant": "lobha"
+    "hetuvariant": "lobha",
+    "name": "upekkhāsahagata diṭṭhigatasampayutta sasaṅkhārika citta"
   },
   {
     "id": "lobha7",
     "order": 7,
     "vedana": "upekkha",
     "jati": "akusala",
-    "hetuvariant": "lobha"
+    "hetuvariant": "lobha",
+    "name": "upekkhāsahagata diṭṭhigatavippayutta asaṅkhārika citta"
   },
   {
     "id": "lobha8",
     "order": 8,
     "vedana": "upekkha",
     "jati": "akusala",
-    "hetuvariant": "lobha"
+    "hetuvariant": "lobha",
+    "name": "upekkhāsahagata diṭṭhigatavippayutta sasaṅkhārika citta"
   },
   {
     "id": "dosa1",
     "order": 9,
     "vedana": "domanassa",
     "jati": "akusala",
-    "hetuvariant": "dosa"
+    "hetuvariant": "dosa",
+    "name": "domanassasahagata paṭighasampayutta asaṅkhārika citta"
   },
   {
     "id": "dosa2",
     "order": 10,
     "vedana": "domanassa",
     "jati": "akusala",
-    "hetuvariant": "dosa"
+    "hetuvariant": "dosa",
+    "name": "domanassasahagata paṭighasampayutta sasaṅkhārika citta"
   },
   {
     "id": "moha1",
     "order": 11,
     "vedana": "upekkha",
     "jati": "akusala",
-    "hetuvariant": "moha"
+    "hetuvariant": "moha",
+    "name": "upekkhāsahagata vicikicchāsampayutta citta"
   },
   {
     "id": "moha2",
     "order": 12,
     "vedana": "upekkha",
     "jati": "akusala",
-    "hetuvariant": "moha"
+    "hetuvariant": "moha",
+    "name": "upekkhāsahagata uddhacchasampayutta citta"
   },
   {
     "id": "cakkhu1",
     "order": 13,
     "vedana": "upekkha",
     "jati": "vipaka",
-    "hetuvariant": "ahetuka"
+    "hetuvariant": "ahetuka",
+    "name": "upekkhāsahagata akusalavipāka cakkhuviññāṇa"
   },
   {
     "id": "sota1",
     "order": 14,
     "vedana": "upekkha",
     "jati": "vipaka",
-    "hetuvariant": "ahetuka"
+    "hetuvariant": "ahetuka",
+    "name": "upekkhāsahagata akusalavipāka sotaviññāṇa"
   },
   {
     "id": "ghana1",
     "order": 15,
     "vedana": "upekkha",
     "jati": "vipaka",
-    "hetuvariant": "ahetuka"
+    "hetuvariant": "ahetuka",
+    "name": "upekkhāsahagata akusalavipāka ghānaviññāṇa"
   },
   {
     "id": "jivha1",
     "order": 16,
     "vedana": "upekkha",
     "jati": "vipaka",
-    "hetuvariant": "ahetuka"
+    "hetuvariant": "ahetuka",
+    "name": "upekkhāsahagata akusalavipāka jivhāviññāṇa"
   },
   {
     "id": "kaya1",
     "order": 17,
     "vedana": "dukkha",
     "jati": "vipaka",
-    "hetuvariant": "ahetuka"
+    "hetuvariant": "ahetuka",
+    "name": "dukkhasahagata akusalavipāka kāyaviññāṇa"
   },
   {
     "id": "sam1",
     "order": 18,
     "vedana": "upekkha",
     "jati": "vipaka",
-    "hetuvariant": "ahetuka"
+    "hetuvariant": "ahetuka",
+    "name": "upekkhāsahagata akusalavipāka sampaṭicchana citta"
   },
   {
     "id": "san1",
     "order": 19,
     "vedana": "upekkha",
     "jati": "vipaka",
-    "hetuvariant": "ahetuka"
+    "hetuvariant": "ahetuka",
+    "name": "upekkhāsahagata akusalavipāka santīraṇa citta"
   },
   {
     "id": "cakkhu2",
     "order": 20,
     "vedana": "upekkha",
     "jati": "vipaka",
-    "hetuvariant": "ahetuka"
+    "hetuvariant": "ahetuka",
+    "name": "upekkhāsahagata kusalavipāka cakkhuviññāṇa"
   },
   {
     "id": "sota2",
     "order": 21,
     "vedana": "upekkha",
     "jati": "vipaka",
-    "hetuvariant": "ahetuka"
+    "hetuvariant": "ahetuka",
+    "name": "upekkhāsahagata kusalavipāka sotaviññāṇa"
   },
   {
     "id": "ghana2",
     "order": 22,
     "vedana": "upekkha",
     "jati": "vipaka",
-    "hetuvariant": "ahetuka"
+    "hetuvariant": "ahetuka",
+    "name": "upekkhāsahagata kusalavipāka ghānaviññāṇa"
   },
   {
     "id": "jivha2",
     "order": 23,
     "vedana": "upekkha",
     "jati": "vipaka",
-    "hetuvariant": "ahetuka"
+    "hetuvariant": "ahetuka",
+    "name": "upekkhāsahagata kusalavipāka jivhāviññāṇa"
   },
   {
     "id": "kaya2",
     "order": 24,
     "vedana": "sukha",
     "jati": "vipaka",
-    "hetuvariant": "ahetuka"
+    "hetuvariant": "ahetuka",
+    "name": "sukhasahagata kusalavipāka kāyaviññāṇa"
   },
   {
     "id": "sam2",
     "order": 25,
     "vedana": "upekkha",
     "jati": "vipaka",
-    "hetuvariant": "ahetuka"
+    "hetuvariant": "ahetuka",
+    "name": "upekkhāsahagata kusalavipāka sampaṭicchana citta"
   },
   {
     "id": "san2",
     "order": 26,
     "vedana": "somanassa",
     "jati": "vipaka",
-    "hetuvariant": "ahetuka"
+    "hetuvariant": "ahetuka",
+    "name": "somanassasahagata kusalavipāka santīraṇa citta"
   },
   {
     "id": "san3",
     "order": 27,
     "vedana": "upekkha",
     "jati": "vipaka",
-    "hetuvariant": "ahetuka"
+    "hetuvariant": "ahetuka",
+    "name": "upekkhāsahagata kusalavipāka santīraṇa citta"
   },
   {
     "id": "pancadv",
     "order": 28,
     "vedana": "upekkha",
     "jati": "kiriya",
-    "hetuvariant": "ahetuka"
+    "hetuvariant": "ahetuka",
+    "name": "upekkhāsahagata pañcadvārāvajjana citta"
   },
   {
     "id": "manodv",
     "order": 29,
     "vedana": "upekkha",
     "jati": "kiriya",
-    "hetuvariant": "ahetuka"
+    "hetuvariant": "ahetuka",
+    "name": "upekkhāsahagata manodvārāvajjanacitta citta"
   },
   {
     "id": "has",
     "order": 30,
     "vedana": "somanassa",
     "jati": "kiriya",
-    "hetuvariant": "ahetuka"
+    "hetuvariant": "ahetuka",
+    "name": "somanassasahagata hasituppāda citta"
   },
   {
     "id": "mkus1",
     "order": 31,
     "vedana": "somanassa",
     "jati": "kusala",
-    "hetuvariant": "tihetuka"
+    "hetuvariant": "tihetuka",
+    "name": "somanassasahagata ñāṇasampayutta asaṅkhārika kusala citta"
   },
   {
     "id": "mkus2",
     "order": 32,
     "vedana": "somanassa",
     "jati": "kusala",
-    "hetuvariant": "tihetuka"
+    "hetuvariant": "tihetuka",
+    "name": "somanassasahagata ñāṇasampayutta sasaṅkhārika kusala citta"
   },
   {
     "id": "mkus3",
     "order": 33,
     "vedana": "somanassa",
     "jati": "kusala",
-    "hetuvariant": "dvihetuka"
+    "hetuvariant": "dvihetuka",
+    "name": "somanassasahagata ñāṇavippayutta asaṅkhārika kusala citta"
   },
   {
     "id": "mkus4",
     "order": 34,
     "vedana": "somanassa",
     "jati": "kusala",
-    "hetuvariant": "dvihetuka"
+    "hetuvariant": "dvihetuka",
+    "name": "somanassasahagata ñāṇavippayutta sasaṅkhārika kusala citta"
   },
   {
     "id": "mkus5",
     "order": 35,
     "vedana": "upekkha",
     "jati": "kusala",
-    "hetuvariant": "tihetuka"
+    "hetuvariant": "tihetuka",
+    "name": "upekkhāsahagata ñāṇasampayutta asaṅkhārika kusala citta"
   },
   {
     "id": "mkus6",
     "order": 36,
     "vedana": "upekkha",
     "jati": "kusala",
-    "hetuvariant": "tihetuka"
+    "hetuvariant": "tihetuka",
+    "name": "upekkhāsahagata ñāṇasampayutta sasaṅkhārika kusala citta"
   },
   {
     "id": "mkus7",
     "order": 37,
     "vedana": "upekkha",
     "jati": "kusala",
-    "hetuvariant": "dvihetuka"
+    "hetuvariant": "dvihetuka",
+    "name": "upekkhāsahagata ñāṇavippayutta asaṅkhārika kusala citta"
   },
   {
     "id": "mkus8",
     "order": 38,
     "vedana": "upekkha",
     "jati": "kusala",
-    "hetuvariant": "dvihetuka"
+    "hetuvariant": "dvihetuka",
+    "name": "upekkhāsahagata ñāṇavippayutta sasaṅkhārika kusala citta"
   },
   {
     "id": "mvip1",
     "order": 39,
     "vedana": "somanassa",
     "jati": "vipaka",
-    "hetuvariant": "tihetuka"
+    "hetuvariant": "tihetuka",
+    "name": "somanassasahagata ñāṇasampayutta asaṅkhārika vipāka citta"
   },
   {
     "id": "mvip2",
     "order": 40,
     "vedana": "somanassa",
     "jati": "vipaka",
-    "hetuvariant": "tihetuka"
+    "hetuvariant": "tihetuka",
+    "name": "somanassasahagata ñāṇasampayutta sasaṅkhārika vipāka citta"
   },
   {
     "id": "mvip3",
     "order": 41,
     "vedana": "somanassa",
     "jati": "vipaka",
-    "hetuvariant": "dvihetuka"
+    "hetuvariant": "dvihetuka",
+    "name": "somanassasahagata ñāṇavippayutta asaṅkhārika vipāka citta"
   },
   {
     "id": "mvip4",
     "order": 42,
     "vedana": "somanassa",
     "jati": "vipaka",
-    "hetuvariant": "dvihetuka"
+    "hetuvariant": "dvihetuka",
+    "name": "somanassasahagata ñāṇavippayutta sasaṅkhārika vipāka citta"
   },
   {
     "id": "mvip5",
     "order": 43,
     "vedana": "upekkha",
     "jati": "vipaka",
-    "hetuvariant": "tihetuka"
+    "hetuvariant": "tihetuka",
+    "name": "upekkhāsahagata ñāṇasampayutta asaṅkhārika vipāka citta"
   },
   {
     "id": "mvip6",
     "order": 44,
     "vedana": "upekkha",
     "jati": "vipaka",
-    "hetuvariant": "tihetuka"
+    "hetuvariant": "tihetuka",
+    "name": "upekkhāsahagata ñāṇasampayutta sasaṅkhārika vipāka citta"
   },
   {
     "id": "mvip7",
     "order": 45,
     "vedana": "upekkha",
     "jati": "vipaka",
-    "hetuvariant": "dvihetuka"
+    "hetuvariant": "dvihetuka",
+    "name": "upekkhāsahagata ñāṇavippayutta asaṅkhārika vipāka citta"
   },
   {
     "id": "mvip8",
     "order": 46,
     "vedana": "upekkha",
     "jati": "vipaka",
-    "hetuvariant": "dvihetuka"
+    "hetuvariant": "dvihetuka",
+    "name": "upekkhāsahagata ñāṇavippayutta sasaṅkhārika vipāka citta"
   },
   {
     "id": "mkir1",
     "order": 47,
     "vedana": "somanassa",
     "jati": "kiriya",
-    "hetuvariant": "tihetuka"
+    "hetuvariant": "tihetuka",
+    "name": "somanassasahagata ñāṇasampayutta asaṅkhārika kiriya citta"
   },
   {
     "id": "mkir2",
     "order": 48,
     "vedana": "somanassa",
     "jati": "kiriya",
-    "hetuvariant": "tihetuka"
+    "hetuvariant": "tihetuka",
+    "name": "somanassasahagata ñāṇasampayutta sasaṅkhārika kiriya citta"
   },
   {
     "id": "mkir3",
     "order": 49,
     "vedana": "somanassa",
     "jati": "kiriya",
-    "hetuvariant": "dvihetuka"
+    "hetuvariant": "dvihetuka",
+    "name": "somanassasahagata ñāṇavippayutta asaṅkhārika kiriya citta"
   },
   {
     "id": "mkir4",
     "order": 50,
     "vedana": "somanassa",
     "jati": "kiriya",
-    "hetuvariant": "dvihetuka"
+    "hetuvariant": "dvihetuka",
+    "name": "somanassasahagata ñāṇavippayutta sasaṅkhārika kiriya citta"
   },
   {
     "id": "mkir5",
     "order": 51,
     "vedana": "upekkha",
     "jati": "kiriya",
-    "hetuvariant": "tihetuka"
+    "hetuvariant": "tihetuka",
+    "name": "upekkhāsahagata ñāṇasampayutta asaṅkhārika kiriya citta"
   },
   {
     "id": "mkir6",
     "order": 52,
     "vedana": "upekkha",
     "jati": "kiriya",
-    "hetuvariant": "tihetuka"
+    "hetuvariant": "tihetuka",
+    "name": "upekkhāsahagata ñāṇasampayutta sasaṅkhārika kiriya citta"
   },
   {
     "id": "mkir7",
     "order": 53,
     "vedana": "upekkha",
     "jati": "kiriya",
-    "hetuvariant": "dvihetuka"
+    "hetuvariant": "dvihetuka",
+    "name": "upekkhāsahagata ñāṇavippayutta asaṅkhārika kiriya citta"
   },
   {
     "id": "mkir8",
     "order": 54,
     "vedana": "upekkha",
     "jati": "kiriya",
-    "hetuvariant": "dvihetuka"
+    "hetuvariant": "dvihetuka",
+    "name": "upekkhāsahagata ñāṇavippayutta sasaṅkhārika kiriya citta"
   },
   {
     "id": "rkus1",
     "order": 55,
     "vedana": "somanassa",
     "jati": "kusala",
-    "hetuvariant": "tihetuka"
+    "hetuvariant": "tihetuka",
+    "name": "vitakkavicārapītisukhekaggatāsahita paṭhamajjhānakusala citta"
   },
   {
     "id": "rkus2",
     "order": 56,
     "vedana": "somanassa",
     "jati": "kusala",
-    "hetuvariant": "tihetuka"
+    "hetuvariant": "tihetuka",
+    "name": "vicārapītisukhekaggatāsahita dutiyajjhānakusala citta"
   },
   {
     "id": "rkus3",
     "order": 57,
     "vedana": "somanassa",
     "jati": "kusala",
-    "hetuvariant": "tihetuka"
+    "hetuvariant": "tihetuka",
+    "name": "pītisukhekaggatāsahita tatiyajjhānakusala citta"
   },
   {
     "id": "rkus4",
     "order": 58,
     "vedana": "somanassa",
     "jati": "kusala",
-    "hetuvariant": "tihetuka"
+    "hetuvariant": "tihetuka",
+    "name": "sukhekaggatāsahita catutthajjhānakusala citta"
   },
   {
     "id": "rkus5",
     "order": 59,
     "vedana": "upekkha",
     "jati": "kusala",
-    "hetuvariant": "tihetuka"
+    "hetuvariant": "tihetuka",
+    "name": "upekkhekaggatāsahita pañcamajjhānakusala citta"
   },
   {
     "id": "rvip1",
     "order": 60,
     "vedana": "somanassa",
     "jati": "vipaka",
-    "hetuvariant": "tihetuka"
+    "hetuvariant": "tihetuka",
+    "name": "vitakkavicārapītisukhekaggatāsahita paṭhamajjhānavipāka citta"
   },
   {
     "id": "rvip2",
     "order": 61,
     "vedana": "somanassa",
     "jati": "vipaka",
-    "hetuvariant": "tihetuka"
+    "hetuvariant": "tihetuka",
+    "name": "vicārapītisukhekaggatāsahita dutiyajjhānavipāka citta"
   },
   {
     "id": "rvip3",
     "order": 62,
     "vedana": "somanassa",
     "jati": "vipaka",
-    "hetuvariant": "tihetuka"
+    "hetuvariant": "tihetuka",
+    "name": "pītisukhekaggatāsahita tatiyajjhānavipāka citta"
   },
   {
     "id": "rvip4",
     "order": 63,
     "vedana": "somanassa",
     "jati": "vipaka",
-    "hetuvariant": "tihetuka"
+    "hetuvariant": "tihetuka",
+    "name": "sukhekaggatāsahita catutthajjhānavipāka citta"
   },
   {
     "id": "rvip5",
     "order": 64,
     "vedana": "upekkha",
     "jati": "vipaka",
-    "hetuvariant": "tihetuka"
+    "hetuvariant": "tihetuka",
+    "name": "upekkhekaggatāsahita pañcamajjhānavipāka citta"
   },
   {
     "id": "rkir1",
     "order": 65,
     "vedana": "somanassa",
     "jati": "kiriya",
-    "hetuvariant": "tihetuka"
+    "hetuvariant": "tihetuka",
+    "name": "vitakkavicārapītisukhekaggatāsahita paṭhamajjhānakiriya citta"
   },
   {
     "id": "rkir2",
     "order": 66,
     "vedana": "somanassa",
     "jati": "kiriya",
-    "hetuvariant": "tihetuka"
+    "hetuvariant": "tihetuka",
+    "name": "vicārapītisukhekaggatāsahita dutiyajjhānakiriya citta"
   },
   {
     "id": "rkir3",
     "order": 67,
     "vedana": "somanassa",
     "jati": "kiriya",
-    "hetuvariant": "tihetuka"
+    "hetuvariant": "tihetuka",
+    "name": "pītisukhekaggatāsahita tatiyajjhānakiriya citta"
   },
   {
     "id": "rkir4",
     "order": 68,
     "vedana": "somanassa",
     "jati": "kiriya",
-    "hetuvariant": "tihetuka"
+    "hetuvariant": "tihetuka",
+    "name": "sukhekaggatāsahita catutthajjhānakiriya citta"
   },
   {
     "id": "rkir5",
     "order": 69,
     "vedana": "upekkha",
     "jati": "kiriya",
-    "hetuvariant": "tihetuka"
+    "hetuvariant": "tihetuka",
+    "name": "upekkhekaggatāsahita pañcamajjhānakiriya citta"
   },
   {
     "id": "arkus1",
     "order": 70,
     "vedana": "upekkha",
     "jati": "kusala",
-    "hetuvariant": "tihetuka"
+    "hetuvariant": "tihetuka",
+    "name": "ākāsānañcāyatana kusala citta"
   },
   {
     "id": "arkus2",
     "order": 71,
     "vedana": "upekkha",
     "jati": "kusala",
-    "hetuvariant": "tihetuka"
+    "hetuvariant": "tihetuka",
+    "name": "viññāṇañcāyatana kusala citta"
   },
   {
     "id": "arkus3",
     "order": 72,
     "vedana": "upekkha",
     "jati": "kusala",
-    "hetuvariant": "tihetuka"
+    "hetuvariant": "tihetuka",
+    "name": "ākiñcaññāyatana kusala citta"
   },
   {
     "id": "arkus4",
     "order": 73,
     "vedana": "upekkha",
     "jati": "kusala",
-    "hetuvariant": "tihetuka"
+    "hetuvariant": "tihetuka",
+    "name": "nevasaññānāsaññāyatana kusala citta"
   },
   {
     "id": "arvip1",
     "order": 74,
     "vedana": "upekkha",
     "jati": "vipaka",
-    "hetuvariant": "tihetuka"
+    "hetuvariant": "tihetuka",
+    "name": "ākāsānañcāyatana vipāka citta"
   },
   {
     "id": "arvip2",
     "order": 75,
     "vedana": "upekkha",
     "jati": "vipaka",
-    "hetuvariant": "tihetuka"
+    "hetuvariant": "tihetuka",
+    "name": "viññāṇañcāyatana vipāka citta"
   },
   {
     "id": "arvip3",
     "order": 76,
     "vedana": "upekkha",
     "jati": "vipaka",
-    "hetuvariant": "tihetuka"
+    "hetuvariant": "tihetuka",
+    "name": "ākiñcaññāyatana vipāka citta"
   },
   {
     "id": "arvip4",
     "order": 77,
     "vedana": "upekkha",
     "jati": "vipaka",
-    "hetuvariant": "tihetuka"
+    "hetuvariant": "tihetuka",
+    "name": "nevasaññānāsaññāyatana vipāka citta"
   },
   {
     "id": "arkir1",
     "order": 78,
     "vedana": "upekkha",
     "jati": "kiriya",
-    "hetuvariant": "tihetuka"
+    "hetuvariant": "tihetuka",
+    "name": "ākāsānañcāyatana kiriya citta"
   },
   {
     "id": "arkir2",
     "order": 79,
     "vedana": "upekkha",
     "jati": "kiriya",
-    "hetuvariant": "tihetuka"
+    "hetuvariant": "tihetuka",
+    "name": "viññāṇañcāyatana kiriya citta"
   },
   {
     "id": "arkir3",
     "order": 80,
     "vedana": "upekkha",
     "jati": "kiriya",
-    "hetuvariant": "tihetuka"
+    "hetuvariant": "tihetuka",
+    "name": "ākiñcaññāyatana kiriya citta"
   },
   {
     "id": "arkir4",
     "order": 81,
     "vedana": "upekkha",
     "jati": "kiriya",
-    "hetuvariant": "tihetuka"
+    "hetuvariant": "tihetuka",
+    "name": "nevasaññānāsaññāyatana kiriya citta"
   },
   {
     "id": "sotmg1",
     "order": 82,
     "vedana": "somanassa",
     "jati": "kusala",
-    "hetuvariant": "tihetuka"
+    "hetuvariant": "tihetuka",
+    "name": "vitakkavicārapītisukhekaggatāsahita paṭhamajjhāna sotāpattimagga citta"
   },
   {
     "id": "sotmg2",
     "order": 83,
     "vedana": "somanassa",
     "jati": "kusala",
-    "hetuvariant": "tihetuka"
+    "hetuvariant": "tihetuka",
+    "name": "vicārapītisukhekaggatāsahita dutiyajjhāna sotāpattimagga citta"
   },
   {
     "id": "sotmg3",
     "order": 84,
     "vedana": "somanassa",
     "jati": "kusala",
-    "hetuvariant": "tihetuka"
+    "hetuvariant": "tihetuka",
+    "name": "pītisukhekaggatāsahita tatiyajjhāna sotāpattimagga citta"
   },
   {
     "id": "sotmg4",
     "order": 85,
     "vedana": "somanassa",
     "jati": "kusala",
-    "hetuvariant": "tihetuka"
+    "hetuvariant": "tihetuka",
+    "name": "sukhekaggatāsahita catutthajjhāna sotāpattimagga citta"
   },
   {
     "id": "sotmg5",
     "order": 86,
     "vedana": "upekkha",
     "jati": "kusala",
-    "hetuvariant": "tihetuka"
+    "hetuvariant": "tihetuka",
+    "name": "upekkhekaggatāsahita pañcamajjhāna sotāpattimagga citta"
   },
   {
     "id": "sakmg1",
     "order": 87,
     "vedana": "somanassa",
     "jati": "kusala",
-    "hetuvariant": "tihetuka"
+    "hetuvariant": "tihetuka",
+    "name": "vitakkavicārapītisukhekaggatāsahita paṭhamajjhāna sakadāgāmimagga citta"
   },
   {
     "id": "sakmg2",
     "order": 88,
     "vedana": "somanassa",
     "jati": "kusala",
-    "hetuvariant": "tihetuka"
+    "hetuvariant": "tihetuka",
+    "name": "vicārapītisukhekaggatāsahita dutiyajjhāna sakadāgāmimagga citta"
   },
   {
     "id": "sakmg3",
     "order": 89,
     "vedana": "somanassa",
     "jati": "kusala",
-    "hetuvariant": "tihetuka"
+    "hetuvariant": "tihetuka",
+    "name": "pītisukhekaggatāsahita tatiyajjhāna sakadāgāmimagga citta"
   },
   {
     "id": "sakmg4",
     "order": 90,
     "vedana": "somanassa",
     "jati": "kusala",
-    "hetuvariant": "tihetuka"
+    "hetuvariant": "tihetuka",
+    "name": "sukhekaggatāsahita catutthajjhāna sakadāgāmimagga citta"
   },
   {
     "id": "sakmg5",
     "order": 91,
     "vedana": "upekkha",
     "jati": "kusala",
-    "hetuvariant": "tihetuka"
+    "hetuvariant": "tihetuka",
+    "name": "upekkhekaggatāsahita pañcamajjhāna sakadāgāmimagga citta"
   },
   {
     "id": "anamg1",
     "order": 92,
     "vedana": "somanassa",
     "jati": "kusala",
-    "hetuvariant": "tihetuka"
+    "hetuvariant": "tihetuka",
+    "name": "vitakkavicārapītisukhekaggatāsahita paṭhamajjhāna anāgāmimagga citta"
   },
   {
     "id": "anamg2",
     "order": 93,
     "vedana": "somanassa",
     "jati": "kusala",
-    "hetuvariant": "tihetuka"
+    "hetuvariant": "tihetuka",
+    "name": "vicārapītisukhekaggatāsahita dutiyajjhāna anāgāmimagga citta"
   },
   {
     "id": "anamg3",
     "order": 94,
     "vedana": "somanassa",
     "jati": "kusala",
-    "hetuvariant": "tihetuka"
+    "hetuvariant": "tihetuka",
+    "name": "pītisukhekaggatāsahita tatiyajjhāna anāgāmimagga citta"
   },
   {
     "id": "anamg4",
     "order": 95,
     "vedana": "somanassa",
     "jati": "kusala",
-    "hetuvariant": "tihetuka"
+    "hetuvariant": "tihetuka",
+    "name": "sukhekaggatāsahita catutthajjhāna anāgāmimagga citta"
   },
   {
     "id": "anamg5",
     "order": 96,
     "vedana": "upekkha",
     "jati": "kusala",
-    "hetuvariant": "tihetuka"
+    "hetuvariant": "tihetuka",
+    "name": "upekkhekaggatāsahita pañcamajjhāna anāgāmimagga citta"
   },
   {
     "id": "aramg1",
     "order": 97,
     "vedana": "somanassa",
     "jati": "kusala",
-    "hetuvariant": "tihetuka"
+    "hetuvariant": "tihetuka",
+    "name": "vitakkavicārapītisukhekaggatāsahita paṭhamajjhāna arahattamagga citta"
   },
   {
     "id": "aramg2",
     "order": 98,
     "vedana": "somanassa",
     "jati": "kusala",
-    "hetuvariant": "tihetuka"
+    "hetuvariant": "tihetuka",
+    "name": "vicārapītisukhekaggatāsahita dutiyajjhāna arahattamagga citta"
   },
   {
     "id": "aramg3",
     "order": 99,
     "vedana": "somanassa",
     "jati": "kusala",
-    "hetuvariant": "tihetuka"
+    "hetuvariant": "tihetuka",
+    "name": "pītisukhekaggatāsahita tatiyajjhāna arahattamagga citta"
   },
   {
     "id": "aramg4",
     "order": 100,
     "vedana": "somanassa",
     "jati": "kusala",
-    "hetuvariant": "tihetuka"
+    "hetuvariant": "tihetuka",
+    "name": "sukhekaggatāsahita catutthajjhāna arahattamagga citta"
   },
   {
     "id": "aramg5",
     "order": 101,
     "vedana": "upekkha",
     "jati": "kusala",
-    "hetuvariant": "tihetuka"
+    "hetuvariant": "tihetuka",
+    "name": "upekkhekaggatāsahita pañcamajjhāna arahattamagga citta"
   },
   {
     "id": "sotph1",
     "order": 102,
     "vedana": "somanassa",
     "jati": "vipaka",
-    "hetuvariant": "tihetuka"
+    "hetuvariant": "tihetuka",
+    "name": "vitakkavicārapītisukhekaggatāsahita paṭhamajjhāna sotāpattiphala citta"
   },
   {
     "id": "sotph2",
     "order": 103,
     "vedana": "somanassa",
     "jati": "vipaka",
-    "hetuvariant": "tihetuka"
+    "hetuvariant": "tihetuka",
+    "name": "vicārapītisukhekaggatāsahita dutiyajjhāna sotāpattiphala citta"
   },
   {
     "id": "sotph3",
     "order": 104,
     "vedana": "somanassa",
     "jati": "vipaka",
-    "hetuvariant": "tihetuka"
+    "hetuvariant": "tihetuka",
+    "name": "pītisukhekaggatāsahita tatiyajjhāna sotāpattiphala citta"
   },
   {
     "id": "sotph4",
     "order": 105,
     "vedana": "somanassa",
     "jati": "vipaka",
-    "hetuvariant": "tihetuka"
+    "hetuvariant": "tihetuka",
+    "name": "sukhekaggatāsahita catutthajjhāna sotāpattiphala citta"
   },
   {
     "id": "sotph5",
     "order": 106,
     "vedana": "upekkha",
     "jati": "vipaka",
-    "hetuvariant": "tihetuka"
+    "hetuvariant": "tihetuka",
+    "name": "upekkhekaggatāsahita pañcamajjhāna sotāpattiphala citta"
   },
   {
     "id": "sakph1",
     "order": 107,
     "vedana": "somanassa",
     "jati": "vipaka",
-    "hetuvariant": "tihetuka"
+    "hetuvariant": "tihetuka",
+    "name": "vitakkavicārapītisukhekaggatāsahita paṭhamajjhāna sakadāgāmiphala citta"
   },
   {
     "id": "sakph2",
     "order": 108,
     "vedana": "somanassa",
     "jati": "vipaka",
-    "hetuvariant": "tihetuka"
+    "hetuvariant": "tihetuka",
+    "name": "vicārapītisukhekaggatāsahita dutiyajjhāna sakadāgāmiphala citta"
   },
   {
     "id": "sakph3",
     "order": 109,
     "vedana": "somanassa",
     "jati": "vipaka",
-    "hetuvariant": "tihetuka"
+    "hetuvariant": "tihetuka",
+    "name": "pītisukhekaggatāsahita tatiyajjhāna sakadāgāmiphala citta"
   },
   {
     "id": "sakph4",
     "order": 110,
     "vedana": "somanassa",
     "jati": "vipaka",
-    "hetuvariant": "tihetuka"
+    "hetuvariant": "tihetuka",
+    "name": "sukhekaggatāsahita catutthajjhāna sakadāgāmiphala citta"
   },
   {
     "id": "sakph5",
     "order": 111,
     "vedana": "upekkha",
     "jati": "vipaka",
-    "hetuvariant": "tihetuka"
+    "hetuvariant": "tihetuka",
+    "name": "upekkhekaggatāsahita pañcamajjhāna sakadāgāmiphala citta"
   },
   {
     "id": "anaph1",
     "order": 112,
     "vedana": "somanassa",
     "jati": "vipaka",
-    "hetuvariant": "tihetuka"
+    "hetuvariant": "tihetuka",
+    "name": "vitakkavicārapītisukhekaggatāsahita paṭhamajjhāna anāgāmiphala citta"
   },
   {
     "id": "anaph2",
     "order": 113,
     "vedana": "somanassa",
     "jati": "vipaka",
-    "hetuvariant": "tihetuka"
+    "hetuvariant": "tihetuka",
+    "name": "vicārapītisukhekaggatāsahita dutiyajjhāna anāgāmiphala citta"
   },
   {
     "id": "anaph3",
     "order": 114,
     "vedana": "somanassa",
     "jati": "vipaka",
-    "hetuvariant": "tihetuka"
+    "hetuvariant": "tihetuka",
+    "name": "pītisukhekaggatāsahita tatiyajjhāna anāgāmiphala citta"
   },
   {
     "id": "anaph4",
     "order": 115,
     "vedana": "somanassa",
     "jati": "vipaka",
-    "hetuvariant": "tihetuka"
+    "hetuvariant": "tihetuka",
+    "name": "sukhekaggatāsahita catutthajjhāna anāgāmiphala citta"
   },
   {
     "id": "anaph5",
     "order": 116,
     "vedana": "upekkha",
     "jati": "vipaka",
-    "hetuvariant": "tihetuka"
+    "hetuvariant": "tihetuka",
+    "name": "upekkhekaggatāsahita pañcamajjhāna anāgāmiphala citta"
   },
   {
     "id": "araph1",
     "order": 117,
     "vedana": "somanassa",
     "jati": "vipaka",
-    "hetuvariant": "tihetuka"
+    "hetuvariant": "tihetuka",
+    "name": "vitakkavicārapītisukhekaggatāsahita paṭhamajjhāna arahattaphala citta"
   },
   {
     "id": "araph2",
     "order": 118,
     "vedana": "somanassa",
     "jati": "vipaka",
-    "hetuvariant": "tihetuka"
+    "hetuvariant": "tihetuka",
+    "name": "vicārapītisukhekaggatāsahita dutiyajjhāna arahattaphala citta"
   },
   {
     "id": "araph3",
     "order": 119,
     "vedana": "somanassa",
     "jati": "vipaka",
-    "hetuvariant": "tihetuka"
+    "hetuvariant": "tihetuka",
+    "name": "pītisukhekaggatāsahita tatiyajjhāna arahattaphala citta"
   },
   {
     "id": "araph4",
     "order": 120,
     "vedana": "somanassa",
     "jati": "vipaka",
-    "hetuvariant": "tihetuka"
+    "hetuvariant": "tihetuka",
+    "name": "sukhekaggatāsahita catutthajjhāna arahattaphala citta"
   },
   {
     "id": "araph5",
     "order": 121,
     "vedana": "upekkha",
     "jati": "vipaka",
-    "hetuvariant": "tihetuka"
+    "hetuvariant": "tihetuka",
+    "name": "upekkhekaggatāsahita pañcamajjhāna arahattaphala citta"
   }
 ]
