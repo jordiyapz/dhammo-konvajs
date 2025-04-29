@@ -1,6 +1,6 @@
 export * from "../model/interface";
 export {
   cittaIdList,
-  getCittaCombination,
+  getCittaAsociation,
   getCittaById,
 } from "../model/repository";

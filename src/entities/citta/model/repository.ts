@@ -1,7 +1,14 @@
 import cittaJson from "@/assets/citta.json";
 import cittaLayout from "@/assets/citta-layout.json";
+import associationJson from "@/assets/citta-association.json";
 import combinationJson from "@/assets/citta-combination.json";
-import { Citta, CittaID, CittaLayoutRow, CombinationRow } from "./interface";
+import {
+  Citta,
+  CittaID,
+  CittaLayoutRow,
+  AssociationRow,
+  CombinationRow,
+} from "./interface";
 
 export const cittaMap = new Map<CittaID, Citta>(
   cittaJson.map((citta) => [
@@ -21,8 +28,14 @@ export const cittaLayoutGroups = Array.from({ length: maxGroup }, (_, i) =>
     (citta) => citta.group === i + 1
   )
 );
-export const combinationTable = combinationJson as CombinationRow[];
 
-export const getCittaCombination = (id: CittaID) => {
-  return combinationTable.find((row) => row.id === id);
+const associationTable = associationJson as AssociationRow[];
+
+export const getCittaAsociation = (id: CittaID) => {
+  return associationTable.find((row) => row.id === id);
 };
+
+const combinationTable = combinationJson as CombinationRow[];
+export const combinationMap = new Map(
+  combinationTable.map((val) => [val.id, val.cetasika ?? []])
+);

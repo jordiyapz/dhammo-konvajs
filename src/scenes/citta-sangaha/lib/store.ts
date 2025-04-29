@@ -1,7 +1,7 @@
 import { createStore } from "zustand/vanilla";
 import { subscribeWithSelector } from "zustand/middleware";
 
-import { cittaIdList, cittaMap, getCittaCombination } from "@/entities/citta";
+import { cittaIdList, cittaMap, getCittaAsociation } from "@/entities/citta";
 import { cetasikaAssociationMap, cetasikaIdList } from "@/entities/cetasika";
 import { CittaSangahaState, CittaSangahaValues } from "./interface";
 
@@ -22,7 +22,7 @@ const store = createStore<CittaSangahaState>()(
       set(() => {
         if (cittaId === null) return { ...initialState, selectedCitta: null };
 
-        const combination = getCittaCombination(cittaId);
+        const combination = getCittaAsociation(cittaId);
         if (!combination) return { ...initialState, selectedCitta: cittaId };
 
         const cetasikaList = combination.mustHave;

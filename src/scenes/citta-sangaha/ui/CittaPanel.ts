@@ -2,7 +2,7 @@ import { palette } from "@/shared/palette";
 import Konva from "konva";
 import CittaSolarSystem from "./CittaSolarSystem";
 import Constants from "@/config/constant";
-import { cittaMap, getCittaCombination } from "@/entities/citta";
+import { cittaMap, getCittaAsociation } from "@/entities/citta";
 import store from "../lib/store";
 import CloseButton from "@/shared/ui/CloseButton";
 import { hideTooltip, showTooltip } from "@/shared/tooltip";
@@ -91,7 +91,7 @@ class CittaPanel extends Konva.Group {
           this._solarSystem.setCitta(citta.id);
           this.show();
 
-          const combination = getCittaCombination(state.selectedCitta);
+          const combination = getCittaAsociation(state.selectedCitta);
           if (!combination) return;
           this._solarSystem.orbit.setSatellites({
             must: combination.mustHave,
