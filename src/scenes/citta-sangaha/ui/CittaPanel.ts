@@ -42,7 +42,7 @@ class CittaPanel extends Konva.Group {
     });
 
     const title = new Konva.Text({
-      text: "Hellow, World, this is quite long, mann, lorem ipsum dolor sit amet culametan met met culametan met met",
+      text: "Citta name",
       y: height / 2 + 60,
       width: width - 80,
       fontSize: 20,
@@ -56,7 +56,7 @@ class CittaPanel extends Konva.Group {
     const closeBtn = new CloseButton({ y: 20 });
     closeBtn.x(width - closeBtn.width() - 20);
 
-    this.add(this._background, this._solarSystem, title, closeBtn);
+    this.add(this._background, title, this._solarSystem, closeBtn);
 
     const titleTween = new Konva.Tween({ node: this._title, opacity: 1 });
     this._tweens = { title: titleTween };
