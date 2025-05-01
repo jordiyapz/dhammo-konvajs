@@ -56,6 +56,17 @@ class CittaPanel extends Konva.Group {
     const closeBtn = new CloseButton({ y: 20 });
     closeBtn.x(width - closeBtn.width() - 20);
 
+    // TODO: Add combination button
+    // const showCombinationBtn = new Konva.Text({
+    //   text: "Show combination",
+    //   y: height - 100,
+    //   fontSize: 16,
+    //   fill: "white",
+    //   align: "center",
+    //   opacity: .8,
+    // });
+    // showCombinationBtn.x((width - showCombinationBtn.width()) / 2);
+
     this.add(this._background, title, this._solarSystem, closeBtn);
 
     const titleTween = new Konva.Tween({ node: this._title, opacity: 1 });
