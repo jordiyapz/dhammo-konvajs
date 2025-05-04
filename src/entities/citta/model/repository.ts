@@ -2,6 +2,7 @@ import cittaJson from "@/assets/citta.json";
 import cittaLayout from "@/assets/citta-layout.json";
 import associationJson from "@/assets/citta-association.json";
 import combinationJson from "@/assets/citta-combination.json";
+
 import {
   Citta,
   CittaID,
@@ -36,6 +37,15 @@ export const getCittaAsociation = (id: CittaID) => {
 };
 
 const combinationTable = combinationJson as CombinationRow[];
-export const combinationMap = new Map(
-  combinationTable.map((val) => [val.id, val.cetasika ?? []])
-);
+
+/**
+ * Given a citta id, returns an list of cetasika combinations that it can associate with.
+ * If no combination is found, returns null.
+ * @param id The id of the citta to look up.
+ * @returns An array of cetasika that the citta can associate with, or null.
+ */
+export const getCittaCombination = (id: CittaID) => {
+  const rows = combinationTable.filter((row) => row.id === id);
+  if (rows.length === 0) return null;
+  return rows.map((row) => row.cetasika ?? []);
+};

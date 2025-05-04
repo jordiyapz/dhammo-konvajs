@@ -7,13 +7,14 @@ export interface CittaSangahaValues {
   cittaList: CittaID[];
   cetasikaList: CetasikaID[];
   sometimeCetasikaList: CetasikaID[];
-  activeCombination: CetasikaID[];
+  activeCombinationIndex: number | null;
   vedana: UVedana;
 }
 
 export type CittaSangahaAction = {
   selectCitta(cittaId: CittaID | null): void;
   selectCetasika(cetasikaId: CetasikaID | null): void;
+  setCombination(index: number | null): void;
 };
 
 export type CittaSangahaState = CittaSangahaValues & CittaSangahaAction;

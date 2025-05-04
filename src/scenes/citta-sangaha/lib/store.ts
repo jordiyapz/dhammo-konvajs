@@ -11,7 +11,7 @@ const initialState: CittaSangahaValues = {
   cittaList: cittaIdList,
   cetasikaList: cetasikaIdList,
   sometimeCetasikaList: [],
-  activeCombination: [],
+  activeCombinationIndex: null,
   vedana: "upekkha",
 };
 
@@ -45,6 +45,7 @@ const store = createStore<CittaSangahaState>()(
           cittaList: cetasikaAssociationMap.get(cetasikaId) ?? [],
         };
       }),
+    setCombination: (index) => set(() => ({ activeCombinationIndex: index })),
   }))
 );
 

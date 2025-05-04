@@ -2,7 +2,11 @@ import { palette } from "@/shared/palette";
 import Konva from "konva";
 import CittaSolarSystem from "./CittaSolarSystem";
 import Constants from "@/config/constant";
-import { cittaMap, getCittaAsociation } from "@/entities/citta";
+import {
+  cittaMap,
+  getCittaAsociation,
+  getCittaCombination,
+} from "@/entities/citta";
 import store from "../lib/store";
 import CloseButton from "@/shared/ui/CloseButton";
 import { hideTooltip, showTooltip } from "@/shared/tooltip";
@@ -63,11 +67,18 @@ class CittaPanel extends Konva.Group {
       fontSize: 16,
       fill: "white",
       align: "center",
-      opacity: .8,
+      opacity: 0.8,
     });
+    this.width(width);
     showCombinationBtn.x((width - showCombinationBtn.width()) / 2);
 
-    this.add(this._background, title, this._solarSystem, showCombinationBtn, closeBtn);
+    this.add(
+      this._background,
+      title,
+      this._solarSystem,
+      showCombinationBtn,
+      closeBtn
+    );
 
     const titleTween = new Konva.Tween({ node: this._title, opacity: 1 });
     this._tweens = { title: titleTween };
@@ -90,10 +101,30 @@ class CittaPanel extends Konva.Group {
       this._tweens.title.play();
     });
 
+    showCombinationBtn.on("pointerclick", () => {
+      const { selectedCitta, activeCombinationIndex, setCombination } =
+        store.getState();
+      if (!selectedCitta) return;
+
+      if (activeCombinationIndex !== null) {
+        setCombination(null);
+        return;
+      }
+
+      const combinations = getCittaCombination(selectedCitta);
+      if (combinations) setCombination(0);
+    });
+
     store.subscribe(
-      (state) => ({ selectedCitta: state.selectedCitta, vedana: state.vedana }),
-      (state) => {
-        if (state.selectedCitta !== null) {
+      ({ selectedCitta, vedana }) => ({
+        selectedCitta,
+        vedana,
+      }),
+      (state, prev) => {
+        if (
+          state.selectedCitta !== prev.selectedCitta &&
+          state.selectedCitta !== null
+        ) {
           const citta = cittaMap.get(state.selectedCitta);
           if (!citta)
             throw new Error(`Citta ${state.selectedCitta} is not defined`);
@@ -176,6 +207,19 @@ class CittaPanel extends Konva.Group {
       }
     );
 
+    store.subscribe(
+      (state) => state,
+      (state, prev) => {
+        if (state.activeCombinationIndex === prev.activeCombinationIndex)
+          return;
+        if (state.activeCombinationIndex !== null) {
+          showCombinationBtn.setText("Don't show combination");
+        } else {
+          showCombinationBtn.setText("Show combination");
+        }
+        showCombinationBtn.x(this.width() / 2 - showCombinationBtn.width() / 2);
+      }
+    );
     // TESTS
     // setTimeout(() => store.getState().selectCitta("dosa1"), 500);
   }
