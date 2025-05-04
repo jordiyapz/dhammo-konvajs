@@ -7,6 +7,7 @@ import store from "../lib/store";
 import CloseButton from "@/shared/ui/CloseButton";
 import { hideTooltip, showTooltip } from "@/shared/tooltip";
 import { cetasikaMap } from "@/entities/cetasika";
+import TextButton from "@/shared/ui/TextButton";
 
 class CittaPanel extends Konva.Group {
   expandTimer?: NodeJS.Timeout;
@@ -56,18 +57,17 @@ class CittaPanel extends Konva.Group {
     const closeBtn = new CloseButton({ y: 20 });
     closeBtn.x(width - closeBtn.width() - 20);
 
-    // TODO: Add combination button
-    // const showCombinationBtn = new Konva.Text({
-    //   text: "Show combination",
-    //   y: height - 100,
-    //   fontSize: 16,
-    //   fill: "white",
-    //   align: "center",
-    //   opacity: .8,
-    // });
-    // showCombinationBtn.x((width - showCombinationBtn.width()) / 2);
+    const showCombinationBtn = new TextButton({
+      text: "Show combination",
+      y: height - 100,
+      fontSize: 16,
+      fill: "white",
+      align: "center",
+      opacity: .8,
+    });
+    showCombinationBtn.x((width - showCombinationBtn.width()) / 2);
 
-    this.add(this._background, title, this._solarSystem, closeBtn);
+    this.add(this._background, title, this._solarSystem, showCombinationBtn, closeBtn);
 
     const titleTween = new Konva.Tween({ node: this._title, opacity: 1 });
     this._tweens = { title: titleTween };
@@ -177,7 +177,7 @@ class CittaPanel extends Konva.Group {
     );
 
     // TESTS
-    // setTimeout(() => store.getState().selectCitta("dosa1"), 500);
+    setTimeout(() => store.getState().selectCitta("dosa1"), 500);
   }
 
   show() {
