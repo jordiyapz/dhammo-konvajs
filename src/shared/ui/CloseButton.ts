@@ -1,5 +1,4 @@
 import Konva from "konva";
-import { setCursorStyle } from "../utils";
 import { palette } from "../palette";
 import ButtonBase from "./ButtonBase";
 
