@@ -1,16 +1,18 @@
 import Konva from "konva";
 import { palette } from "../palette";
-import ButtonBase from "./ButtonBase";
+import ContainerButton, { ContainerButtonProps } from "./ContainerButton";
 
 const Defaults = { size: 30 };
 
-class CloseButton extends ButtonBase {
-  constructor(options: Konva.GroupConfig) {
+class CloseButton extends ContainerButton {
+  constructor(options: Omit<ContainerButtonProps, "child">) {
     super({
       name: "close-button",
       ...options,
       width: Defaults.size,
       height: Defaults.size,
+      paddingX: 0,
+      paddingY: 0,
     });
 
     this._baseNode.width(Defaults.size);
@@ -29,7 +31,13 @@ class CloseButton extends ButtonBase {
       lineCap: "round",
     });
 
-    super.add(line1, line2);
+    const group = new Konva.Group({
+      width: Defaults.size,
+      height: Defaults.size,
+    });
+    group.add(line1, line2);
+
+    this.setChild(group);
   }
 }
 

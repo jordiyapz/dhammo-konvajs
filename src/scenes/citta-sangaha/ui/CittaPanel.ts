@@ -12,6 +12,7 @@ import CloseButton from "@/shared/ui/CloseButton";
 import { hideTooltip, showTooltip } from "@/shared/tooltip";
 import { cetasikaMap } from "@/entities/cetasika";
 import TextButton from "@/shared/ui/TextButton";
+import ArrowButton from "./ArrowButton";
 
 class CittaPanel extends Konva.Group {
   expandTimer?: NodeJS.Timeout;
@@ -23,6 +24,8 @@ class CittaPanel extends Konva.Group {
     solarSystem: CittaSolarSystem;
     title: Konva.Text;
     closeBtn: CloseButton;
+    leftBtn: ArrowButton;
+    rightBtn: ArrowButton;
     showCombinationBtn: TextButton;
   };
 
@@ -76,23 +79,42 @@ class CittaPanel extends Konva.Group {
     this.width(width);
     showCombinationBtn.x((width - showCombinationBtn.width()) / 2);
 
+    const leftBtn = new ArrowButton({ paddingY: 30, direction: "left" });
+    leftBtn.x(20);
+    leftBtn.y(height / 2 - leftBtn.height() / 2);
+    leftBtn.hide();
+    const rightBtn = new ArrowButton({ paddingY: 30, direction: "right" });
+    rightBtn.x(width - rightBtn.width() - 20);
+    rightBtn.y(height / 2 - rightBtn.height() / 2);
+    rightBtn.hide();
+
     this._nodes = {
       backdrop,
       solarSystem,
       title,
+      leftBtn,
+      rightBtn,
       closeBtn,
       showCombinationBtn,
     };
 
-    this.add(backdrop, title, solarSystem, showCombinationBtn, closeBtn);
+    this.add(
+      backdrop,
+      title,
+      solarSystem,
+      showCombinationBtn,
+      leftBtn,
+      rightBtn,
+      closeBtn
+    );
 
     const titleTween = new Konva.Tween({ node: title, opacity: 1 });
     this._tweens = { title: titleTween };
 
     this.listen();
-    
+
     // TESTS
-    // setTimeout(() => store.getState().selectCitta("dosa1"), 500);
+    setTimeout(() => store.getState().selectCitta("dosa1"), 500);
   }
 
   listen() {
@@ -103,6 +125,24 @@ class CittaPanel extends Konva.Group {
     };
     this._nodes.closeBtn.on("pointerclick", handleClose);
     this._nodes.backdrop.on("pointerclick", handleClose);
+
+    this._nodes.leftBtn.on("pointerclick", () => {
+      const { activeCombinationIndex, setCombination } = store.getState();
+      if (activeCombinationIndex !== null) {
+        setCombination(Math.max(activeCombinationIndex - 1, 0));
+      }
+    });
+    this._nodes.rightBtn.on("pointerclick", () => {
+      const { activeCombinationIndex, setCombination, selectedCitta } =
+        store.getState();
+      if (activeCombinationIndex !== null && selectedCitta) {
+        const combinations = getCittaCombination(selectedCitta);
+        if (!combinations) return;
+        setCombination(
+          Math.min(activeCombinationIndex + 1, combinations.length - 1)
+        );
+      }
+    });
 
     this._nodes.solarSystem.core.on("pointerout", () => hideTooltip());
     this._nodes.solarSystem.onExpand(() => {
@@ -214,19 +254,29 @@ class CittaPanel extends Konva.Group {
 
           this._nodes.solarSystem.core.on("pointerover", renderCittaTooltip);
           this._nodes.solarSystem.onClickCore(() => renderCittaTooltip());
+
+          const combinations = getCittaCombination(state.selectedCitta);
+          if (combinations) this._nodes.showCombinationBtn.show();
+          else this._nodes.showCombinationBtn.hide();
         }
       }
     );
 
     store.subscribe(
-      (state) => state,
+      ({ activeCombinationIndex }) => ({ activeCombinationIndex }),
       (state, prev) => {
         if (state.activeCombinationIndex === prev.activeCombinationIndex)
           return;
 
-        if (state.activeCombinationIndex !== null)
+        if (state.activeCombinationIndex !== null) {
           this._nodes.showCombinationBtn.setText("Don't show combination");
-        else this._nodes.showCombinationBtn.setText("Show combination");
+          this._nodes.leftBtn.show();
+          this._nodes.rightBtn.show();
+        } else {
+          this._nodes.showCombinationBtn.setText("Show combination");
+          this._nodes.leftBtn.hide();
+          this._nodes.rightBtn.hide();
+        }
 
         this._nodes.showCombinationBtn.x(
           this.width() / 2 - this._nodes.showCombinationBtn.width() / 2
