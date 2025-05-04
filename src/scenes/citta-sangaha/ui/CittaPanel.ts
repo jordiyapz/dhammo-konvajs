@@ -177,7 +177,7 @@ class CittaPanel extends Konva.Group {
     );
 
     // TESTS
-    setTimeout(() => store.getState().selectCitta("dosa1"), 500);
+    // setTimeout(() => store.getState().selectCitta("dosa1"), 500);
   }
 
   show() {
