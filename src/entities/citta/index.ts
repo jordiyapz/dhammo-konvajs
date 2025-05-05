@@ -4,7 +4,8 @@ export {
   cittaMap,
   cittaLayoutGroups,
   getCittaById,
-  getCittaCombination,
+  getCittaAsociation,
+  getCittaCombination
 } from "./model/repository";
 
 export { cittaFactory, default as CittaFactory } from "./model/CittaFactory";

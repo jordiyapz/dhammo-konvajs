@@ -160,9 +160,13 @@ export interface CittaLayoutRow {
   x: number;
   y: number;
 }
-export interface CombinationRow {
+export interface AssociationRow {
   id: CittaID;
   mustHave: CetasikaID[];
   sometime: CetasikaID[];
-  variations?: CetasikaID[][];
+}
+
+export interface CombinationRow {
+  id: CittaID;
+  cetasika?: CetasikaID[];
 }

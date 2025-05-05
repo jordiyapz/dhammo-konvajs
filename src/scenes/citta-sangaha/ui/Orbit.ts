@@ -107,6 +107,7 @@ class Orbit extends Konva.Group {
     >;
   }) {
     const { must, sometime, vedana } = args;
+    const isExpanded = this.revolveAnimation.isRunning();
 
     this.planets.forEach((p) => {
       p.node.hide();
@@ -133,6 +134,8 @@ class Orbit extends Konva.Group {
       const node = this.planetPool[i];
       node.visible(true);
       CetasikaFactory.modifyCetasika(node, id, vedana, isAniyata);
+      node.x(0);
+      node.y(0);
       const tween = new Konva.Tween({
         node,
         x: expandedPositions[i].x,
@@ -142,6 +145,7 @@ class Orbit extends Konva.Group {
         radius: this.planetRadius,
         easing: Defaults.expandEasing,
       });
+      if (isExpanded) tween.play();
       for (const [event, fn] of args.nodeEvents ?? []) {
         node.on(event, (e) => fn(id, e));
       }

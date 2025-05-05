@@ -2,19 +2,34 @@ import { palette } from "@/shared/palette";
 import Konva from "konva";
 import CittaSolarSystem from "./CittaSolarSystem";
 import Constants from "@/config/constant";
-import { cittaMap, getCittaCombination } from "@/entities/citta";
+import {
+  AssociationRow,
+  cittaMap,
+  getCittaCombination,
+  UVedana,
+} from "@/entities/citta";
 import store from "../lib/store";
 import CloseButton from "@/shared/ui/CloseButton";
 import { hideTooltip, showTooltip } from "@/shared/tooltip";
 import { cetasikaMap } from "@/entities/cetasika";
+import TextButton from "@/shared/ui/TextButton";
+import ArrowButton from "./ArrowButton";
 
 class CittaPanel extends Konva.Group {
   expandTimer?: NodeJS.Timeout;
 
-  _background: Konva.Rect;
-  _solarSystem: CittaSolarSystem;
-  _title: Konva.Text;
   _tweens: { title: Konva.Tween };
+
+  _nodes: {
+    backdrop: Konva.Rect;
+    solarSystem: CittaSolarSystem;
+    title: Konva.Text;
+    subtitle: Konva.Text;
+    closeBtn: CloseButton;
+    leftBtn: ArrowButton;
+    rightBtn: ArrowButton;
+    showCombinationBtn: TextButton;
+  };
 
   _onClose: (e?: Konva.KonvaEventObject<MouseEvent>) => void = () => {};
 
@@ -28,14 +43,14 @@ class CittaPanel extends Konva.Group {
     super({ opacity: 0, ...rest });
     super.hide();
 
-    this._background = new Konva.Rect({
+    const backdrop = new Konva.Rect({
       width,
       height,
-      opacity: 0.7,
+      opacity: 0.9,
       fill: palette.grays["950"],
     });
 
-    this._solarSystem = new CittaSolarSystem({
+    const solarSystem = new CittaSolarSystem({
       x: width / 2,
       y: height / 2,
       orbitOptions: { angularVelocity: 2, planetRadius: 10, minimalRadius: 50 },
@@ -51,107 +66,152 @@ class CittaPanel extends Konva.Group {
       opacity: 0,
     });
     title.x((width - title.width()) / 2);
-    this._title = title;
 
     const closeBtn = new CloseButton({ y: 20 });
     closeBtn.x(width - closeBtn.width() - 20);
 
-    this.add(this._background, title, this._solarSystem, closeBtn);
+    const showCombinationBtn = new TextButton({
+      text: "Show combination",
+      y: height - 100,
+      fontSize: 16,
+      fill: "white",
+      align: "center",
+      opacity: 0.8,
+    });
+    this.width(width);
+    showCombinationBtn.x((width - showCombinationBtn.width()) / 2);
 
-    const titleTween = new Konva.Tween({ node: this._title, opacity: 1 });
+    const subtitle = new Konva.Text({
+      text: "Combination #0",
+      y: showCombinationBtn.y() + 40,
+      width: width - 80,
+      fontSize: 16,
+      fill: "white",
+      align: "center",
+    });
+    subtitle.x((width - subtitle.width()) / 2);
+    subtitle.hide();
+
+    const leftBtn = new ArrowButton({ paddingY: 30, direction: "left" });
+    leftBtn.x(20);
+    leftBtn.y(height / 2 - leftBtn.height() / 2);
+    leftBtn.hide();
+    const rightBtn = new ArrowButton({ paddingY: 30, direction: "right" });
+    rightBtn.x(width - rightBtn.width() - 20);
+    rightBtn.y(height / 2 - rightBtn.height() / 2);
+    rightBtn.hide();
+
+    this._nodes = {
+      backdrop,
+      solarSystem,
+      title,
+      subtitle,
+      leftBtn,
+      rightBtn,
+      closeBtn,
+      showCombinationBtn,
+    };
+
+    this.add(
+      backdrop,
+      title,
+      subtitle,
+      solarSystem,
+      showCombinationBtn,
+      leftBtn,
+      rightBtn,
+      closeBtn
+    );
+
+    const titleTween = new Konva.Tween({ node: title, opacity: 1 });
     this._tweens = { title: titleTween };
 
-    // EVENT HANDLERS
+    this.listen();
 
+    // TESTS
+    // setTimeout(() => store.getState().selectCitta("dosa1"), 500);
+  }
+
+  listen() {
     const handleClose = (e?: Konva.KonvaEventObject<MouseEvent>) => {
       clearTimeout(this.expandTimer);
       this.hide();
       this._onClose(e);
     };
-    closeBtn.on("pointerclick", handleClose);
-    this._background.on("pointerclick", handleClose);
+    this._nodes.closeBtn.on("pointerclick", handleClose);
+    this._nodes.backdrop.on("pointerclick", handleClose);
 
-    this._solarSystem.core.on("pointerout", () => hideTooltip());
-    this._solarSystem.onExpand(() => {
+    this._nodes.leftBtn.on("pointerclick", () => {
+      const { activeCombinationIndex, setCombination } = store.getState();
+      if (activeCombinationIndex !== null && activeCombinationIndex > 0) {
+        setCombination(activeCombinationIndex - 1);
+      }
+    });
+    this._nodes.rightBtn.on("pointerclick", () => {
+      const { activeCombinationIndex, setCombination, selectedCitta } =
+        store.getState();
+      if (activeCombinationIndex !== null && selectedCitta) {
+        const combinations = getCittaCombination(selectedCitta);
+        if (!combinations) return;
+        if (activeCombinationIndex + 1 >= combinations.length) return;
+        setCombination(activeCombinationIndex + 1);
+      }
+    });
+
+    this._nodes.solarSystem.core.on("pointerout", () => hideTooltip());
+    this._nodes.solarSystem.onExpand(() => {
       this._tweens.title.reverse();
     });
-    this._solarSystem.onShrink(() => {
+    this._nodes.solarSystem.onShrink(() => {
       this._tweens.title.play();
     });
 
+    this._nodes.showCombinationBtn.on("pointerclick", () => {
+      const { selectedCitta, activeCombinationIndex, setCombination } =
+        store.getState();
+      if (!selectedCitta) return;
+
+      if (activeCombinationIndex !== null) {
+        setCombination(null);
+        return;
+      }
+
+      const combinations = getCittaCombination(selectedCitta);
+      if (combinations) setCombination(0);
+    });
+
+    // Listen for changes in the selected citta
     store.subscribe(
-      (state) => ({ selectedCitta: state.selectedCitta, vedana: state.vedana }),
-      (state) => {
-        if (state.selectedCitta !== null) {
+      ({ selectedCitta, vedana }) => ({
+        selectedCitta,
+        vedana,
+      }),
+      (state, prev) => {
+        if (
+          state.selectedCitta !== prev.selectedCitta &&
+          state.selectedCitta !== null
+        ) {
           const citta = cittaMap.get(state.selectedCitta);
           if (!citta)
             throw new Error(`Citta ${state.selectedCitta} is not defined`);
 
-          this._title.setText(citta.name ?? citta.id);
-          this._solarSystem.setCitta(citta.id);
+          this._nodes.title.setText(citta.name ?? citta.id);
+          this._nodes.solarSystem.setCitta(citta.id);
           this.show();
-
-          const combination = getCittaCombination(state.selectedCitta);
-          if (!combination) return;
-          this._solarSystem.orbit.setSatellites({
-            must: combination.mustHave,
-            sometime: combination.sometime,
-            vedana: state.vedana,
-            nodeEvents: [
-              [
-                "pointerover",
-                (id, e) => {
-                  this._solarSystem.orbit.revolveAnimation.stop();
-                  const stage = e.target.getStage();
-                  const orbit = this._solarSystem.orbit;
-                  if (stage) {
-                    const satellitePosition = e.currentTarget.getPosition();
-                    const orbitPos = orbit.getAbsolutePosition(stage);
-                    const orbitRotation =
-                      (orbit.getAbsoluteRotation() * Math.PI) / 180;
-                    const satelliteAngle =
-                      Math.atan(satellitePosition.y / satellitePosition.x) +
-                      (satellitePosition.x >= 0 ? 0 : Math.PI);
-
-                    const targetAngle = satelliteAngle + orbitRotation;
-                    const pointer = {
-                      x: orbitPos.x + orbit.orbitRadius * Math.cos(targetAngle),
-                      y:
-                        orbitPos.y +
-                        orbit.orbitRadius * Math.sin(targetAngle) +
-                        orbit.planetRadius,
-                    };
-
-                    showTooltip({
-                      position: pointer,
-                      text: cetasikaMap.get(id)?.name,
-                    });
-                  }
-                },
-              ],
-              [
-                "pointerout",
-                () => {
-                  hideTooltip();
-                  this._solarSystem.orbit.revolveAnimation.start();
-                },
-              ],
-            ],
-          });
 
           const renderCittaTooltip = () => {
             const thisPos = this.getPosition();
-            const solarPos = this._solarSystem.getPosition();
+            const solarPos = this._nodes.solarSystem.getPosition();
             const position = {
               x: thisPos.x + solarPos.x,
               y: thisPos.y + solarPos.y,
             };
-            if (this._solarSystem.isExpanded) {
-              position.y += this._solarSystem.core.shrunkRadius;
+            if (this._nodes.solarSystem.isExpanded) {
+              position.y += this._nodes.solarSystem.core.shrunkRadius;
               showTooltip({ position, text: "Citta" });
             } else {
               hideTooltip();
-              // position.y += this._solarSystem.core.initialRadius;
+              // position.y += this._nodes.solarSystem.core.initialRadius;
               // const text =
               //   cittaMap.get(state.selectedCitta!)?.name ??
               //   state.selectedCitta!;
@@ -159,21 +219,88 @@ class CittaPanel extends Konva.Group {
             }
           };
 
-          this._solarSystem.core.on("pointerover", renderCittaTooltip);
-          this._solarSystem.onClickCore(() => renderCittaTooltip());
+          this._nodes.solarSystem.core.on("pointerover", renderCittaTooltip);
+          this._nodes.solarSystem.onClickCore(() => renderCittaTooltip());
+
+          const combinations = getCittaCombination(state.selectedCitta);
+          if (combinations) this._nodes.showCombinationBtn.show();
+          else this._nodes.showCombinationBtn.hide();
         }
       }
     );
 
-    // TESTS
-    // setTimeout(() => store.getState().selectCitta("dosa1"), 500);
+    store.subscribe(
+      (s) => s,
+      (state, prev) => {
+        if (
+          state.cetasikaList !== prev.cetasikaList &&
+          state.cetasikaList.length &&
+          state.cetasikaList.length <= 38 // Because orbit pool is limited
+        ) {
+          this.updateSolarSystemSatellite(
+            {
+              mustHave: state.cetasikaList,
+              sometime: state.sometimeCetasikaList,
+            },
+            state.vedana
+          );
+        }
+      }
+    );
+
+    // Listen for changes in active combination
+    store.subscribe(
+      ({ activeCombinationIndex, selectedCitta, vedana }) => ({
+        activeCombinationIndex,
+        selectedCitta,
+        vedana,
+      }),
+      (state, prev) => {
+        if (state.activeCombinationIndex === prev.activeCombinationIndex)
+          return;
+
+        const combinations = getCittaCombination(state.selectedCitta!) ?? [];
+
+        if (state.activeCombinationIndex !== null) {
+          this._nodes.showCombinationBtn.setText("Don't show combination");
+          this._nodes.leftBtn.show();
+          this._nodes.rightBtn.show();
+          this._nodes.subtitle.show();
+          this._nodes.subtitle.text(
+            `Combination #${state.activeCombinationIndex + 1} of ${
+              combinations.length
+            }`
+          );
+          this._nodes.subtitle.x(
+            this.width() / 2 - this._nodes.subtitle.width() / 2
+          );
+
+          if (combinations) {
+            if (state.activeCombinationIndex === 0)
+              this._nodes.leftBtn.disabled = true;
+            else this._nodes.leftBtn.disabled = false;
+            if (state.activeCombinationIndex === combinations.length - 1)
+              this._nodes.rightBtn.disabled = true;
+            else this._nodes.rightBtn.disabled = false;
+          }
+        } else {
+          this._nodes.showCombinationBtn.setText("Show combination");
+          this._nodes.leftBtn.hide();
+          this._nodes.rightBtn.hide();
+          this._nodes.subtitle.hide();
+        }
+        this._nodes.showCombinationBtn.x(
+          this.width() / 2 - this._nodes.showCombinationBtn.width() / 2
+        );
+      }
+    );
   }
 
   show() {
     super.show();
     this.to({ opacity: 1 });
     this.expandTimer = setTimeout(() => {
-      this._solarSystem.expand();
+      this._nodes.solarSystem.expand();
     }, 800);
     return this;
   }
@@ -183,7 +310,7 @@ class CittaPanel extends Konva.Group {
       opacity: 0,
       onFinish: () => {
         super.hide();
-        this._solarSystem.shrink({ skipAnimation: true });
+        this._nodes.solarSystem.shrink({ skipAnimation: true });
       },
     });
     return this;
@@ -191,6 +318,57 @@ class CittaPanel extends Konva.Group {
 
   onClose(callback: (e?: Konva.KonvaEventObject<MouseEvent>) => void) {
     this._onClose = callback;
+  }
+
+  updateSolarSystemSatellite(
+    association: Pick<AssociationRow, "mustHave" | "sometime">,
+    vedana: UVedana
+  ) {
+    this._nodes.solarSystem.orbit.setSatellites({
+      must: association.mustHave,
+      sometime: association.sometime,
+      vedana,
+      nodeEvents: [
+        [
+          "pointerover",
+          (id, e) => {
+            this._nodes.solarSystem.orbit.revolveAnimation.stop();
+            const stage = e.target.getStage();
+            const orbit = this._nodes.solarSystem.orbit;
+            if (stage) {
+              const satellitePosition = e.currentTarget.getPosition();
+              const orbitPos = orbit.getAbsolutePosition(stage);
+              const orbitRotation =
+                (orbit.getAbsoluteRotation() * Math.PI) / 180;
+              const satelliteAngle =
+                Math.atan(satellitePosition.y / satellitePosition.x) +
+                (satellitePosition.x >= 0 ? 0 : Math.PI);
+
+              const targetAngle = satelliteAngle + orbitRotation;
+              const pointer = {
+                x: orbitPos.x + orbit.orbitRadius * Math.cos(targetAngle),
+                y:
+                  orbitPos.y +
+                  orbit.orbitRadius * Math.sin(targetAngle) +
+                  orbit.planetRadius,
+              };
+
+              showTooltip({
+                position: pointer,
+                text: cetasikaMap.get(id)?.name,
+              });
+            }
+          },
+        ],
+        [
+          "pointerout",
+          () => {
+            hideTooltip();
+            this._nodes.solarSystem.orbit.revolveAnimation.start();
+          },
+        ],
+      ],
+    });
   }
 }
 

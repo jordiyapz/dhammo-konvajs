@@ -1,7 +1,12 @@
 import { createStore } from "zustand/vanilla";
 import { subscribeWithSelector } from "zustand/middleware";
 
-import { cittaIdList, cittaMap, getCittaCombination } from "@/entities/citta";
+import {
+  cittaIdList,
+  cittaMap,
+  getCittaAsociation,
+  getCittaCombination,
+} from "@/entities/citta";
 import { cetasikaAssociationMap, cetasikaIdList } from "@/entities/cetasika";
 import { CittaSangahaState, CittaSangahaValues } from "./interface";
 
@@ -11,7 +16,7 @@ const initialState: CittaSangahaValues = {
   cittaList: cittaIdList,
   cetasikaList: cetasikaIdList,
   sometimeCetasikaList: [],
-  activeCombination: [],
+  activeCombinationIndex: null,
   vedana: "upekkha",
 };
 
@@ -22,11 +27,11 @@ const store = createStore<CittaSangahaState>()(
       set(() => {
         if (cittaId === null) return { ...initialState, selectedCitta: null };
 
-        const combination = getCittaCombination(cittaId);
-        if (!combination) return { ...initialState, selectedCitta: cittaId };
+        const association = getCittaAsociation(cittaId);
+        if (!association) return { ...initialState, selectedCitta: cittaId };
 
-        const cetasikaList = combination.mustHave;
-        const sometimeCetasikaList = combination.sometime;
+        const cetasikaList = association.mustHave;
+        const sometimeCetasikaList = association.sometime;
         return {
           ...initialState,
           selectedCitta: cittaId,
@@ -43,6 +48,27 @@ const store = createStore<CittaSangahaState>()(
         return {
           selectedCetasika: cetasikaId,
           cittaList: cetasikaAssociationMap.get(cetasikaId) ?? [],
+        };
+      }),
+    setCombination: (index) =>
+      set((s) => {
+        if (s.selectedCitta === null) return { activeCombinationIndex: null };
+
+        const association = getCittaAsociation(s.selectedCitta);
+        const combinations = getCittaCombination(s.selectedCitta);
+        if (!association || !combinations)
+          return { activeCombinationIndex: null };
+
+        const sometimeCetasikaList = index === null ? association.sometime : [];
+        const cetasikaList =
+          index === null
+            ? association.mustHave
+            : [...association.mustHave, ...combinations[index]];
+
+        return {
+          activeCombinationIndex: index,
+          cetasikaList,
+          sometimeCetasikaList,
         };
       }),
   }))

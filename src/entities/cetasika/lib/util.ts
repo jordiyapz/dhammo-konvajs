@@ -1,7 +1,7 @@
 import {
   CittaID,
   cittaIdList,
-  getCittaCombination,
+  getCittaAsociation,
 } from "@/entities/citta/@x/cetasika";
 import { CetasikaGroupTerms, CetasikaID } from "../model/interface";
 import { cetasikaIdList } from "../model/repository";
@@ -50,7 +50,7 @@ export const generateAssociationTable = () => {
   return cetasikaIdList.reduce((data, cetasikaId) => {
     const cittaList: CittaID[] = [];
     cittaIdList.forEach((cittaId) => {
-      const combination = getCittaCombination(cittaId);
+      const combination = getCittaAsociation(cittaId);
       if (!combination) return;
       if (
         combination.mustHave.includes(cetasikaId) ||
