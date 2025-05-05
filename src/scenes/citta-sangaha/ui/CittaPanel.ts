@@ -3,9 +3,11 @@ import Konva from "konva";
 import CittaSolarSystem from "./CittaSolarSystem";
 import Constants from "@/config/constant";
 import {
+  AssociationRow,
   cittaMap,
   getCittaAsociation,
   getCittaCombination,
+  UVedana,
 } from "@/entities/citta";
 import store from "../lib/store";
 import CloseButton from "@/shared/ui/CloseButton";
@@ -166,6 +168,7 @@ class CittaPanel extends Konva.Group {
       if (combinations) setCombination(0);
     });
 
+    // Listen for changes in the selected citta
     store.subscribe(
       ({ selectedCitta, vedana }) => ({
         selectedCitta,
@@ -184,53 +187,10 @@ class CittaPanel extends Konva.Group {
           this._nodes.solarSystem.setCitta(citta.id);
           this.show();
 
-          const combination = getCittaAsociation(state.selectedCitta);
-          if (!combination) return;
-          this._nodes.solarSystem.orbit.setSatellites({
-            must: combination.mustHave,
-            sometime: combination.sometime,
-            vedana: state.vedana,
-            nodeEvents: [
-              [
-                "pointerover",
-                (id, e) => {
-                  this._nodes.solarSystem.orbit.revolveAnimation.stop();
-                  const stage = e.target.getStage();
-                  const orbit = this._nodes.solarSystem.orbit;
-                  if (stage) {
-                    const satellitePosition = e.currentTarget.getPosition();
-                    const orbitPos = orbit.getAbsolutePosition(stage);
-                    const orbitRotation =
-                      (orbit.getAbsoluteRotation() * Math.PI) / 180;
-                    const satelliteAngle =
-                      Math.atan(satellitePosition.y / satellitePosition.x) +
-                      (satellitePosition.x >= 0 ? 0 : Math.PI);
+          const association = getCittaAsociation(state.selectedCitta);
+          if (!association) return;
 
-                    const targetAngle = satelliteAngle + orbitRotation;
-                    const pointer = {
-                      x: orbitPos.x + orbit.orbitRadius * Math.cos(targetAngle),
-                      y:
-                        orbitPos.y +
-                        orbit.orbitRadius * Math.sin(targetAngle) +
-                        orbit.planetRadius,
-                    };
-
-                    showTooltip({
-                      position: pointer,
-                      text: cetasikaMap.get(id)?.name,
-                    });
-                  }
-                },
-              ],
-              [
-                "pointerout",
-                () => {
-                  hideTooltip();
-                  this._nodes.solarSystem.orbit.revolveAnimation.start();
-                },
-              ],
-            ],
-          });
+          this.updateSolarSystemSatellite(association, state.vedana);
 
           const renderCittaTooltip = () => {
             const thisPos = this.getPosition();
@@ -262,25 +222,49 @@ class CittaPanel extends Konva.Group {
       }
     );
 
+    // Listen for changes in active combination
     store.subscribe(
-      ({ activeCombinationIndex }) => ({ activeCombinationIndex }),
+      ({ activeCombinationIndex, selectedCitta, vedana }) => ({
+        activeCombinationIndex,
+        selectedCitta,
+        vedana,
+      }),
       (state, prev) => {
         if (state.activeCombinationIndex === prev.activeCombinationIndex)
           return;
 
+        const association = getCittaAsociation(state.selectedCitta!);
+
         if (state.activeCombinationIndex !== null) {
           this._nodes.showCombinationBtn.setText("Don't show combination");
+          this._nodes.showCombinationBtn.x(
+            this.width() / 2 - this._nodes.showCombinationBtn.width() / 2
+          );
+
           this._nodes.leftBtn.show();
           this._nodes.rightBtn.show();
+
+          const combinations = getCittaCombination(state.selectedCitta!);
+          this.updateSolarSystemSatellite(
+            {
+              mustHave: [
+                ...association!.mustHave,
+                ...combinations![state.activeCombinationIndex!],
+              ],
+              sometime: [],
+            },
+            state.vedana
+          );
         } else {
           this._nodes.showCombinationBtn.setText("Show combination");
+          this._nodes.showCombinationBtn.x(
+            this.width() / 2 - this._nodes.showCombinationBtn.width() / 2
+          );
           this._nodes.leftBtn.hide();
           this._nodes.rightBtn.hide();
-        }
 
-        this._nodes.showCombinationBtn.x(
-          this.width() / 2 - this._nodes.showCombinationBtn.width() / 2
-        );
+          this.updateSolarSystemSatellite(association!, state.vedana);
+        }
       }
     );
   }
@@ -307,6 +291,57 @@ class CittaPanel extends Konva.Group {
 
   onClose(callback: (e?: Konva.KonvaEventObject<MouseEvent>) => void) {
     this._onClose = callback;
+  }
+
+  updateSolarSystemSatellite(
+    association: Pick<AssociationRow, "mustHave" | "sometime">,
+    vedana: UVedana
+  ) {
+    this._nodes.solarSystem.orbit.setSatellites({
+      must: association.mustHave,
+      sometime: association.sometime,
+      vedana,
+      nodeEvents: [
+        [
+          "pointerover",
+          (id, e) => {
+            this._nodes.solarSystem.orbit.revolveAnimation.stop();
+            const stage = e.target.getStage();
+            const orbit = this._nodes.solarSystem.orbit;
+            if (stage) {
+              const satellitePosition = e.currentTarget.getPosition();
+              const orbitPos = orbit.getAbsolutePosition(stage);
+              const orbitRotation =
+                (orbit.getAbsoluteRotation() * Math.PI) / 180;
+              const satelliteAngle =
+                Math.atan(satellitePosition.y / satellitePosition.x) +
+                (satellitePosition.x >= 0 ? 0 : Math.PI);
+
+              const targetAngle = satelliteAngle + orbitRotation;
+              const pointer = {
+                x: orbitPos.x + orbit.orbitRadius * Math.cos(targetAngle),
+                y:
+                  orbitPos.y +
+                  orbit.orbitRadius * Math.sin(targetAngle) +
+                  orbit.planetRadius,
+              };
+
+              showTooltip({
+                position: pointer,
+                text: cetasikaMap.get(id)?.name,
+              });
+            }
+          },
+        ],
+        [
+          "pointerout",
+          () => {
+            hideTooltip();
+            this._nodes.solarSystem.orbit.revolveAnimation.start();
+          },
+        ],
+      ],
+    });
   }
 }
 

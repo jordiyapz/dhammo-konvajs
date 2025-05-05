@@ -14,6 +14,14 @@
     "cetasika": ["mana"]
   },
   {
+    "id": "lobha4",
+    "cetasika": ["thina", "middha"]
+  },
+  {
+    "id": "lobha4",
+    "cetasika": ["mana", "thina", "middha"]
+  },
+  {
     "id": "lobha7"
   },
   {
@@ -26,6 +34,14 @@
   {
     "id": "lobha8",
     "cetasika": ["mana"]
+  },
+  {
+    "id": "lobha8",
+    "cetasika": ["thina", "middha"]
+  },
+  {
+    "id": "lobha8",
+    "cetasika": ["mana", "thina", "middha"]
   },
   {
     "id": "dosa1"
