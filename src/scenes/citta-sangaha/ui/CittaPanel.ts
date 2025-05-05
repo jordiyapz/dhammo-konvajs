@@ -5,7 +5,6 @@ import Constants from "@/config/constant";
 import {
   AssociationRow,
   cittaMap,
-  getCittaAsociation,
   getCittaCombination,
   UVedana,
 } from "@/entities/citta";
@@ -25,6 +24,7 @@ class CittaPanel extends Konva.Group {
     backdrop: Konva.Rect;
     solarSystem: CittaSolarSystem;
     title: Konva.Text;
+    subtitle: Konva.Text;
     closeBtn: CloseButton;
     leftBtn: ArrowButton;
     rightBtn: ArrowButton;
@@ -46,7 +46,7 @@ class CittaPanel extends Konva.Group {
     const backdrop = new Konva.Rect({
       width,
       height,
-      opacity: 0.7,
+      opacity: 0.9,
       fill: palette.grays["950"],
     });
 
@@ -81,6 +81,17 @@ class CittaPanel extends Konva.Group {
     this.width(width);
     showCombinationBtn.x((width - showCombinationBtn.width()) / 2);
 
+    const subtitle = new Konva.Text({
+      text: "Combination #0",
+      y: showCombinationBtn.y() + 40,
+      width: width - 80,
+      fontSize: 16,
+      fill: "white",
+      align: "center",
+    });
+    subtitle.x((width - subtitle.width()) / 2);
+    subtitle.hide();
+
     const leftBtn = new ArrowButton({ paddingY: 30, direction: "left" });
     leftBtn.x(20);
     leftBtn.y(height / 2 - leftBtn.height() / 2);
@@ -94,6 +105,7 @@ class CittaPanel extends Konva.Group {
       backdrop,
       solarSystem,
       title,
+      subtitle,
       leftBtn,
       rightBtn,
       closeBtn,
@@ -103,6 +115,7 @@ class CittaPanel extends Konva.Group {
     this.add(
       backdrop,
       title,
+      subtitle,
       solarSystem,
       showCombinationBtn,
       leftBtn,
@@ -116,7 +129,7 @@ class CittaPanel extends Konva.Group {
     this.listen();
 
     // TESTS
-    setTimeout(() => store.getState().selectCitta("dosa1"), 500);
+    // setTimeout(() => store.getState().selectCitta("dosa1"), 500);
   }
 
   listen() {
@@ -130,8 +143,8 @@ class CittaPanel extends Konva.Group {
 
     this._nodes.leftBtn.on("pointerclick", () => {
       const { activeCombinationIndex, setCombination } = store.getState();
-      if (activeCombinationIndex !== null) {
-        setCombination(Math.max(activeCombinationIndex - 1, 0));
+      if (activeCombinationIndex !== null && activeCombinationIndex > 0) {
+        setCombination(activeCombinationIndex - 1);
       }
     });
     this._nodes.rightBtn.on("pointerclick", () => {
@@ -140,9 +153,8 @@ class CittaPanel extends Konva.Group {
       if (activeCombinationIndex !== null && selectedCitta) {
         const combinations = getCittaCombination(selectedCitta);
         if (!combinations) return;
-        setCombination(
-          Math.min(activeCombinationIndex + 1, combinations.length - 1)
-        );
+        if (activeCombinationIndex + 1 >= combinations.length) return;
+        setCombination(activeCombinationIndex + 1);
       }
     });
 
@@ -187,11 +199,6 @@ class CittaPanel extends Konva.Group {
           this._nodes.solarSystem.setCitta(citta.id);
           this.show();
 
-          const association = getCittaAsociation(state.selectedCitta);
-          if (!association) return;
-
-          this.updateSolarSystemSatellite(association, state.vedana);
-
           const renderCittaTooltip = () => {
             const thisPos = this.getPosition();
             const solarPos = this._nodes.solarSystem.getPosition();
@@ -222,6 +229,25 @@ class CittaPanel extends Konva.Group {
       }
     );
 
+    store.subscribe(
+      (s) => s,
+      (state, prev) => {
+        if (
+          state.cetasikaList !== prev.cetasikaList &&
+          state.cetasikaList.length &&
+          state.cetasikaList.length <= 38 // Because orbit pool is limited
+        ) {
+          this.updateSolarSystemSatellite(
+            {
+              mustHave: state.cetasikaList,
+              sometime: state.sometimeCetasikaList,
+            },
+            state.vedana
+          );
+        }
+      }
+    );
+
     // Listen for changes in active combination
     store.subscribe(
       ({ activeCombinationIndex, selectedCitta, vedana }) => ({
@@ -233,38 +259,36 @@ class CittaPanel extends Konva.Group {
         if (state.activeCombinationIndex === prev.activeCombinationIndex)
           return;
 
-        const association = getCittaAsociation(state.selectedCitta!);
-
         if (state.activeCombinationIndex !== null) {
           this._nodes.showCombinationBtn.setText("Don't show combination");
-          this._nodes.showCombinationBtn.x(
-            this.width() / 2 - this._nodes.showCombinationBtn.width() / 2
-          );
-
           this._nodes.leftBtn.show();
           this._nodes.rightBtn.show();
+          this._nodes.subtitle.show();
+          this._nodes.subtitle.text(
+            `Combination #${state.activeCombinationIndex + 1}`
+          );
+          this._nodes.subtitle.x(
+            this.width() / 2 - this._nodes.subtitle.width() / 2
+          );
 
           const combinations = getCittaCombination(state.selectedCitta!);
-          this.updateSolarSystemSatellite(
-            {
-              mustHave: [
-                ...association!.mustHave,
-                ...combinations![state.activeCombinationIndex!],
-              ],
-              sometime: [],
-            },
-            state.vedana
-          );
+          if (combinations) {
+            if (state.activeCombinationIndex === 0)
+              this._nodes.leftBtn.disabled = true;
+            else this._nodes.leftBtn.disabled = false;
+            if (state.activeCombinationIndex === combinations.length - 1)
+              this._nodes.rightBtn.disabled = true;
+            else this._nodes.rightBtn.disabled = false;
+          }
         } else {
           this._nodes.showCombinationBtn.setText("Show combination");
-          this._nodes.showCombinationBtn.x(
-            this.width() / 2 - this._nodes.showCombinationBtn.width() / 2
-          );
           this._nodes.leftBtn.hide();
           this._nodes.rightBtn.hide();
-
-          this.updateSolarSystemSatellite(association!, state.vedana);
+          this._nodes.subtitle.hide();
         }
+        this._nodes.showCombinationBtn.x(
+          this.width() / 2 - this._nodes.showCombinationBtn.width() / 2
+        );
       }
     );
   }
