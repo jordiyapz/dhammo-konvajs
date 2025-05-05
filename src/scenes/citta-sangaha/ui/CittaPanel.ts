@@ -259,19 +259,22 @@ class CittaPanel extends Konva.Group {
         if (state.activeCombinationIndex === prev.activeCombinationIndex)
           return;
 
+        const combinations = getCittaCombination(state.selectedCitta!) ?? [];
+
         if (state.activeCombinationIndex !== null) {
           this._nodes.showCombinationBtn.setText("Don't show combination");
           this._nodes.leftBtn.show();
           this._nodes.rightBtn.show();
           this._nodes.subtitle.show();
           this._nodes.subtitle.text(
-            `Combination #${state.activeCombinationIndex + 1}`
+            `Combination #${state.activeCombinationIndex + 1} of ${
+              combinations.length
+            }`
           );
           this._nodes.subtitle.x(
             this.width() / 2 - this._nodes.subtitle.width() / 2
           );
 
-          const combinations = getCittaCombination(state.selectedCitta!);
           if (combinations) {
             if (state.activeCombinationIndex === 0)
               this._nodes.leftBtn.disabled = true;
