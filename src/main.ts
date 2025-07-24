@@ -3,8 +3,8 @@ import "./style.css";
 import Konva from "konva";
 
 import Constants from "./config/constant";
-import CittaSangahaScene from "./scenes/citta-sangaha";
 import { fitStageBestFit } from "./shared/utils";
+import App from "./app";
 
 const containerId = "app";
 
@@ -34,11 +34,4 @@ window.addEventListener("resize", () => {
   resizeStage(stage);
 });
 
-// then create layer
-var layer = new Konva.Layer();
-
-const scene = new CittaSangahaScene();
-scene.attachToLayer(layer);
-
-// add the layer to the stage
-stage.add(layer);
+new App(stage);
