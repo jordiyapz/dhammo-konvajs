@@ -1,5 +1,12 @@
 [
   {
+    "id": "lobha2"
+  },
+  {
+    "id": "lobha2",
+    "cetasika": ["thina", "middha"]
+  },
+  {
     "id": "lobha3"
   },
   {
@@ -20,6 +27,13 @@
   {
     "id": "lobha4",
     "cetasika": ["mana", "thina", "middha"]
+  },
+  {
+    "id": "lobha6"
+  },
+  {
+    "id": "lobha6",
+    "cetasika": ["thina", "middha"]
   },
   {
     "id": "lobha7"

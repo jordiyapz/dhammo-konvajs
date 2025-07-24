@@ -9,4 +9,7 @@ export default defineConfig({
       "@": resolve(root),
     },
   },
+  server: {
+    allowedHosts: [".tail45888a.ts.net"]
+  }
 });
